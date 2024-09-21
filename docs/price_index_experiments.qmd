@@ -1,0 +1,12 @@
+---
+title: "Experiments with price index methods"
+author: Serge Goussev
+date: 2024-09-20
+format:
+  html:
+    toc: true
+    toc-expand: 2
+---
+
+
+Examples from public sites

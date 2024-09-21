@@ -1,18 +1,39 @@
 project:
   type: website
 
+execute:
+  freeze: auto
+
 website:
-  title: "price_stats_experiments"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+  title: "Experiments with price statistics"
+  repo-actions: [source]
+  bread-crumbs: true
+  page-navigation: true
+  back-to-top-navigation: true
+  search: true
+  sidebar:
+    style: "docked"
+    type: "dark"
+    search: true
+    border: true
+    tools:
+      - icon: github
+        href: https://sergegoussev.github.io/price_index_experiments/
+        text: GitHub account for this site
+    contents:
+      - href: docs/index.qmd
+        text: Overview
+      - section:
+        href: docs/price_index_experiments.qmd
+        contents:
+          - notebooks/aizcorbe_example_2.2.ipynb
+          - notebooks/aizcorbe_example_3.2.ipynb
+
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme: darkly
+    css: docs/styles.css
     toc: true
 
 
