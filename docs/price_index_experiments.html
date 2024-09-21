@@ -76,20 +76,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-sample-listings .list');
+    const listingTargetEl = window.document.querySelector('#listing-price-index-experiments .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-sample-listings'] = new List('listing-sample-listings', options);
+    window['quarto-listings']['listing-price-index-experiments'] = new List('listing-price-index-experiments', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -162,7 +162,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Experiments with price statistics</a> 
         <div class="sidebar-tools-main">
-    <a href="https://sergegoussev.github.io/price_index_experiments/" title="GitHub account for this site" class="quarto-navigation-tool px-1" aria-label="GitHub account for this site"><i class="bi bi-github"></i></a>
+    <a href="../docs/index.html" title="GitHub account for this site" class="quarto-navigation-tool px-1" aria-label="GitHub account for this site"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -191,9 +191,15 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#list-of-price-index-methods-experiments" id="toc-list-of-price-index-methods-experiments" class="nav-link active" data-scroll-target="#list-of-price-index-methods-experiments">List of price index methods experiments</a></li>
+  </ul>
+</nav>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bilateral index methods">bilateral index methods <span class="quarto-category-count">(1)</span></div><div class="category" data-category="hedonic methods">hedonic methods <span class="quarto-category-count">(1)</span></div><div class="category" data-category="product churn">product churn <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -229,11 +235,13 @@ window.Quarto = {
 
 
 <p>This pages lists the experiments done by topic on specific public examples</p>
-<div id="listing-sample-listings" class="quarto-listing quarto-listing-container-table">
+<section id="list-of-price-index-methods-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="list-of-price-index-methods-experiments">List of price index methods experiments</h2>
+<div id="listing-price-index-experiments" class="quarto-listing quarto-listing-container-table">
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
      <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-sample-listings-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-sample-listings'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+     <select id="listing-price-index-experiments-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-price-index-experiments'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
        <option value="" disabled="" selected="" hidden="">Order By</option>
        <option value="index" data-direction="asc">Default</option>
          <option value="listing-date-sort" data-direction="asc">
@@ -244,9 +252,6 @@ window.Quarto = {
         </option>
          <option value="listing-title-sort" data-direction="asc">
           Title
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
         </option>
      </select>
   </div>
@@ -265,12 +270,12 @@ window.Quarto = {
 <a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
 </th>
 <th>
-<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Author</a>
+Categories
 </th>
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1726928187231" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="20" data-listing-title-sort="Aizcorbe (2014), ex 2.2. Bilateral indices" data-listing-filename-sort="aizcorbe_example_2.2.ipynb">
+<tr data-index="0" data-categories="bilateral index methods,product churn" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1726928848821" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="20" data-listing-title-sort="Aizcorbe (2014), ex 2.2. Bilateral indices" data-listing-filename-sort="aizcorbe_example_2.2.ipynb">
 <td>
 <span class="listing-date">Sep 20, 2024</span>
 </td>
@@ -278,10 +283,10 @@ window.Quarto = {
 <a href="../notebooks/aizcorbe_example_2.2.html" class="title listing-title">Aizcorbe (2014), ex 2.2. Bilateral indices</a>
 </td>
 <td>
-<span class="listing-author">&nbsp;</span>
+<span class="listing-categories">bilateral index methods, product churn</span>
 </td>
 </tr>
-<tr data-index="1" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1726928187231" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8" data-listing-title-sort="Aizcorbe (2014), ex 3.2. Hedonic dummy variable method" data-listing-filename-sort="aizcorbe_example_3.2.ipynb">
+<tr data-index="1" data-categories="hedonic methods" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1726928848821" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8" data-listing-title-sort="Aizcorbe (2014), ex 3.2. Hedonic dummy variable method" data-listing-filename-sort="aizcorbe_example_3.2.ipynb">
 <td>
 <span class="listing-date">Sep 20, 2024</span>
 </td>
@@ -289,7 +294,7 @@ window.Quarto = {
 <a href="../notebooks/aizcorbe_example_3.2.html" class="title listing-title">Aizcorbe (2014), ex 3.2. Hedonic dummy variable method</a>
 </td>
 <td>
-<span class="listing-author">&nbsp;</span>
+<span class="listing-categories">hedonic methods</span>
 </td>
 </tr>
 </tbody>
@@ -301,6 +306,7 @@ No matching items
 
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
