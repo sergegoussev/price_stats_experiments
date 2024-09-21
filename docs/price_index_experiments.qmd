@@ -1,5 +1,5 @@
 ---
-title: "Experiments with price index methods"
+title: "Price index methods"
 author: Serge Goussev
 date: 2024-09-20
 listing:
@@ -8,7 +8,7 @@ listing:
   sort: "title"
   type: table
   categories: true
-  fields: [date, title, categories]
+  fields: [title, categories]
 format:
   html:
     toc: true
