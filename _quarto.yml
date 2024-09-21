@@ -23,11 +23,7 @@ website:
     contents:
       - href: docs/index.qmd
         text: Overview
-      - section:
-        href: docs/price_index_experiments.qmd
-        contents:
-          - notebooks/aizcorbe_example_2.2.ipynb
-          - notebooks/aizcorbe_example_3.2.ipynb
+      - href: docs/price_index_experiments.qmd
 
 
 format:

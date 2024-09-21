@@ -2,6 +2,11 @@
 title: "Experiments with price index methods"
 author: Serge Goussev
 date: 2024-09-20
+listing:
+  id: sample-listings
+  contents: ../notebooks/*.ipynb
+  sort: "date"
+  type: table
 format:
   html:
     toc: true
@@ -10,3 +15,6 @@ format:
 
 
 This pages lists the experiments done by topic on specific public examples
+
+::: {#sample-listings}
+:::
