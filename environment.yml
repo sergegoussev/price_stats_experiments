@@ -1,0 +1,20 @@
+name: price_stats_experiments
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - python=3.10
+  - ipykernel
+  - pandas
+  - scipy
+  - jupyterlab
+  - pyodbc
+  - scikit-learn
+  - pyarrow
+  - openpyxl
+  - matplotlib
+  - plotly
+  - requests
+  - beautifulsoup4
