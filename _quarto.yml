@@ -18,7 +18,7 @@ website:
     border: true
     tools:
       - icon: github
-        href: https://sergegoussev.github.io/price_index_experiments/
+        href: docs/index.qmd
         text: GitHub account for this site
     contents:
       - href: docs/index.qmd
