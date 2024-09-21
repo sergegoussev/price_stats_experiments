@@ -1,0 +1,37 @@
+# notebook content not relevant in the git
+.ipynb_checkpoints
+*_secure.ipynb
+*.log
+__temp__*
+
+#working files
+*.pyc
+
+#draw.io interim file
+*.bkp
+
+# Whole folders
+env/*
+data/*
+build/*
+.vscode
+
+# Data files
+*_raw.csv
+*_secure.csv
+*_raw.feather
+*_secure.feather
+*_raw.pkl
+*_secure.pkl
+*.zip
+*.gzip
+*.h5
+*_raw.xlsx
+*_secure.xlsx
+*_raw.parquet
+*_secure.parquet
+
+
+# Quarto components
+/.quarto/
+/_site/
