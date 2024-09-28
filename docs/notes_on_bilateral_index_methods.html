@@ -73,6 +73,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../docs/styles.css">
 </head>
@@ -168,9 +197,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#the-concept-of-price-index-methods" id="toc-the-concept-of-price-index-methods" class="nav-link" data-scroll-target="#the-concept-of-price-index-methods">The concept of price index methods</a></li>
+  </ul></li>
+  <li><a href="#main-formulas" id="toc-main-formulas" class="nav-link" data-scroll-target="#main-formulas">Main formulas</a>
+  <ul class="collapse">
+  <li><a href="#laspeyres-index" id="toc-laspeyres-index" class="nav-link" data-scroll-target="#laspeyres-index">Laspeyres index</a></li>
+  </ul></li>
   </ul>
-<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://global.oup.com/academic/product/a-practical-guide-to-price-index-and-hedonic-techniques-9780198702429?cc=ca&amp;lang=en&amp;"><i class="bi bi-link-45deg"></i>Aizcorbe (2014) A Practical Guide to Price Index and Hedonic Techniques</a></li><li><a href="https://www.cambridge.org/core/books/price-and-quantity-index-numbers/9A54AF90399685AED460F52821BD6225"><i class="bi bi-link-45deg"></i>Balk (2008) Price and Quantity Index Numbers</a></li><li><a href="https://www.imf.org/-/media/Files/Data/CPI/cpi-manual-concepts-and-methods.ashx"><i class="bi bi-link-45deg"></i>CPI Manual: Concepts and Methods (2020)</a></li></ul></div></nav>
+<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://global.oup.com/academic/product/a-practical-guide-to-price-index-and-hedonic-techniques-9780198702429?cc=ca&amp;lang=en&amp;"><i class="bi bi-link-45deg"></i>Aizcorbe (2014) A Practical Guide to Price Index and Hedonic Techniques</a></li><li><a href="https://www.cambridge.org/core/books/price-and-quantity-index-numbers/9A54AF90399685AED460F52821BD6225"><i class="bi bi-link-45deg"></i>Balk (2008) Price and Quantity Index Numbers</a></li><li><a href="https://www.imf.org/-/media/Files/Data/CPI/cpi-manual-concepts-and-methods.ashx"><i class="bi bi-link-45deg"></i>CPI Manual: Concepts and Methods (2020)</a></li><li><a href="https://unstats.un.org/wiki/display/GWGSD/Bilateral+price+index+methods"><i class="bi bi-link-45deg"></i>UN Task Team e-handbook: Bilateral Price Index Methods</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -206,14 +242,41 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<section id="overview" class="level1">
+<h1>Overview</h1>
 <p>This page provides an overview of Bilateral Price Index methods. Several sources are used (included in the links to the page) to go over key concepts. Emprical examples are linked from this page or can be found in the main guide</p>
+<section id="the-concept-of-price-index-methods" class="level2">
+<h2 class="anchored" data-anchor-id="the-concept-of-price-index-methods">The concept of price index methods</h2>
 <blockquote class="blockquote">
 <p>A price index provides an aggregate measure of price change for a particular product segment, industry, or overall economy. … [They compare] the cost of purchasing a set of goods at different points in time. This “set of goods” is often referred to as the “market basket” or the “bundle” of goods. - Aizcorbe (2014)</p>
 </blockquote>
+</section>
+</section>
+<section id="main-formulas" class="level1">
+<h1>Main formulas</h1>
+<section id="laspeyres-index" class="level2">
+<h2 class="anchored" data-anchor-id="laspeyres-index">Laspeyres index</h2>
+<p>The simplest formula (and one that is commonly used) is the Laspeyres index:</p>
+<p><span class="math inline">\(I^{L}_{0,1} = \frac{\sum_{m=1}^{M}(P_{m,1}Q_{m,0})}{\sum_{m=1}^{M}(P_{m,0}Q_{m,0}})\)</span></p>
+<p>Where P’s and Q’s denote prices and quantities, and 0 and 1 denote two points in time.</p>
+<p>If M goods are sold in both periods (note that an overlap is needed), we can compare the the cost of purchasing the same goods we bought in period 1 with a certain period in the future.</p>
+<p>We can also write the Laspeyres as the weighted arithmetic average of the price change of the individual products in the index</p>
+<p><span class="math inline">\(I^L_{0,1} = \sum_{m=1}^{M} (w_{m,0}\frac{P_{m,1}}{P_{m,0}})\)</span></p>
+<p>where the <span class="math inline">\(w_{m,0} = (P_{m,0}Q_{m,0})/\sum_{m=1}^{M}(P_{m,0}Q_{m,0}\)</span> give the ratio of good m’s expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:</p>
+<ul>
+<li>Products sold in both periods are included in both periods, thus new products are omitted.</li>
+<li>We fix the relative importance of the goods for both periods based on period 1 weight, thus we do not reflect changes in composition over time (substitution). This can be convenient as we need weights only for the base period.
+<ul>
+<li>Most price indices are variants of the Laspeyres, such as the Lowe (which compare the prices from the current month with the previous month, but use weights from a year before that)</li>
+</ul></li>
+</ul>
+<p>See empirical examples:</p>
+<ul>
+<li></li>
+</ul>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
