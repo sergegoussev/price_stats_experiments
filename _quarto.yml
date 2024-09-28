@@ -11,10 +11,11 @@ website:
   page-navigation: true
   back-to-top-navigation: true
   search: true
-  navbar:
+  sidebar:
+    style: "docked"
+    type: "dark"
     search: true
-    background: primary
-    pinned: true
+    border: true
     tools:
       - icon: github
         menu:
@@ -22,9 +23,15 @@ website:
           href: https://github.com/sergegoussev/price_stats_experiments
         - text: Report a bug
           href: https://github.com/sergegoussev/price_stats_experiments/issues
-    left:
-      - docs/index.qmd
-      - docs/price_index_experiments.qmd
+    contents:
+      - href: docs/index.qmd
+        text: Overview
+      - section:
+        text: Notes by method
+        contents:
+        - href: docs/notes_on_bilateral_index_methods.qmd
+      - href: docs/price_index_experiments.qmd
+
 
 
 format:

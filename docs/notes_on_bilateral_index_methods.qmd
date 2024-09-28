@@ -1,0 +1,24 @@
+---
+title: "Notes on bilateral price index methods"
+author: Serge Goussev
+date: 2024-09-27
+format:
+  html:
+    toc: true
+    toc-expand: 2
+    other-links:
+      - text: Aizcorbe (2014) A Practical Guide to Price Index and Hedonic Techniques
+        href: https://global.oup.com/academic/product/a-practical-guide-to-price-index-and-hedonic-techniques-9780198702429?cc=ca&lang=en&      
+      - text: Balk (2008) Price and Quantity Index Numbers
+        href: https://www.cambridge.org/core/books/price-and-quantity-index-numbers/9A54AF90399685AED460F52821BD6225
+      - text: "CPI Manual: Concepts and Methods (2020)"
+        href: https://www.imf.org/-/media/Files/Data/CPI/cpi-manual-concepts-and-methods.ashx
+---
+
+## Overview 
+
+This page provides an overview of Bilateral Price Index methods. Several sources are used (included in the links to the page) to go over key concepts. Emprical examples are linked from this page or can be found in the main guide  
+
+> A price index provides an aggregate measure of price change for a particular product segment, industry, or overall economy. ... [They compare] the cost of purchasing a set of goods at different points in time. This "set of goods" is often referred to as the "market basket" or the "bundle" of goods.
+- Aizcorbe (2014)
+

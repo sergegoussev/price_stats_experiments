@@ -1,9 +1,9 @@
 ---
-title: "Price index methods"
+title: "Experiments catalogue"
 author: Serge Goussev
 date: 2024-09-20
 listing:
-  id: price-index-experiments
+  id: experiments-experiments
   contents: ../notebooks/*.ipynb
   sort: "title"
   type: table
@@ -17,7 +17,7 @@ format:
 
 This pages lists the experiments done by topic on specific public examples
 
-## List of price index methods experiments
+## List of empirical price statistics experiments
 
-::: {#price-index-experiments}
+::: {#experiments-experiments}
 :::
