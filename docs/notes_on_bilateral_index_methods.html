@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Serge Goussev">
-<meta name="dcterms.date" content="2024-09-20">
+<meta name="dcterms.date" content="2024-09-27">
 
-<title>Overview – Experiments with price stats</title>
+<title>Notes on bilateral price index methods – Experiments with price stats</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +32,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../docs/notes_on_bilateral_index_methods.html" rel="next">
+<link href="../docs/price_index_experiments.html" rel="next">
+<link href="../docs/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -85,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/index.html">Overview</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/notes_on_bilateral_index_methods.html">Notes by method</a></li><li class="breadcrumb-item"><a href="../docs/notes_on_bilateral_index_methods.html">Notes on bilateral price index methods</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../docs/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../docs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
@@ -145,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../docs/notes_on_bilateral_index_methods.html" class="sidebar-item-text sidebar-link">
+  <a href="../docs/notes_on_bilateral_index_methods.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Notes on bilateral price index methods</span></a>
   </div>
 </li>
@@ -167,16 +168,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#purpose-of-site" id="toc-purpose-of-site" class="nav-link active" data-scroll-target="#purpose-of-site">Purpose of site</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   </ul>
-</nav>
+<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://global.oup.com/academic/product/a-practical-guide-to-price-index-and-hedonic-techniques-9780198702429?cc=ca&amp;lang=en&amp;"><i class="bi bi-link-45deg"></i>Aizcorbe (2014) A Practical Guide to Price Index and Hedonic Techniques</a></li><li><a href="https://www.cambridge.org/core/books/price-and-quantity-index-numbers/9A54AF90399685AED460F52821BD6225"><i class="bi bi-link-45deg"></i>Balk (2008) Price and Quantity Index Numbers</a></li><li><a href="https://www.imf.org/-/media/Files/Data/CPI/cpi-manual-concepts-and-methods.ashx"><i class="bi bi-link-45deg"></i>CPI Manual: Concepts and Methods (2020)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/notes_on_bilateral_index_methods.html">Notes by method</a></li><li class="breadcrumb-item"><a href="../docs/notes_on_bilateral_index_methods.html">Notes on bilateral price index methods</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Overview</h1>
+<h1 class="title">Notes on bilateral price index methods</h1>
 </div>
 
 
@@ -193,7 +194,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 20, 2024</p>
+      <p class="date">September 27, 2024</p>
     </div>
   </div>
   
@@ -205,9 +206,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="purpose-of-site" class="level2">
-<h2 class="anchored" data-anchor-id="purpose-of-site">Purpose of site</h2>
-<p>This is a personal site that I used to render experiments and workflows that relate to the price statistics domain within official statistics. It is meant to show work in a reproducible manner for anyone else who chooses to look at this. As its personal, it is not meant in any official capacity.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This page provides an overview of Bilateral Price Index methods. Several sources are used (included in the links to the page) to go over key concepts. Emprical examples are linked from this page or can be found in the main guide</p>
+<blockquote class="blockquote">
+<p>A price index provides an aggregate measure of price change for a particular product segment, industry, or overall economy. … [They compare] the cost of purchasing a set of goods at different points in time. This “set of goods” is often referred to as the “market basket” or the “bundle” of goods. - Aizcorbe (2014)</p>
+</blockquote>
 
 
 </section>
@@ -779,10 +783,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../docs/index.html" class="pagination-link" aria-label="Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../docs/notes_on_bilateral_index_methods.html" class="pagination-link" aria-label="Notes on bilateral price index methods">
-        <span class="nav-page-text">Notes on bilateral price index methods</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../docs/price_index_experiments.html" class="pagination-link" aria-label="Experiments catalogue">
+        <span class="nav-page-text">Experiments catalogue</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

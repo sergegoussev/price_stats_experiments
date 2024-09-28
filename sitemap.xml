@@ -2,18 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sergegoussev.github.io/price_stats_experiments/docs/price_index_experiments.html</loc>
-    <lastmod>2024-09-21T14:47:03.258Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sergegoussev.github.io/price_stats_experiments/notebooks/aizcorbe_example_3.2.html</loc>
-    <lastmod>2024-09-21T14:47:03.258Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sergegoussev.github.io/price_stats_experiments/notebooks/aizcorbe_example_2.2.html</loc>
-    <lastmod>2024-09-21T14:47:03.258Z</lastmod>
+    <lastmod>2024-09-28T03:09:51.857Z</lastmod>
   </url>
   <url>
     <loc>https://sergegoussev.github.io/price_stats_experiments/docs/index.html</loc>
-    <lastmod>2024-09-21T14:47:03.258Z</lastmod>
+    <lastmod>2024-09-28T03:09:51.857Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sergegoussev.github.io/price_stats_experiments/notebooks/aizcorbe_example_2.2.html</loc>
+    <lastmod>2024-09-28T03:09:51.858Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sergegoussev.github.io/price_stats_experiments/notebooks/aizcorbe_example_3.2.html</loc>
+    <lastmod>2024-09-28T03:09:51.858Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sergegoussev.github.io/price_stats_experiments/docs/notes_on_bilateral_index_methods.html</loc>
+    <lastmod>2024-09-28T03:09:51.857Z</lastmod>
   </url>
 </urlset>

@@ -9,7 +9,7 @@
 <meta name="author" content="Serge Goussev">
 <meta name="dcterms.date" content="2024-09-20">
 
-<title>Price index methods – Experiments with price stats</title>
+<title>Experiments catalogue – Experiments with price stats</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,11 +26,13 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../docs/notes_on_bilateral_index_methods.html" rel="prev">
 <script src="../site_libs/quarto-listing/list.min.js"></script>
 <script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -45,11 +47,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -74,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-price-index-experiments .list');
+    const listingTargetEl = window.document.querySelector('#listing-experiments-experiments .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -87,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-price-index-experiments'] = new List('listing-price-index-experiments', options);
+    window['quarto-listings']['listing-experiments-experiments'] = new List('listing-experiments-experiments', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -134,44 +136,42 @@ window.Quarto = {
 <link rel="stylesheet" href="../docs/styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Experiments with price stats</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../docs/index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="../docs/price_index_experiments.html" aria-current="page"> 
-<span class="menu-text">Price index methods</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/price_index_experiments.html">Experiments catalogue</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Experiments with price stats</a> 
+        <div class="sidebar-tools-main">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/sergegoussev/price_stats_experiments">
+            <a class="dropdown-item sidebar-tools-main-item" href="https://github.com/sergegoussev/price_stats_experiments">
             Source
             </a>
           </li>
           <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/sergegoussev/price_stats_experiments/issues">
+            <a class="dropdown-item sidebar-tools-main-item" href="https://github.com/sergegoussev/price_stats_experiments/issues">
             Report a bug
             </a>
           </li>
@@ -179,19 +179,55 @@ window.Quarto = {
     </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../docs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true">
+ <span class="menu-text">Notes by method</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../docs/notes_on_bilateral_index_methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes on bilateral price index methods</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../docs/price_index_experiments.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Experiments catalogue</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#list-of-price-index-methods-experiments" id="toc-list-of-price-index-methods-experiments" class="nav-link active" data-scroll-target="#list-of-price-index-methods-experiments">List of price index methods experiments</a></li>
+  <li><a href="#list-of-empirical-price-statistics-experiments" id="toc-list-of-empirical-price-statistics-experiments" class="nav-link active" data-scroll-target="#list-of-empirical-price-statistics-experiments">List of empirical price statistics experiments</a></li>
   </ul>
 </nav>
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bilateral index methods">bilateral index methods <span class="quarto-category-count">(1)</span></div><div class="category" data-category="hedonic methods">hedonic methods <span class="quarto-category-count">(1)</span></div><div class="category" data-category="product churn">product churn <span class="quarto-category-count">(1)</span></div></div></div>
@@ -200,7 +236,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Price index methods</h1>
+<h1 class="title">Experiments catalogue</h1>
 </div>
 
 
@@ -230,13 +266,13 @@ window.Quarto = {
 
 
 <p>This pages lists the experiments done by topic on specific public examples</p>
-<section id="list-of-price-index-methods-experiments" class="level2">
-<h2 class="anchored" data-anchor-id="list-of-price-index-methods-experiments">List of price index methods experiments</h2>
-<div id="listing-price-index-experiments" class="quarto-listing quarto-listing-container-table">
+<section id="list-of-empirical-price-statistics-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="list-of-empirical-price-statistics-experiments">List of empirical price statistics experiments</h2>
+<div id="listing-experiments-experiments" class="quarto-listing quarto-listing-container-table">
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
      <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-price-index-experiments-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-price-index-experiments'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+     <select id="listing-experiments-experiments-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-experiments-experiments'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
        <option value="" disabled="" selected="" hidden="">Order By</option>
        <option value="index" data-direction="asc">Default</option>
          <option value="listing-title-sort" data-direction="asc">
@@ -261,7 +297,7 @@ Categories
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-categories="bilateral index methods,product churn" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1726930023258" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="20" data-listing-title-sort="Aizcorbe (2014), ex 2.2. Bilateral indices" data-listing-filename-sort="aizcorbe_example_2.2.ipynb">
+<tr data-index="0" data-categories="bilateral index methods,product churn" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1727492991858" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="20" data-listing-title-sort="Aizcorbe (2014), ex 2.2. Bilateral indices" data-listing-filename-sort="aizcorbe_example_2.2.ipynb">
 <td>
 <a href="../notebooks/aizcorbe_example_2.2.html" class="title listing-title">Aizcorbe (2014), ex 2.2. Bilateral indices</a>
 </td>
@@ -269,7 +305,7 @@ Categories
 <span class="listing-categories">bilateral index methods, product churn</span>
 </td>
 </tr>
-<tr data-index="1" data-categories="hedonic methods" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1726930023258" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8" data-listing-title-sort="Aizcorbe (2014), ex 3.2. Hedonic dummy variable method" data-listing-filename-sort="aizcorbe_example_3.2.ipynb">
+<tr data-index="1" data-categories="hedonic methods" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1727492991858" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8" data-listing-title-sort="Aizcorbe (2014), ex 3.2. Hedonic dummy variable method" data-listing-filename-sort="aizcorbe_example_3.2.ipynb">
 <td>
 <a href="../notebooks/aizcorbe_example_3.2.html" class="title listing-title">Aizcorbe (2014), ex 3.2. Hedonic dummy variable method</a>
 </td>
@@ -853,6 +889,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../docs/notes_on_bilateral_index_methods.html" class="pagination-link" aria-label="Notes on bilateral price index methods">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes on bilateral price index methods</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
