@@ -34,7 +34,7 @@ This page provides an overview of Bilateral Price Index methods. Several sources
 
 The simplest formula (and one that is commonly used) is the Laspeyres index:
 
-$I^{L}_{0,1} = \frac{\sum_{m=1}^{M}(P_{m,1}Q_{m,0})}{\sum_{m=1}^{M}(P_{m,0}Q_{m,0}})$
+$I^{L}_{0,1} = \frac{\sum_{m=1}^{M}(P_{m,1}Q_{m,0})}{\sum_{m=1}^{M}(P_{m,0}Q_{m,0})}$
 
 Where P's and Q's denote prices and quantities, and 0 and 1 denote two points in time.
 
