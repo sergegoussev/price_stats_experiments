@@ -44,7 +44,7 @@ We can also write the Laspeyres as the weighted arithmetic average of the price 
 
 $I^L_{0,1} = \sum_{m=1}^{M} (w_{m,0}\frac{P_{m,1}}{P_{m,0}})$
 
-where the $w_{m,0} = (P_{m,0}Q_{m,0})/\sum_{m=1}^{M}(P_{m,0}Q_{m,0}$ give the ratio of good m's expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:
+where the $w_{m,0} = (P_{m,0}Q_{m,0})/\sum_{m=1}^{M}(P_{m,0}Q_{m,0})$ give the ratio of good m's expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:
 
 -   Products sold in both periods are included in both periods, thus new products are omitted.
 -   We fix the relative importance of the goods for both periods based on period 1 weight, thus we do not reflect changes in composition over time (substitution). This can be convenient as we need weights only for the base period.
