@@ -204,7 +204,12 @@ window.Quarto = {
   <li><a href="#main-formulas" id="toc-main-formulas" class="nav-link" data-scroll-target="#main-formulas">Main formulas</a>
   <ul class="collapse">
   <li><a href="#laspeyres-index" id="toc-laspeyres-index" class="nav-link" data-scroll-target="#laspeyres-index">Laspeyres index</a></li>
+  <li><a href="#paashe-index" id="toc-paashe-index" class="nav-link" data-scroll-target="#paashe-index">Paashe Index</a></li>
+  <li><a href="#fisher-index" id="toc-fisher-index" class="nav-link" data-scroll-target="#fisher-index">Fisher Index</a></li>
+  <li><a href="#törnqvist-index" id="toc-törnqvist-index" class="nav-link" data-scroll-target="#törnqvist-index">Törnqvist Index</a></li>
+  <li><a href="#jevons-index" id="toc-jevons-index" class="nav-link" data-scroll-target="#jevons-index">Jevons Index</a></li>
   </ul></li>
+  <li><a href="#empirical-examples" id="toc-empirical-examples" class="nav-link" data-scroll-target="#empirical-examples">Empirical examples</a></li>
   </ul>
 <div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://global.oup.com/academic/product/a-practical-guide-to-price-index-and-hedonic-techniques-9780198702429?cc=ca&amp;lang=en&amp;"><i class="bi bi-link-45deg"></i>Aizcorbe (2014) A Practical Guide to Price Index and Hedonic Techniques</a></li><li><a href="https://www.cambridge.org/core/books/price-and-quantity-index-numbers/9A54AF90399685AED460F52821BD6225"><i class="bi bi-link-45deg"></i>Balk (2008) Price and Quantity Index Numbers</a></li><li><a href="https://www.imf.org/-/media/Files/Data/CPI/cpi-manual-concepts-and-methods.ashx"><i class="bi bi-link-45deg"></i>CPI Manual: Concepts and Methods (2020)</a></li><li><a href="https://unstats.un.org/wiki/display/GWGSD/Bilateral+price+index+methods"><i class="bi bi-link-45deg"></i>UN Task Team e-handbook: Bilateral Price Index Methods</a></li></ul></div></nav>
     </div>
@@ -261,8 +266,8 @@ window.Quarto = {
 <p>Where P’s and Q’s denote prices and quantities, and 0 and 1 denote two points in time.</p>
 <p>If M goods are sold in both periods (note that an overlap is needed), we can compare the the cost of purchasing the same goods we bought in period 1 with a certain period in the future.</p>
 <p>We can also write the Laspeyres as the weighted arithmetic average of the price change of the individual products in the index</p>
-<p><span class="math inline">\(I^L_{0,1} = \sum_{m=1}^{M} (w_{m,0}\frac{P_{m,1}}{P_{m,0}})\)</span></p>
-<p>where the <span class="math inline">\(w_{m,0} = (P_{m,0}Q_{m,0})/\sum_{m=1}^{M}(P_{m,0}Q_{m,0})\)</span> give the ratio of good m’s expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:</p>
+<p><span class="math inline">\(I^L_{0,1} = \sum_{m=1}^{M} (w_{m,0}\frac{P_{m,1}}{P_{m,0}})\)</span> such that <span class="math inline">\(w_{m,0} = (P_{m,0}Q_{m,0})/\sum_{m=1}^{M}(P_{m,0}Q_{m,0})\)</span></p>
+<p>give the ratio of good m’s expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:</p>
 <ul>
 <li>Products sold in both periods are included in both periods, thus new products are omitted.</li>
 <li>We fix the relative importance of the goods for both periods based on period 1 weight, thus we do not reflect changes in composition over time (substitution). This can be convenient as we need weights only for the base period.
@@ -270,13 +275,41 @@ window.Quarto = {
 <li>Most price indices are variants of the Laspeyres, such as the Lowe (which compare the prices from the current month with the previous month, but use weights from a year before that)</li>
 </ul></li>
 </ul>
-<p>See empirical examples:</p>
+</section>
+<section id="paashe-index" class="level2">
+<h2 class="anchored" data-anchor-id="paashe-index">Paashe Index</h2>
+<p>Similar to the Lasperyes, however uses a different basket (the one from the pricing period:</p>
+<p><span class="math inline">\(I^P_{0,1} = \sum_{m=1}^M (P_{m,1}Q_{m,1}) / \sum_{m=1}^M
+(P_{m,0}Q_{m,1})\)</span> The Paasche may also be expressed as a function of the weighted average (i.e.&nbsp;shares):</p>
+<p><span class="math inline">\(I^P_{0,1} = 1/ \sum_{m=1}^M (w_{m,1} \frac{P_{m,0}}{P_{m,1}})\)</span> such that <span class="math inline">\(w_{m,1} = (P_{m,1}Q_{m,1})/ \sum_{m=1}^M (w_{m,1}P_{m,0}Q_{m,1})\)</span></p>
+<p>The Laspeyres and Paasche include prices and quantities in both periods, and both use the same relatives with different expenditure shares.</p>
+</section>
+<section id="fisher-index" class="level2">
+<h2 class="anchored" data-anchor-id="fisher-index">Fisher Index</h2>
+<p>The Fisher does a geometric average of the Laspeyres and the Paasche:</p>
+<p><span class="math inline">\(I^F_{0,1} = (I^L_{0,1}I^P_{0,1})^\frac{1}{2}\)</span></p>
+<p>The Fisher thus uses expenditure from both periods and thus provides relative importance that are more closely aligned with the goods actually sold. As the Fisher satisfies homogeneity, symmetry, and the time reversal test (the price change from the base to the current should be the inverse of the current to the base) - thus it doesn’t matter what period is chosen as the base.</p>
+</section>
+<section id="törnqvist-index" class="level2">
+<h2 class="anchored" data-anchor-id="törnqvist-index">Törnqvist Index</h2>
+<p>Similar to the Fisher, however it takes the average of the weights instead of averaging the two indices</p>
+<p>In logged form:</p>
+<p><span class="math inline">\(lnI^T_{0,1}=\sum^M_{m=1}(w_{m,0}+w_{m,1})/2(ln\frac{P_{m,1}}{P_{m,0}})\)</span></p>
+</section>
+<section id="jevons-index" class="level2">
+<h2 class="anchored" data-anchor-id="jevons-index">Jevons Index</h2>
+<p>The Jevons is unweighted geometric mean. Similar to the Törnqvist, in logged form:</p>
+<p><span class="math inline">\(lnI^J_{0,1} = \frac{1}{M} \sum^M_{m=1}ln(P_{m,1}/P_{m,0})\)</span></p>
+<p>The Jevons takes the unweighted average by replacing the <span class="math inline">\((w_{m,0}+w_{m,1})/2\)</span> with <span class="math inline">\(1/M\)</span>, thus giving each model equal weight</p>
+</section>
+</section>
+<section id="empirical-examples" class="level1">
+<h1>Empirical examples</h1>
 <ul>
-<li></li>
+<li>See an application of these methods locally using <a href="https://sergegoussev.github.io/price_stats_experiments/docs/price_index_experiments.html#category=bilateral%20index%20methods">various data examples</a></li>
 </ul>
 
 
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->

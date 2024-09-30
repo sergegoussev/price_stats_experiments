@@ -87,7 +87,51 @@
     "href": "docs/notes_on_bilateral_index_methods.html#laspeyres-index",
     "title": "Notes on bilateral price index methods",
     "section": "Laspeyres index",
-    "text": "Laspeyres index\nThe simplest formula (and one that is commonly used) is the Laspeyres index:\n\\(I^{L}_{0,1} = \\frac{\\sum_{m=1}^{M}(P_{m,1}Q_{m,0})}{\\sum_{m=1}^{M}(P_{m,0}Q_{m,0}})\\)\nWhere P’s and Q’s denote prices and quantities, and 0 and 1 denote two points in time.\nIf M goods are sold in both periods (note that an overlap is needed), we can compare the the cost of purchasing the same goods we bought in period 1 with a certain period in the future.\nWe can also write the Laspeyres as the weighted arithmetic average of the price change of the individual products in the index\n\\(I^L_{0,1} = \\sum_{m=1}^{M} (w_{m,0}\\frac{P_{m,1}}{P_{m,0}})\\)\nwhere the \\(w_{m,0} = (P_{m,0}Q_{m,0})/\\sum_{m=1}^{M}(P_{m,0}Q_{m,0})\\) give the ratio of good m’s expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:\n\nProducts sold in both periods are included in both periods, thus new products are omitted.\nWe fix the relative importance of the goods for both periods based on period 1 weight, thus we do not reflect changes in composition over time (substitution). This can be convenient as we need weights only for the base period.\n\nMost price indices are variants of the Laspeyres, such as the Lowe (which compare the prices from the current month with the previous month, but use weights from a year before that)\n\n\nSee empirical examples:",
+    "text": "Laspeyres index\nThe simplest formula (and one that is commonly used) is the Laspeyres index:\n\\(I^{L}_{0,1} = \\frac{\\sum_{m=1}^{M}(P_{m,1}Q_{m,0})}{\\sum_{m=1}^{M}(P_{m,0}Q_{m,0}})\\)\nWhere P’s and Q’s denote prices and quantities, and 0 and 1 denote two points in time.\nIf M goods are sold in both periods (note that an overlap is needed), we can compare the the cost of purchasing the same goods we bought in period 1 with a certain period in the future.\nWe can also write the Laspeyres as the weighted arithmetic average of the price change of the individual products in the index\n\\(I^L_{0,1} = \\sum_{m=1}^{M} (w_{m,0}\\frac{P_{m,1}}{P_{m,0}})\\) such that \\(w_{m,0} = (P_{m,0}Q_{m,0})/\\sum_{m=1}^{M}(P_{m,0}Q_{m,0})\\)\ngive the ratio of good m’s expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:\n\nProducts sold in both periods are included in both periods, thus new products are omitted.\nWe fix the relative importance of the goods for both periods based on period 1 weight, thus we do not reflect changes in composition over time (substitution). This can be convenient as we need weights only for the base period.\n\nMost price indices are variants of the Laspeyres, such as the Lowe (which compare the prices from the current month with the previous month, but use weights from a year before that)",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_bilateral_index_methods.html#paashe-index",
+    "href": "docs/notes_on_bilateral_index_methods.html#paashe-index",
+    "title": "Notes on bilateral price index methods",
+    "section": "Paashe Index",
+    "text": "Paashe Index\nSimilar to the Lasperyes, however uses a different basket (the one from the pricing period:\n\\(I^P_{0,1} = \\sum_{m=1}^M (P_{m,1}Q_{m,1}) / \\sum_{m=1}^M\n(P_{m,0}Q_{m,1})\\) The Paasche may also be expressed as a function of the weighted average (i.e. shares):\n\\(I^P_{0,1} = 1/ \\sum_{m=1}^M (w_{m,1} \\frac{P_{m,0}}{P_{m,1}})\\) such that \\(w_{m,1} = (P_{m,1}Q_{m,1})/ \\sum_{m=1}^M (w_{m,1}P_{m,0}Q_{m,1})\\)\nThe Laspeyres and Paasche include prices and quantities in both periods, and both use the same relatives with different expenditure shares.",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_bilateral_index_methods.html#fisher-index",
+    "href": "docs/notes_on_bilateral_index_methods.html#fisher-index",
+    "title": "Notes on bilateral price index methods",
+    "section": "Fisher Index",
+    "text": "Fisher Index\nThe Fisher does a geometric average of the Laspeyres and the Paasche:\n\\(I^F_{0,1} = (I^L_{0,1}I^P_{0,1})^\\frac{1}{2}\\)\nThe Fisher thus uses expenditure from both periods and thus provides relative importance that are more closely aligned with the goods actually sold. As the Fisher satisfies homogeneity, symmetry, and the time reversal test (the price change from the base to the current should be the inverse of the current to the base) - thus it doesn’t matter what period is chosen as the base.",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_bilateral_index_methods.html#törnqvist-index",
+    "href": "docs/notes_on_bilateral_index_methods.html#törnqvist-index",
+    "title": "Notes on bilateral price index methods",
+    "section": "Törnqvist Index",
+    "text": "Törnqvist Index\nSimilar to the Fisher, however it takes the average of the weights instead of averaging the two indices\nIn logged form:\n\\(lnI^T_{0,1}=\\sum^M_{m=1}(w_{m,0}+w_{m,1})/2(ln\\frac{P_{m,1}}{P_{m,0}})\\)",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_bilateral_index_methods.html#jevons-index",
+    "href": "docs/notes_on_bilateral_index_methods.html#jevons-index",
+    "title": "Notes on bilateral price index methods",
+    "section": "Jevons Index",
+    "text": "Jevons Index\nThe Jevons is unweighted geometric mean. Similar to the Törnqvist, in logged form:\n\\(lnI^J_{0,1} = \\frac{1}{M} \\sum^M_{m=1}ln(P_{m,1}/P_{m,0})\\)\nThe Jevons takes the unweighted average by replacing the \\((w_{m,0}+w_{m,1})/2\\) with \\(1/M\\), thus giving each model equal weight",
     "crumbs": [
       "Notes by method",
       "Notes on bilateral price index methods"
