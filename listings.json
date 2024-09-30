@@ -2,6 +2,7 @@
   {
     "listing": "/docs/price_index_experiments.html",
     "items": [
+      "/notebooks/aizcorbe_example_2.1.html",
       "/notebooks/aizcorbe_example_2.2.html",
       "/notebooks/aizcorbe_example_3.2.html"
     ]

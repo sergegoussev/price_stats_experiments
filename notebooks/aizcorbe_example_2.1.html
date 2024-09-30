@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Serge Goussev">
-<meta name="dcterms.date" content="2024-09-20">
+<meta name="dcterms.date" content="2024-09-29">
 
-<title>Experiments catalogue – Experiments with price stats</title>
+<title>Aizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices – Experiments with price stats</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,19 +21,50 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../docs/notes_on_bilateral_index_methods.html" rel="prev">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -73,65 +103,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-experiments-experiments .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-    const options = {
-      valueNames: ['listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-experiments-experiments'] = new List('listing-experiments-experiments', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../docs/styles.css">
 </head>
@@ -145,7 +120,9 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/price_index_experiments.html">Experiments catalogue</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Experiments with price stats
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -213,7 +190,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../docs/price_index_experiments.html" class="sidebar-item-text sidebar-link active">
+  <a href="../docs/price_index_experiments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Experiments catalogue</span></a>
   </div>
 </li>
@@ -227,33 +204,32 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#list-of-empirical-price-statistics-experiments" id="toc-list-of-empirical-price-statistics-experiments" class="nav-link active" data-scroll-target="#list-of-empirical-price-statistics-experiments">List of empirical price statistics experiments</a></li>
+  <li><a href="#example-of-fixed-base-and-chained-bilateral-indices-from-aizcorbe-2014-example-2.1" id="toc-example-of-fixed-base-and-chained-bilateral-indices-from-aizcorbe-2014-example-2.1" class="nav-link active" data-scroll-target="#example-of-fixed-base-and-chained-bilateral-indices-from-aizcorbe-2014-example-2.1">Example of fixed-base and chained bilateral indices (from Aizcorbe 2014, example 2.1)</a></li>
   </ul>
 </nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="bilateral index methods">bilateral index methods <span class="quarto-category-count">(2)</span></div><div class="category" data-category="chained indices">chained indices <span class="quarto-category-count">(1)</span></div><div class="category" data-category="fixed-base indices">fixed-base indices <span class="quarto-category-count">(1)</span></div><div class="category" data-category="hedonic methods">hedonic methods <span class="quarto-category-count">(1)</span></div><div class="category" data-category="product churn">product churn <span class="quarto-category-count">(1)</span></div></div></div>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Experiments catalogue</h1>
-</div>
+<h1 class="title">Aizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">bilateral index methods</div>
+    <div class="quarto-category">fixed-base indices</div>
+    <div class="quarto-category">chained indices</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Serge Goussev </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 20, 2024</p>
+      <p class="date">September 29, 2024</p>
     </div>
   </div>
   
@@ -265,69 +241,238 @@ window.Quarto = {
 </header>
 
 
-<p>This pages lists the experiments done by topic on specific public examples</p>
-<section id="list-of-empirical-price-statistics-experiments" class="level2">
-<h2 class="anchored" data-anchor-id="list-of-empirical-price-statistics-experiments">List of empirical price statistics experiments</h2>
-<div id="listing-experiments-experiments" class="quarto-listing quarto-listing-container-table">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-experiments-experiments-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-experiments-experiments'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title-sort" data-direction="asc">
-          Title
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
+<section id="example-of-fixed-base-and-chained-bilateral-indices-from-aizcorbe-2014-example-2.1" class="level1">
+<h1>Example of fixed-base and chained bilateral indices (from Aizcorbe 2014, example 2.1)</h1>
+<p>In Example 2.1, Aizcorbe uses US National Income and Product Accounts data from the BEA. This data is provided with the repo. Instead of the raw format on the BEA website and the massaged format on Table 2.3, it is instead provided in two separate <code>.csv</code> files</p>
+<div id="cell-2" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<table class="quarto-listing-table table">
+<div id="cell-3" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_expenditures <span class="op">=</span> pd.read_csv(<span class="st">"../data/silver/2000-2010 US NIPA data - nominal spending.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_expenditures</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
-<th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
-</th>
-<th>
-Categories
-</th>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Years</th>
+<th data-quarto-table-cell-role="th">Motor Vehicles and Parts</th>
+<th data-quarto-table-cell-role="th">Furnishings and Durable Household Equipment</th>
+<th data-quarto-table-cell-role="th">Recreational Goods and Vehicles</th>
+<th data-quarto-table-cell-role="th">Other Durable Goods</th>
 </tr>
 </thead>
-<tbody class="list">
-<tr data-index="0" data-categories="bilateral index methods,fixed-base indices,chained indices" data-listing-date-sort="1727568000000" data-listing-file-modified-sort="1727662679619" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="47" data-listing-title-sort="Aizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices" data-listing-filename-sort="aizcorbe_example_2.1.ipynb">
-<td>
-<a href="../notebooks/aizcorbe_example_2.1.html" class="title listing-title">Aizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices</a>
-</td>
-<td>
-<span class="listing-categories">bilateral index methods, fixed-base indices, chained indices</span>
-</td>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2000</td>
+<td>363.2</td>
+<td>208.1</td>
+<td>234.1</td>
+<td>110.4</td>
 </tr>
-<tr data-index="1" data-categories="bilateral index methods,product churn" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1727662679619" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="20" data-listing-title-sort="Aizcorbe (2014), ex 2.2. Bilateral indices" data-listing-filename-sort="aizcorbe_example_2.2.ipynb">
-<td>
-<a href="../notebooks/aizcorbe_example_2.2.html" class="title listing-title">Aizcorbe (2014), ex 2.2. Bilateral indices</a>
-</td>
-<td>
-<span class="listing-categories">bilateral index methods, product churn</span>
-</td>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2001</td>
+<td>383.3</td>
+<td>214.9</td>
+<td>239.8</td>
+<td>108.4</td>
 </tr>
-<tr data-index="2" data-categories="hedonic methods" data-listing-date-sort="1726790400000" data-listing-file-modified-sort="1727662679620" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8" data-listing-title-sort="Aizcorbe (2014), ex 3.2. Hedonic dummy variable method" data-listing-filename-sort="aizcorbe_example_3.2.ipynb">
-<td>
-<a href="../notebooks/aizcorbe_example_3.2.html" class="title listing-title">Aizcorbe (2014), ex 3.2. Hedonic dummy variable method</a>
-</td>
-<td>
-<span class="listing-categories">hedonic methods</span>
-</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2002</td>
+<td>401.3</td>
+<td>225.9</td>
+<td>251.5</td>
+<td>113.4</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2003</td>
+<td>401.0</td>
+<td>231.8</td>
+<td>265.7</td>
+<td>121.4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2004</td>
+<td>403.9</td>
+<td>247.0</td>
+<td>290.5</td>
+<td>131.5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>2005</td>
+<td>408.2</td>
+<td>261.3</td>
+<td>312.8</td>
+<td>141.1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>2006</td>
+<td>394.8</td>
+<td>271.5</td>
+<td>334.1</td>
+<td>154.6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>2007</td>
+<td>399.9</td>
+<td>271.3</td>
+<td>349.4</td>
+<td>167.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>2008</td>
+<td>339.3</td>
+<td>257.9</td>
+<td>344.0</td>
+<td>167.7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>2009</td>
+<td>316.5</td>
+<td>235.3</td>
+<td>316.6</td>
+<td>161.2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>2010</td>
+<td>340.1</td>
+<td>243.8</td>
+<td>329.8</td>
+<td>171.8</td>
 </tr>
 </tbody>
 </table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
 
+</div>
+</div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_price_indices <span class="op">=</span> pd.read_csv(<span class="st">"../data/silver/2000-2010 US NIPA data - price indexes.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_price_indices</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Years</th>
+<th data-quarto-table-cell-role="th">Motor Vehicles and Parts</th>
+<th data-quarto-table-cell-role="th">Furnishings and Durable Household Equipment</th>
+<th data-quarto-table-cell-role="th">Recreational Goods and Vehicles</th>
+<th data-quarto-table-cell-role="th">Other Durable Goods</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2000</td>
+<td>102.00</td>
+<td>108.12</td>
+<td>136.29</td>
+<td>105.23</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2001</td>
+<td>102.40</td>
+<td>106.27</td>
+<td>126.99</td>
+<td>105.56</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2002</td>
+<td>101.86</td>
+<td>104.08</td>
+<td>118.78</td>
+<td>103.61</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2003</td>
+<td>99.08</td>
+<td>101.16</td>
+<td>111.28</td>
+<td>101.91</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2004</td>
+<td>98.40</td>
+<td>99.91</td>
+<td>105.76</td>
+<td>101.54</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>2005</td>
+<td>100.00</td>
+<td>100.00</td>
+<td>100.00</td>
+<td>100.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>2006</td>
+<td>100.11</td>
+<td>99.60</td>
+<td>93.79</td>
+<td>101.80</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>2007</td>
+<td>99.62</td>
+<td>98.89</td>
+<td>87.16</td>
+<td>105.53</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>2008</td>
+<td>97.82</td>
+<td>98.14</td>
+<td>82.65</td>
+<td>109.09</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>2009</td>
+<td>98.16</td>
+<td>97.82</td>
+<td>77.35</td>
+<td>110.40</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>2010</td>
+<td>103.05</td>
+<td>93.73</td>
+<td>71.74</td>
+<td>110.92</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 
 
 </section>
@@ -897,15 +1042,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../docs/notes_on_bilateral_index_methods.html" class="pagination-link" aria-label="Notes on bilateral price index methods">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes on bilateral price index methods</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
