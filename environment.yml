@@ -15,3 +15,7 @@ dependencies:
   - openpyxl
   - matplotlib
   - plotly
+  - git
+  - pip
+  - pip:
+    - git+https://github.com/wspackman/PriceIndexCalc.git
