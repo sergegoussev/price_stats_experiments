@@ -1,0 +1,91 @@
+---
+title: "Sampling methods for scanner data"
+author: Serge Goussev
+date: 2024-11-01
+format:
+  html:
+    toc: true
+    toc-expand: 2
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    other-links:
+      - text: van der Grient and de Haan (2010) Use of Supermarket scanner data in the Dutch CPI
+        href: https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf    
+      - text: "Lamboray (2021) Index Compilation Techniques for Scanner Data: An overview"
+        href: https://unece.org/sites/default/files/2021-05/Session_1_Eurostat_Paper.pdf
+      - text: "Eurostat (2017) Practical Guide for Processing Supermarket Scanner Data. (Draft version, link to final broken)"
+        href: https://stats.unece.org/ottawagroup/download/f477.pdfx
+      - text: "UN Task Team e-handbook: Product sampling for price index calculation"      
+        href: https://unstats.un.org/wiki/display/GWGSD/Product+sampling+for+price+index+calculation
+---
+
+# Overview
+
+Even when scanner data is available, not all data necessarily needs to be used to calculate the elementary aggregate price index. There are two sampling approaches that are also typically used as they are quite effective ways to use the data - the static and dynamic sample methods.
+
+# Fixed sample method
+
+Simulates field collection but uses scanner data
+
+-   Step 1: select a large number of items at the beginning of the year which were representative the previous year (need to do analysis to choose this sample)
+
+    -   Each item identified by an EAN (in the Dutch case, stable unique identifier is needed)
+    -   Each item given a weight representing its relative importance
+
+-   Step 2: a monthly price index for each item is calculated as the unit value in the current month and unit value in the base month
+
+    -   Need cleaning to make sure unit value is determined
+
+-   Step 3: an EA is calculated as the weighted average of these item’s relatives using the Laspeyres (as is done on at the higher level).
+
+    -   Chain the indices at December to create a long-term series
+    -   Ongoing work to replace:
+        -   If there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed
+            -   TO DO: Flush out process of bridged overlap method and explicit quality adjustment used in this case
+    -   If an item disappeared – replace it with a similar one (but not with totally new products as these will only be available once the sample is refreshed in December).
+
+# Dynamic sample method
+
+Purpose/Idea:
+
+-   Procedure to do fixed sample method is too labor intensive to extend to many retailers (6 in the Netherlands case) from the a few when the fixed sample method was sufficient. This procedure requires much less manual work.
+
+-   The dynamic method was also found to closely approximate the GEKS
+
+-   An unweighted Jevons is used to avoid chain drifta
+
+-   Not used by Netherlands everywhere, only some traditional categories.
+
+Process as follows:
+
+-   Step 1: use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures
+
+$\frac{s_{t}+s_{t+1}}{2}>\frac{1}{n\times\lambda}$
+
+Where
+
+$\frac{(s_t+s\_(t+1))}{2}$ – the product’s average share between the two periods
+
+$n$ – the number of products
+
+$\lambda$ – 1.25
+
+-   Step 2: Calculate movement for category based on the unit value price in this month over unit value price the previous month.
+
+    -   Pre-processing is needed at this stage to get unit prices
+    -   Also filtering/cleaning applied:
+        -   Outlier filter excludes anything 300% higher and 75% decline
+        -   Dumping filter is used to exclude strong simultaneous price and quantity decreases – as this dumping in prices without an offsetting price increase will have a downward effect on the index.
+    -   EAN used for matched model method, but cleaning/investigation needed to make sure EAN is stable (sometimes retailers recycle EANs). SKU can be used where applicable as it may be more stable (sometimes capture the relaunch problem)
+    -   Only the first several weeks of data are used – the Dutch case its 3 weeks, consistent with field collection
+
+-   Step 3: If item is missing – impute its price once (as you may have temporarily missing) by multiplying the last observed price by the Jevons of the category movement
+
+-   Step 4: If explicit adjustments needed such as package changes – can be made manually
+
+    -   Examples are change in package sizes that are really the same for the consumer (i.e. EANs are basically too detailed, and we need a way to link/group 2 products together).
+    -   Other implicit quality adjustment stays as per the matched model approach
+    -   TO DO: flush out example
+
+-   Step 6: Integrate retailer specific COICOP6 indices together using Laspeyres method – i.e. higher-level aggregation unchanged
