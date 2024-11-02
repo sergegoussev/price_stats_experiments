@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-09-20">
+<meta name="author" content="Serge Goussev">
+<meta name="dcterms.date" content="2024-11-01">
 
-<title>Aizcorbe (2014), ex 2.2. Bilateral indices – Experiments with price stats</title>
+<title>Sampling methods for scanner data – Experiments with price stats</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,6 +32,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../docs/price_index_experiments.html" rel="next">
+<link href="../docs/notes_on_bilateral_index_methods.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,6 +73,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../docs/styles.css">
 </head>
@@ -83,9 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Experiments with price stats
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/notes_on_bilateral_index_methods.html">Notes by method</a></li><li class="breadcrumb-item"><a href="../docs/sampling_methods.html">Sampling methods for scanner data</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../docs/sampling_methods.html" class="sidebar-item-text sidebar-link">
+  <a href="../docs/sampling_methods.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Sampling methods for scanner data</span></a>
   </div>
 </li>
@@ -173,31 +203,35 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#example-of-bilateral-indices-with-product-churn-from-aizcorbe-2014-example-2.2" id="toc-example-of-bilateral-indices-with-product-churn-from-aizcorbe-2014-example-2.2" class="nav-link active" data-scroll-target="#example-of-bilateral-indices-with-product-churn-from-aizcorbe-2014-example-2.2">Example of bilateral indices with product churn (from Aizcorbe 2014, example 2.2)</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#fixed-sample-method" id="toc-fixed-sample-method" class="nav-link" data-scroll-target="#fixed-sample-method">Fixed sample method</a></li>
+  <li><a href="#dynamic-sample-method" id="toc-dynamic-sample-method" class="nav-link" data-scroll-target="#dynamic-sample-method">Dynamic sample method</a></li>
   </ul>
-</nav>
+<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf"><i class="bi bi-link-45deg"></i>van der Grient and de Haan (2010) Use of Supermarket scanner data in the Dutch CPI</a></li><li><a href="https://unece.org/sites/default/files/2021-05/Session_1_Eurostat_Paper.pdf"><i class="bi bi-link-45deg"></i>Lamboray (2021) Index Compilation Techniques for Scanner Data: An overview</a></li><li><a href="https://circabc.europa.eu/ui/group/7b031f10-ac19-4da3-a36f-58708a70133d/library/8e1333df-ca16-40fc-bc6a-1ce1be37247c/details"><i class="bi bi-link-45deg"></i>Eurostat (2017) Practical Guide for Processing Supermarket Scanner Data</a></li><li><a href="https://unstats.un.org/wiki/display/GWGSD/Product+sampling+for+price+index+calculation"><i class="bi bi-link-45deg"></i>UN Task Team e-handbook: Product sampling for price index calculation</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/notes_on_bilateral_index_methods.html">Notes by method</a></li><li class="breadcrumb-item"><a href="../docs/sampling_methods.html">Sampling methods for scanner data</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Aizcorbe (2014), ex 2.2. Bilateral indices</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">bilateral index methods</div>
-    <div class="quarto-category">product churn</div>
-  </div>
-  </div>
+<h1 class="title">Sampling methods for scanner data</h1>
+</div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Serge Goussev </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 20, 2024</p>
+      <p class="date">November 1, 2024</p>
     </div>
   </div>
   
@@ -209,9 +243,76 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="example-of-bilateral-indices-with-product-churn-from-aizcorbe-2014-example-2.2" class="level1">
-<h1>Example of bilateral indices with product churn (from Aizcorbe 2014, example 2.2)</h1>
-<p>In Example 2.2, Aizcorbe uses the <a href="https://phe.rockefeller.edu/LogletLab/DRAM/">DRAM dataset</a> to demonstrate how to construct bilateral price indices with product churn.</p>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>Even when scanner data is available, not all data necessarily needs to be used to calculate the elementary aggregate price index. There are two sampling approaches that are also typically used as they are quite effective ways to use the data - the static and dynamic sample methods. For a good overview of the topic, see <a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">van der Grient and de Haan (2010)</a>.</p>
+</section>
+<section id="fixed-sample-method" class="level1">
+<h1>Fixed sample method</h1>
+<p>Simulates field collection but uses scanner data</p>
+<ul>
+<li><p>Step 1: select a large number of items at the beginning of the year which were representative the previous year (need to do analysis to choose this sample)</p>
+<ul>
+<li>Each item identified by an EAN (in the Dutch case, stable unique identifier is needed)</li>
+<li>Each item given a weight representing its relative importance</li>
+</ul></li>
+<li><p>Step 2: a monthly price index for each item is calculated as the unit value in the current month and unit value in the base month</p>
+<ul>
+<li>Need cleaning to make sure unit value is determined</li>
+</ul></li>
+<li><p>Step 3: an EA is calculated as the weighted average of these item’s relatives using the Laspeyres (as is done on at the higher level).</p>
+<ul>
+<li>Chain the indices at December to create a long-term series</li>
+<li>Ongoing work to replace:
+<ul>
+<li>If there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed
+<ul>
+<li>TO DO: Flush out process of bridged overlap method and explicit quality adjustment used in this case</li>
+</ul></li>
+</ul></li>
+<li>If an item disappeared – replace it with a similar one (but not with totally new products as these will only be available once the sample is refreshed in December).</li>
+</ul></li>
+</ul>
+</section>
+<section id="dynamic-sample-method" class="level1">
+<h1>Dynamic sample method</h1>
+<p>Purpose/Idea:</p>
+<ul>
+<li><p>Procedure to do fixed sample method is too labor intensive to extend to many retailers (6 in the Netherlands case) from the a few when the fixed sample method was sufficient. This procedure requires much less manual work.</p></li>
+<li><p>The dynamic method was also found to closely approximate the GEKS</p></li>
+<li><p>An unweighted Jevons is used to avoid chain drifta</p></li>
+<li><p>Not used by Netherlands everywhere, only some traditional categories.</p></li>
+</ul>
+<p>Process as follows:</p>
+<ul>
+<li>Step 1: use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures</li>
+</ul>
+<p><span class="math inline">\(\frac{s_{t}+s_{t+1}}{2}&gt;\frac{1}{n\times\lambda}\)</span></p>
+<p>Where</p>
+<p><span class="math inline">\(\frac{(s_t+s\_(t+1))}{2}\)</span> – the product’s average share between the two periods</p>
+<p><span class="math inline">\(n\)</span> – the number of products</p>
+<p><span class="math inline">\(\lambda\)</span> – 1.25</p>
+<ul>
+<li><p>Step 2: Calculate movement for category based on the unit value price in this month over unit value price the previous month.</p>
+<ul>
+<li>Pre-processing is needed at this stage to get unit prices</li>
+<li>Also filtering/cleaning applied:
+<ul>
+<li>Outlier filter excludes anything 300% higher and 75% decline</li>
+<li>Dumping filter is used to exclude strong simultaneous price and quantity decreases – as this dumping in prices without an offsetting price increase will have a downward effect on the index.</li>
+</ul></li>
+<li>EAN used for matched model method, but cleaning/investigation needed to make sure EAN is stable (sometimes retailers recycle EANs). SKU can be used where applicable as it may be more stable (sometimes capture the relaunch problem)</li>
+<li>Only the first several weeks of data are used – the Dutch case its 3 weeks, consistent with field collection</li>
+</ul></li>
+<li><p>Step 3: If item is missing – impute its price once (as you may have temporarily missing) by multiplying the last observed price by the Jevons of the category movement</p></li>
+<li><p>Step 4: If explicit adjustments needed such as package changes – can be made manually</p>
+<ul>
+<li>Examples are change in package sizes that are really the same for the consumer (i.e.&nbsp;EANs are basically too detailed, and we need a way to link/group 2 products together).</li>
+<li>Other implicit quality adjustment stays as per the matched model approach</li>
+<li>TO DO: flush out example</li>
+</ul></li>
+<li><p>Step 6: Integrate retailer specific COICOP6 indices together using Laspeyres method – i.e.&nbsp;higher-level aggregation unchanged</p></li>
+</ul>
 
 
 </section>
@@ -781,6 +882,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../docs/notes_on_bilateral_index_methods.html" class="pagination-link" aria-label="Notes on bilateral price index methods">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes on bilateral price index methods</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../docs/price_index_experiments.html" class="pagination-link" aria-label="Experiments catalogue">
+        <span class="nav-page-text">Experiments catalogue</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
