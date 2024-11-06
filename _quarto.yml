@@ -31,7 +31,7 @@ website:
         contents:
         - href: docs/notes_on_bilateral_index_methods.qmd
         - href: docs/sampling_methods.qmd
-      - href: docs/price_index_experiments.qmd
+      - href: docs/empirical_experiments.qmd
 
 
 

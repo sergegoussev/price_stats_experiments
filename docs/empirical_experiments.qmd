@@ -15,7 +15,7 @@ format:
     toc-expand: 2
 ---
 
-This pages lists the experiments done by topic on specific public examples
+This pages lists the experiments done by topic on specific topics related in some way to price statistics
 
 ## List of empirical price statistics experiments
 
