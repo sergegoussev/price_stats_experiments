@@ -6,7 +6,6 @@ execute:
 
 website:
   title: "Experiments with price stats"
-  favicon: docs/images/logo_bauhaus.jpeg
   repo-url: https://sergegoussev.github.io/price_stats_experiments/docs/
   repo-actions: [source]
   bread-crumbs: true
@@ -17,6 +16,7 @@ website:
     style: "docked"
     type: "dark"
     search: true
+    logo: docs/images/logo_bauhaus.jpeg
     border: true
     tools:
       - icon: github
