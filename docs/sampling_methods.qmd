@@ -22,42 +22,56 @@ format:
 
 # Overview
 
-Even when scanner data is available, not all data necessarily needs to be used to calculate the elementary aggregate price index. There are two sampling approaches that are also typically used as they are quite effective ways to use the data - the static and dynamic sample methods. For a good overview of the topic, see [van der Grient and de Haan (2010)](https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf).
+Even when scanner data is available, not all data necessarily needs to be used to calculate elementary price indices. There are two sampling approaches that are typically used as they are quite effective ways to use a subset of the data but - the static and dynamic sample methods. A requirement for sampling is that each unique product is already classified to categories within which the elementary price indices are calculated.
+
+For a good overview of the topic, see [van der Grient and de Haan (2010)](https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf).
 
 # Fixed sample method
 
-Simulates field collection but uses scanner data
+## The concept
 
--   Step 1: select a large number of items at the beginning of the year which were representative the previous year (need to do analysis to choose this sample)
+The fixed sample method simulates a traditional fixed sample, similar to field collection. The sample is refreshed every year to stay representative and replacement is used to maintain the sample following a traditional methodology (except in this case, all products and all transactions provide a lot of additional detail of what replacement to select).
 
-    -   Each item identified by an EAN (in the Dutch case, stable unique identifier is needed)
+The method is simple (in the sense that it follows a traditional methodology and can be combined with other data in a traditional way), however it is resource intensive as replacement must be dealt with manually (for example [the Netherlands found it too costly to extend to 6 scanner retailers and shifted to the dynamic sample method](https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf)). It is also typically used with only a small (although very representative) sample of data.
+
+## Step-by-step process
+
+The summary of the overall process is best summarized by the [Eurostat (2017) guide, chapter 6](https://circabc.europa.eu/ui/group/7b031f10-ac19-4da3-a36f-58708a70133d/library/8e1333df-ca16-40fc-bc6a-1ce1be37247c/details):
+
+> In the static approach, a sample is drawn from year t and used for 12 months following December of year t. The sample is kept and replacements are made as needed.
+
+In a more detailed sense, the following steps are used to select and maintain the sample:
+
+-   Step 1: Select a number of items at the beginning of the year which were representative the previous year (need to do analysis to choose this sample).
+
+    -   In European literature, an item is identified by European Article Number (EAN)
     -   Each item given a weight representing its relative importance
 
--   Step 2: a monthly price index for each item is calculated as the unit value in the current month and unit value in the base month
+-   Step 2: A monthly price index (i.e. relative) for each item is calculated as the unit value in the current month and unit value in the base year.
 
     -   Need cleaning to make sure unit value is determined
 
--   Step 3: an EA is calculated as the weighted average of these item’s relatives using the Laspeyres (as is done on at the higher level).
+-   Step 3: An elementary price index as the weighted average of each item’s relatives using the Laspeyres (as is done on at the higher level aggregation).
 
     -   Chain the indices at December to create a long-term series
     -   Ongoing work to replace:
-        -   If there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed
+        -   If there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed in a select number of cases. Implicit methods (typically the bridged overlap method) are used.
             -   TO DO: Flush out process of bridged overlap method and explicit quality adjustment used in this case
-    -   If an item disappeared – replace it with a similar one (but not with totally new products as these will only be available once the sample is refreshed in December).
+    -   If an item disappeared – replace it with a similar one that was present in the base period.
 
 # Dynamic sample method
 
-Purpose/Idea:
+## The concept
 
 -   Procedure to do fixed sample method is too labor intensive to extend to many retailers (6 in the Netherlands case) from the a few when the fixed sample method was sufficient. This procedure requires much less manual work.
 
 -   The dynamic method was also found to closely approximate the GEKS
 
--   An unweighted Jevons is used to avoid chain drifta
+-   An unweighted Jevons is used to avoid chain drift
 
 -   Not used by Netherlands everywhere, only some traditional categories.
 
-Process as follows:
+## Step-by-step process
 
 -   Step 1: use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures
 
