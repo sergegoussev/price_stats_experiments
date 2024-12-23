@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,17 +34,18 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../">
 <link href="../docs/empirical_experiments.html" rel="next">
 <link href="../docs/notes_on_bilateral_index_methods.html" rel="prev">
+<link href="../docs/images/logo_bauhaus.jpeg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-a68d576f93b57464e23d983d685fe254.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-a71619196f4f5e4e93c7baa22a6c2c91.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -207,7 +208,7 @@ window.Quarto = {
   <li><a href="#fixed-sample-method" id="toc-fixed-sample-method" class="nav-link" data-scroll-target="#fixed-sample-method">Fixed sample method</a></li>
   <li><a href="#dynamic-sample-method" id="toc-dynamic-sample-method" class="nav-link" data-scroll-target="#dynamic-sample-method">Dynamic sample method</a></li>
   </ul>
-<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf"><i class="bi bi-link-45deg"></i>van der Grient and de Haan (2010) Use of Supermarket scanner data in the Dutch CPI</a></li><li><a href="https://unece.org/sites/default/files/2021-05/Session_1_Eurostat_Paper.pdf"><i class="bi bi-link-45deg"></i>Lamboray (2021) Index Compilation Techniques for Scanner Data: An overview</a></li><li><a href="https://circabc.europa.eu/ui/group/7b031f10-ac19-4da3-a36f-58708a70133d/library/8e1333df-ca16-40fc-bc6a-1ce1be37247c/details"><i class="bi bi-link-45deg"></i>Eurostat (2017) Practical Guide for Processing Supermarket Scanner Data</a></li><li><a href="https://unstats.un.org/wiki/display/GWGSD/Product+sampling+for+price+index+calculation"><i class="bi bi-link-45deg"></i>UN Task Team e-handbook: Product sampling for price index calculation</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://sergegoussev.github.io/price_stats_experiments/docs/blob/main/docs/sampling_methods.qmd" class="toc-action"><i class="bi bi-git"></i>View source</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf"><i class="bi bi-link-45deg"></i>van der Grient and de Haan (2010) Use of Supermarket scanner data in the Dutch CPI</a></li><li><a href="https://unece.org/sites/default/files/2021-05/Session_1_Eurostat_Paper.pdf"><i class="bi bi-link-45deg"></i>Lamboray (2021) Index Compilation Techniques for Scanner Data: An overview</a></li><li><a href="https://circabc.europa.eu/ui/group/7b031f10-ac19-4da3-a36f-58708a70133d/library/8e1333df-ca16-40fc-bc6a-1ce1be37247c/details"><i class="bi bi-link-45deg"></i>Eurostat (2017) Practical Guide for Processing Supermarket Scanner Data</a></li><li><a href="https://unstats.un.org/wiki/display/GWGSD/Product+sampling+for+price+index+calculation"><i class="bi bi-link-45deg"></i>UN Task Team e-handbook: Product sampling for price index calculation</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -544,8 +545,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -656,7 +655,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -899,4 +897,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://sergegoussev.github.io/price_stats_experiments/docs/blob/main/docs/sampling_methods.qmd" class="toc-action"><i class="bi bi-git"></i>View source</a></li></ul></div></div></div></footer></body></html>
