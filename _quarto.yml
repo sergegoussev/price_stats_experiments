@@ -17,6 +17,7 @@ website:
     type: "dark"
     search: true
     logo: docs/images/logo_bauhaus.jpeg
+    title: "Experiments with price stats"
     border: true
     tools:
       - icon: github
