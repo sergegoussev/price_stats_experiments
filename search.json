@@ -14,191 +14,6 @@
     "text": "Example of bilateral indices with product churn (from Aizcorbe 2014, example 2.2)\nIn Example 2.2, Aizcorbe uses the DRAM dataset to demonstrate how to construct bilateral price indices with product churn.\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "docs/sampling_methods.html",
-    "href": "docs/sampling_methods.html",
-    "title": "Sampling methods for scanner data",
-    "section": "",
-    "text": "Even when scanner data is available, not all data necessarily needs to be used to calculate elementary price indices. There are two sampling approaches that are typically used as they are quite effective ways to use a subset of the data but - the static and dynamic sample methods. A requirement for sampling is that each unique product is already classified to categories within which the elementary price indices are calculated.",
-    "crumbs": [
-      "Notes by method",
-      "Sampling methods for scanner data"
-    ]
-  },
-  {
-    "objectID": "docs/sampling_methods.html#the-concept",
-    "href": "docs/sampling_methods.html#the-concept",
-    "title": "Sampling methods for scanner data",
-    "section": "The concept",
-    "text": "The concept\n\nThe fixed sample method simulates a traditional approach, similar to field collection. The sample is refreshed every year to stay representative and replacement is used to maintain the sample following a traditional methodology (except that as scanner data is available to evaluation, i.e. seeing all products and all transactions provides a lot of additional detail of what product to replace with).\nThe method is simple (in the sense that it follows a traditional methodology and can be combined with other data in a traditional way), however it is resource intensive as replacement must be dealt with manually (for example the Netherlands found it too costly to extend to 6 scanner retailers and shifted to the dynamic sample method). It is also typically used with only a small (although representative) sample of data. It is also similar to traditional methods so its easy to implement when starting out with scanner data.\nThe fixed sample method favors comparability over representativity as the same items are compared over time, however the representativity of the sample deteriorates over time:\n\nA consequence of the method is thus that only similar products are selected for most disappearing items (to avoid quality adjustment), which means the method is most applicable to situations where quality change is not a major factor in the category.\nThe method is also only applicable to categories with little churn as representativity of the products in sample will decline quickly if this is not the case. Both of these consequences are only partially mitigated by the annual product resampling. In this",
-    "crumbs": [
-      "Notes by method",
-      "Sampling methods for scanner data"
-    ]
-  },
-  {
-    "objectID": "docs/sampling_methods.html#step-by-step-process",
-    "href": "docs/sampling_methods.html#step-by-step-process",
-    "title": "Sampling methods for scanner data",
-    "section": "Step-by-step process",
-    "text": "Step-by-step process\nThe summary of the overall process is best summarized by the Eurostat (2017) guide, chapter 6:\n\nIn the static approach, a sample is drawn from year t and used for 12 months following December of year t. The sample is kept and replacements are made as needed.\n\nIn a more detailed sense, the following steps are used to select and maintain the sample:\n\nStep 1: For each category (typically COICOP 6) for which an elementary price index will be calculated, select a number of items (representative products) at the beginning of the year which were representative the previous year. For instance you can look at products that constituted the top 50% of annual turnover.\n\nSelect unique products (such as by European Article Number (EAN)) per supermarket chain and stores (to ensure that coverage by all chains in the sample is maintained)\nWith this approach, we may end up with a lot of observations per category, or too few, in which case a little tuning is necessary.\nEach item given a weight representing its relative importance\n\nStep 2: A monthly price index (i.e. relative) for each item is calculated as the unit value in the current month and unit value in the base year.\nStep 3: An elementary price index as the weighted average of each item’s relatives using the Laspeyres (as is done on at the higher level aggregation).\n\nChain the indices at December to create a long-term series\nOngoing work to replace:\n\nIf there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed in a select number of cases. Implicit methods (typically the bridged overlap method) are used. See CPI Manual, chapter 7 for more detail on how to maintain methods.\n\nIf an item disappeared – replace it with a similar one that was present in the base period.",
-    "crumbs": [
-      "Notes by method",
-      "Sampling methods for scanner data"
-    ]
-  },
-  {
-    "objectID": "docs/sampling_methods.html#resources",
-    "href": "docs/sampling_methods.html#resources",
-    "title": "Sampling methods for scanner data",
-    "section": "Resources",
-    "text": "Resources\nThe following articles summarize the fixed sample method well\n\nLarsen (2014) Implementing scanner data in the Danish CPI\nvan der Grient and Jan de Haan (2010) The use of supermarket scanner data in the Dutch CPI",
-    "crumbs": [
-      "Notes by method",
-      "Sampling methods for scanner data"
-    ]
-  },
-  {
-    "objectID": "docs/sampling_methods.html#the-concept-1",
-    "href": "docs/sampling_methods.html#the-concept-1",
-    "title": "Sampling methods for scanner data",
-    "section": "The concept",
-    "text": "The concept\n\nAs the distribution of expenditures is typically quite skewed, a relatively small number of items are usually representing the majority of expenditures. The method focuses on these using a cut-off-sampling approach and allows the basket (sample) to be updated (i.e. re-sampled) every month. Put differently, “an item will be used in the scomputation of hte index between two consecutive months if its average expenditure share (with respect tho the set of matched items) in those months is above a certain threshold value” (van der Grient and Jan de Haan, 2010).\nAn unweighted (i.e. not using turnover) Jevons is used and chained, thereby reducing the risk of chain drift (as weights are used implicitly for sampling of items but not explicitly for index calculation).\nThe other added benefit is that it shifts to an automatic way to maintain the sample, as the process to maintain the fixed sample method is also too labor intensive and hard to extend to many retailers (6 in the Netherlands case).\nThe dynamic method was also found to closely approximate the GEKS, hence its a useful way to measure food and non-food categories. After a while, the NSO can shift to the multilateral method is possible (requires a minimum of 13 months, ideally 25).\nImplementation requires research on dumping and outlier filters prior to implementing.",
-    "crumbs": [
-      "Notes by method",
-      "Sampling methods for scanner data"
-    ]
-  },
-  {
-    "objectID": "docs/sampling_methods.html#step-by-step-process-1",
-    "href": "docs/sampling_methods.html#step-by-step-process-1",
-    "title": "Sampling methods for scanner data",
-    "section": "Step-by-step process",
-    "text": "Step-by-step process\n\nStep 1: Calculate movement for each product in the category based on the unit value price in this month over unit value price the previous month.\n\nPre-processing is needed to calculate unit prices\nFiltering/cleaning is also applied:\n\nOutlier filter excludes anything 300% higher and 75% decline\nDumping filter is used to exclude strong simultaneous price and quantity decreases – as this dumping in prices without an offsetting price increase will have a downward effect on the index.\n\nThe unique identifier applicable (EAN in the Dutch example) is used for matched-model method, but cleaning/investigation needed to make sure identifier is stable (sometimes retailers recycle EANs for instance). SKU can be used where applicable as it may be more stable (sometimes capture the relaunch problem). If the identifier is too detailed for CPI purposes (say where two products with different codes are identical from a consumers’ point of view), these should be grouped in theory but in principle can be explicitly quality adjusted.\nOnly the first several weeks of data are used – the Dutch case its 3 weeks, consistent with field collection\n\nStep 2: Use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures\n\n\\(\\frac{s_{t}+s_{t+1}}{2}&gt;\\frac{1}{n\\times\\lambda}\\)\nWhere\n\\(\\frac{(s_t+s_{t+1})}{2}\\) – the product’s average share between the two periods\n\\(n\\) – the number of products\n\\(\\lambda\\) – 1.25\nFor example if \\(n\\) = 80 then items with an average expenditure share greater than 1% are selected\n\nStep 3: If item is missing – impute its price once (as you may have temporarily missing) by multiplying the last observed price by the Jevons of the category movement (i.e. ‘class mean imputation’ method). This is needed as a strict matched-item method will exclude temporary observed items from the computation.\nStep 4: If explicit adjustments needed such as package changes – can be made manually\n\nExamples are change in package sizes that are really the same for the consumer (i.e. EANs are basically too detailed, and we need a way to link/group 2 products together).\nOther implicit quality adjustment stays as per the matched model approach\n\nStep 5: Integrate retailer specific COICOP6 indices together using annual chained Laspeyres method (i.e. higher-level aggregation). Scanner data can be used to weigh different retailers (when present) but sub-COICOP6 weight may be needed to separate out non-scanner data sources that use a different aggregation method.",
-    "crumbs": [
-      "Notes by method",
-      "Sampling methods for scanner data"
-    ]
-  },
-  {
-    "objectID": "docs/sampling_methods.html#categories-applicable",
-    "href": "docs/sampling_methods.html#categories-applicable",
-    "title": "Sampling methods for scanner data",
-    "section": "Categories applicable",
-    "text": "Categories applicable\nThe Dutch case showcased the application of the method for several COICOP categories, specifically Food (01), Wine and Beer (0212, 0213), Tools, household maintenance tools (055, 056), medical and pharmaceutical products (061), pet food (0934), and personal care products (1313). This showcases the application of the method.",
-    "crumbs": [
-      "Notes by method",
-      "Sampling methods for scanner data"
-    ]
-  },
-  {
-    "objectID": "docs/sampling_methods.html#resources-1",
-    "href": "docs/sampling_methods.html#resources-1",
-    "title": "Sampling methods for scanner data",
-    "section": "Resources",
-    "text": "Resources\nThe following articles go through the process in depth\n\nvan der Grient and Jan de Haan (2010) The use of supermarket scanner data in the Dutch CPI\nvan der Grient and Jan de Haan (2011) Scanner Data Price Indexes: The “Dutch Method” versus Rolling Year GEKS",
-    "crumbs": [
-      "Notes by method",
-      "Sampling methods for scanner data"
-    ]
-  },
-  {
-    "objectID": "docs/notes_on_bilateral_index_methods.html",
-    "href": "docs/notes_on_bilateral_index_methods.html",
-    "title": "Notes on bilateral price index methods",
-    "section": "",
-    "text": "This page provides an overview of Bilateral Price Index methods. Several sources are used (included in the links to the page) to go over key concepts. Emprical examples are linked from this page or can be found in the main guide\n\n\n\nA price index provides an aggregate measure of price change for a particular product segment, industry, or overall economy. … [They compare] the cost of purchasing a set of goods at different points in time. This “set of goods” is often referred to as the “market basket” or the “bundle” of goods. - Aizcorbe (2014)",
-    "crumbs": [
-      "Notes by method",
-      "Notes on bilateral price index methods"
-    ]
-  },
-  {
-    "objectID": "docs/notes_on_bilateral_index_methods.html#the-concept-of-price-index-methods",
-    "href": "docs/notes_on_bilateral_index_methods.html#the-concept-of-price-index-methods",
-    "title": "Notes on bilateral price index methods",
-    "section": "",
-    "text": "A price index provides an aggregate measure of price change for a particular product segment, industry, or overall economy. … [They compare] the cost of purchasing a set of goods at different points in time. This “set of goods” is often referred to as the “market basket” or the “bundle” of goods. - Aizcorbe (2014)",
-    "crumbs": [
-      "Notes by method",
-      "Notes on bilateral price index methods"
-    ]
-  },
-  {
-    "objectID": "docs/notes_on_bilateral_index_methods.html#laspeyres-index",
-    "href": "docs/notes_on_bilateral_index_methods.html#laspeyres-index",
-    "title": "Notes on bilateral price index methods",
-    "section": "Laspeyres index",
-    "text": "Laspeyres index\nThe simplest formula (and one that is commonly used) is the Laspeyres index:\n\\(I^{L}_{0,1} = \\frac{\\sum_{m=1}^{M}(P_{m,1}Q_{m,0})}{\\sum_{m=1}^{M}(P_{m,0}Q_{m,0})}\\)\nWhere P’s and Q’s denote prices and quantities, and 0 and 1 denote two points in time.\nIf M goods are sold in both periods (note that an overlap is needed), we can compare the the cost of purchasing the same goods we bought in period 1 with a certain period in the future.\nWe can also write the Laspeyres as the weighted arithmetic average of the price change of the individual products in the index\n\\(I^L_{0,1} = \\sum_{m=1}^{M} (w_{m,0}\\frac{P_{m,1}}{P_{m,0}})\\) such that \\(w_{m,0} = (P_{m,0}Q_{m,0})/\\sum_{m=1}^{M}(P_{m,0}Q_{m,0})\\)\ngive the ratio of good m’s expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:\n\nProducts sold in both periods are included in both periods, thus new products are omitted.\nWe fix the relative importance of the goods for both periods based on period 1 weight, thus we do not reflect changes in composition over time (substitution). This can be convenient as we need weights only for the base period.\n\nMost price indices are variants of the Laspeyres, such as the Lowe (which compare the prices from the current month with the previous month, but use weights from a year before that)",
-    "crumbs": [
-      "Notes by method",
-      "Notes on bilateral price index methods"
-    ]
-  },
-  {
-    "objectID": "docs/notes_on_bilateral_index_methods.html#paashe-index",
-    "href": "docs/notes_on_bilateral_index_methods.html#paashe-index",
-    "title": "Notes on bilateral price index methods",
-    "section": "Paashe Index",
-    "text": "Paashe Index\nSimilar to the Lasperyes, however uses a different basket (the one from the pricing period:\n\\(I^P_{0,1} = \\sum_{m=1}^M (P_{m,1}Q_{m,1}) / \\sum_{m=1}^M\n(P_{m,0}Q_{m,1})\\) The Paasche may also be expressed as a function of the weighted average (i.e. shares):\n\\(I^P_{0,1} = 1/ \\sum_{m=1}^M (w_{m,1} \\frac{P_{m,0}}{P_{m,1}})\\) such that \\(w_{m,1} = (P_{m,1}Q_{m,1})/ \\sum_{m=1}^M (w_{m,1}P_{m,0}Q_{m,1})\\)\nThe Laspeyres and Paasche include prices and quantities in both periods, and both use the same relatives with different expenditure shares.",
-    "crumbs": [
-      "Notes by method",
-      "Notes on bilateral price index methods"
-    ]
-  },
-  {
-    "objectID": "docs/notes_on_bilateral_index_methods.html#fisher-index",
-    "href": "docs/notes_on_bilateral_index_methods.html#fisher-index",
-    "title": "Notes on bilateral price index methods",
-    "section": "Fisher Index",
-    "text": "Fisher Index\nThe Fisher does a geometric average of the Laspeyres and the Paasche:\n\\(I^F_{0,1} = (I^L_{0,1}I^P_{0,1})^\\frac{1}{2}\\)\nThe Fisher thus uses expenditure from both periods and thus provides relative importance that are more closely aligned with the goods actually sold. As the Fisher satisfies homogeneity, symmetry, and the time reversal test (the price change from the base to the current should be the inverse of the current to the base) - thus it doesn’t matter what period is chosen as the base.",
-    "crumbs": [
-      "Notes by method",
-      "Notes on bilateral price index methods"
-    ]
-  },
-  {
-    "objectID": "docs/notes_on_bilateral_index_methods.html#törnqvist-index",
-    "href": "docs/notes_on_bilateral_index_methods.html#törnqvist-index",
-    "title": "Notes on bilateral price index methods",
-    "section": "Törnqvist Index",
-    "text": "Törnqvist Index\nSimilar to the Fisher, however it takes the average of the weights instead of averaging the two indices\nIn logged form:\n\\(lnI^T_{0,1}=\\sum^M_{m=1}(w_{m,0}+w_{m,1})/2(ln\\frac{P_{m,1}}{P_{m,0}})\\)",
-    "crumbs": [
-      "Notes by method",
-      "Notes on bilateral price index methods"
-    ]
-  },
-  {
-    "objectID": "docs/notes_on_bilateral_index_methods.html#jevons-index",
-    "href": "docs/notes_on_bilateral_index_methods.html#jevons-index",
-    "title": "Notes on bilateral price index methods",
-    "section": "Jevons Index",
-    "text": "Jevons Index\nThe Jevons is unweighted geometric mean. Similar to the Törnqvist, in logged form:\n\\(lnI^J_{0,1} = \\frac{1}{M} \\sum^M_{m=1}ln(P_{m,1}/P_{m,0})\\)\nThe Jevons takes the unweighted average by replacing the \\((w_{m,0}+w_{m,1})/2\\) with \\(1/M\\), thus giving each model equal weight",
-    "crumbs": [
-      "Notes by method",
-      "Notes on bilateral price index methods"
-    ]
-  },
-  {
-    "objectID": "docs/empirical_experiments.html",
-    "href": "docs/empirical_experiments.html",
-    "title": "Experiments catalogue",
-    "section": "",
-    "text": "This pages lists the experiments done by topic on specific topics related in some way to price statistics",
-    "crumbs": [
-      "Experiments catalogue"
-    ]
-  },
-  {
-    "objectID": "docs/empirical_experiments.html#list-of-empirical-price-statistics-experiments",
-    "href": "docs/empirical_experiments.html#list-of-empirical-price-statistics-experiments",
-    "title": "Experiments catalogue",
-    "section": "List of empirical price statistics experiments",
-    "text": "List of empirical price statistics experiments\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nCategories\n\n\n\n\n\n\nAizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices\n\n\nbilateral index methods, fixed-base indices, chained indices\n\n\n\n\nAizcorbe (2014), ex 2.2. Bilateral indices\n\n\nbilateral index methods, product churn\n\n\n\n\nAizcorbe (2014), ex 3.2. Hedonic dummy variable method\n\n\nhedonic methods\n\n\n\n\nBenchmark test in file formats\n\n\ndata engineering, file format benchmarks\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Experiments catalogue"
-    ]
-  },
-  {
     "objectID": "docs/index.html",
     "href": "docs/index.html",
     "title": "Overview",
@@ -216,6 +31,191 @@
     "text": "This is a personal site that I used to render experiments and workflows that relate to the price statistics domain within official statistics. It is meant to log various experiments and notes to myself in a reproducible manner. Anyone else can use this if they choose but it is not explicitly meant for any formal capacity.",
     "crumbs": [
       "Overview"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/bilateral_indices.html",
+    "href": "docs/notes_on_methods/bilateral_indices.html",
+    "title": "Notes on bilateral price index methods",
+    "section": "",
+    "text": "This page provides an overview of Bilateral Price Index methods. Several sources are used (included in the links to the page) to go over key concepts. Emprical examples are linked from this page or can be found in the main guide\n\n\n\nA price index provides an aggregate measure of price change for a particular product segment, industry, or overall economy. … [They compare] the cost of purchasing a set of goods at different points in time. This “set of goods” is often referred to as the “market basket” or the “bundle” of goods. - Aizcorbe (2014)",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/bilateral_indices.html#the-concept-of-price-index-methods",
+    "href": "docs/notes_on_methods/bilateral_indices.html#the-concept-of-price-index-methods",
+    "title": "Notes on bilateral price index methods",
+    "section": "",
+    "text": "A price index provides an aggregate measure of price change for a particular product segment, industry, or overall economy. … [They compare] the cost of purchasing a set of goods at different points in time. This “set of goods” is often referred to as the “market basket” or the “bundle” of goods. - Aizcorbe (2014)",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/bilateral_indices.html#laspeyres-index",
+    "href": "docs/notes_on_methods/bilateral_indices.html#laspeyres-index",
+    "title": "Notes on bilateral price index methods",
+    "section": "Laspeyres index",
+    "text": "Laspeyres index\nThe simplest formula (and one that is commonly used) is the Laspeyres index:\n\\(I^{L}_{0,1} = \\frac{\\sum_{m=1}^{M}(P_{m,1}Q_{m,0})}{\\sum_{m=1}^{M}(P_{m,0}Q_{m,0})}\\)\nWhere P’s and Q’s denote prices and quantities, and 0 and 1 denote two points in time.\nIf M goods are sold in both periods (note that an overlap is needed), we can compare the the cost of purchasing the same goods we bought in period 1 with a certain period in the future.\nWe can also write the Laspeyres as the weighted arithmetic average of the price change of the individual products in the index\n\\(I^L_{0,1} = \\sum_{m=1}^{M} (w_{m,0}\\frac{P_{m,1}}{P_{m,0}})\\) such that \\(w_{m,0} = (P_{m,0}Q_{m,0})/\\sum_{m=1}^{M}(P_{m,0}Q_{m,0})\\)\ngive the ratio of good m’s expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:\n\nProducts sold in both periods are included in both periods, thus new products are omitted.\nWe fix the relative importance of the goods for both periods based on period 1 weight, thus we do not reflect changes in composition over time (substitution). This can be convenient as we need weights only for the base period.\n\nMost price indices are variants of the Laspeyres, such as the Lowe (which compare the prices from the current month with the previous month, but use weights from a year before that)",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/bilateral_indices.html#paashe-index",
+    "href": "docs/notes_on_methods/bilateral_indices.html#paashe-index",
+    "title": "Notes on bilateral price index methods",
+    "section": "Paashe Index",
+    "text": "Paashe Index\nSimilar to the Lasperyes, however uses a different basket (the one from the pricing period:\n\\(I^P_{0,1} = \\sum_{m=1}^M (P_{m,1}Q_{m,1}) / \\sum_{m=1}^M\n(P_{m,0}Q_{m,1})\\) The Paasche may also be expressed as a function of the weighted average (i.e. shares):\n\\(I^P_{0,1} = 1/ \\sum_{m=1}^M (w_{m,1} \\frac{P_{m,0}}{P_{m,1}})\\) such that \\(w_{m,1} = (P_{m,1}Q_{m,1})/ \\sum_{m=1}^M (w_{m,1}P_{m,0}Q_{m,1})\\)\nThe Laspeyres and Paasche include prices and quantities in both periods, and both use the same relatives with different expenditure shares.",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/bilateral_indices.html#fisher-index",
+    "href": "docs/notes_on_methods/bilateral_indices.html#fisher-index",
+    "title": "Notes on bilateral price index methods",
+    "section": "Fisher Index",
+    "text": "Fisher Index\nThe Fisher does a geometric average of the Laspeyres and the Paasche:\n\\(I^F_{0,1} = (I^L_{0,1}I^P_{0,1})^\\frac{1}{2}\\)\nThe Fisher thus uses expenditure from both periods and thus provides relative importance that are more closely aligned with the goods actually sold. As the Fisher satisfies homogeneity, symmetry, and the time reversal test (the price change from the base to the current should be the inverse of the current to the base) - thus it doesn’t matter what period is chosen as the base.",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/bilateral_indices.html#törnqvist-index",
+    "href": "docs/notes_on_methods/bilateral_indices.html#törnqvist-index",
+    "title": "Notes on bilateral price index methods",
+    "section": "Törnqvist Index",
+    "text": "Törnqvist Index\nSimilar to the Fisher, however it takes the average of the weights instead of averaging the two indices\nIn logged form:\n\\(lnI^T_{0,1}=\\sum^M_{m=1}(w_{m,0}+w_{m,1})/2(ln\\frac{P_{m,1}}{P_{m,0}})\\)",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/bilateral_indices.html#jevons-index",
+    "href": "docs/notes_on_methods/bilateral_indices.html#jevons-index",
+    "title": "Notes on bilateral price index methods",
+    "section": "Jevons Index",
+    "text": "Jevons Index\nThe Jevons is unweighted geometric mean. Similar to the Törnqvist, in logged form:\n\\(lnI^J_{0,1} = \\frac{1}{M} \\sum^M_{m=1}ln(P_{m,1}/P_{m,0})\\)\nThe Jevons takes the unweighted average by replacing the \\((w_{m,0}+w_{m,1})/2\\) with \\(1/M\\), thus giving each model equal weight",
+    "crumbs": [
+      "Notes by method",
+      "Notes on bilateral price index methods"
+    ]
+  },
+  {
+    "objectID": "docs/empirical_experiments/experiments_catalogue.html",
+    "href": "docs/empirical_experiments/experiments_catalogue.html",
+    "title": "Experiments catalogue",
+    "section": "",
+    "text": "This pages lists the experiments done by topic on specific topics related in some way to price statistics",
+    "crumbs": [
+      "Experiments catalogue"
+    ]
+  },
+  {
+    "objectID": "docs/empirical_experiments/experiments_catalogue.html#list-of-empirical-price-statistics-experiments",
+    "href": "docs/empirical_experiments/experiments_catalogue.html#list-of-empirical-price-statistics-experiments",
+    "title": "Experiments catalogue",
+    "section": "List of empirical price statistics experiments",
+    "text": "List of empirical price statistics experiments\n\n\n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nCategories\n\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Experiments catalogue"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/sampling_with_scanner.html",
+    "href": "docs/notes_on_methods/sampling_with_scanner.html",
+    "title": "Sampling methods for scanner data",
+    "section": "",
+    "text": "Even when scanner data is available, not all data necessarily needs to be used to calculate elementary price indices. There are two sampling approaches that are typically used as they are quite effective ways to use a subset of the data but - the static and dynamic sample methods. A requirement for sampling is that each unique product is already classified to categories within which the elementary price indices are calculated.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/sampling_with_scanner.html#the-concept",
+    "href": "docs/notes_on_methods/sampling_with_scanner.html#the-concept",
+    "title": "Sampling methods for scanner data",
+    "section": "The concept",
+    "text": "The concept\n\nThe fixed sample method simulates a traditional approach, similar to field collection. The sample is refreshed every year to stay representative and replacement is used to maintain the sample following a traditional methodology (except that as scanner data is available to evaluation, i.e. seeing all products and all transactions provides a lot of additional detail of what product to replace with).\nThe method is simple (in the sense that it follows a traditional methodology and can be combined with other data in a traditional way), however it is resource intensive as replacement must be dealt with manually (for example the Netherlands found it too costly to extend to 6 scanner retailers and shifted to the dynamic sample method). It is also typically used with only a small (although representative) sample of data. It is also similar to traditional methods so its easy to implement when starting out with scanner data.\nThe fixed sample method favors comparability over representativity as the same items are compared over time, however the representativity of the sample deteriorates over time:\n\nA consequence of the method is thus that only similar products are selected for most disappearing items (to avoid quality adjustment), which means the method is most applicable to situations where quality change is not a major factor in the category.\nThe method is also only applicable to categories with little churn as representativity of the products in sample will decline quickly if this is not the case. Both of these consequences are only partially mitigated by the annual product resampling. In this",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/sampling_with_scanner.html#step-by-step-process",
+    "href": "docs/notes_on_methods/sampling_with_scanner.html#step-by-step-process",
+    "title": "Sampling methods for scanner data",
+    "section": "Step-by-step process",
+    "text": "Step-by-step process\nThe summary of the overall process is best summarized by the Eurostat (2017) guide, chapter 6:\n\nIn the static approach, a sample is drawn from year t and used for 12 months following December of year t. The sample is kept and replacements are made as needed.\n\nIn a more detailed sense, the following steps are used to select and maintain the sample:\n\nStep 1: For each category (typically COICOP 6) for which an elementary price index will be calculated, select a number of items (representative products) at the beginning of the year which were representative the previous year. For instance you can look at products that constituted the top 50% of annual turnover.\n\nSelect unique products (such as by European Article Number (EAN)) per supermarket chain and stores (to ensure that coverage by all chains in the sample is maintained)\nWith this approach, we may end up with a lot of observations per category, or too few, in which case a little tuning is necessary.\nEach item given a weight representing its relative importance\n\nStep 2: A monthly price index (i.e. relative) for each item is calculated as the unit value in the current month and unit value in the base year.\nStep 3: An elementary price index as the weighted average of each item’s relatives using the Laspeyres (as is done on at the higher level aggregation).\n\nChain the indices at December to create a long-term series\nOngoing work to replace:\n\nIf there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed in a select number of cases. Implicit methods (typically the bridged overlap method) are used. See CPI Manual, chapter 7 for more detail on how to maintain methods.\n\nIf an item disappeared – replace it with a similar one that was present in the base period.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/sampling_with_scanner.html#resources",
+    "href": "docs/notes_on_methods/sampling_with_scanner.html#resources",
+    "title": "Sampling methods for scanner data",
+    "section": "Resources",
+    "text": "Resources\nThe following articles summarize the fixed sample method well\n\nLarsen (2014) Implementing scanner data in the Danish CPI\nvan der Grient and Jan de Haan (2010) The use of supermarket scanner data in the Dutch CPI",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/sampling_with_scanner.html#the-concept-1",
+    "href": "docs/notes_on_methods/sampling_with_scanner.html#the-concept-1",
+    "title": "Sampling methods for scanner data",
+    "section": "The concept",
+    "text": "The concept\n\nAs the distribution of expenditures is typically quite skewed, a relatively small number of items are usually representing the majority of expenditures. The method focuses on these using a cut-off-sampling approach and allows the basket (sample) to be updated (i.e. re-sampled) every month. Put differently, “an item will be used in the scomputation of hte index between two consecutive months if its average expenditure share (with respect tho the set of matched items) in those months is above a certain threshold value” (van der Grient and Jan de Haan, 2010).\nAn unweighted (i.e. not using turnover) Jevons is used and chained, thereby reducing the risk of chain drift (as weights are used implicitly for sampling of items but not explicitly for index calculation).\nThe other added benefit is that it shifts to an automatic way to maintain the sample, as the process to maintain the fixed sample method is also too labor intensive and hard to extend to many retailers (6 in the Netherlands case).\nThe dynamic method was also found to closely approximate the GEKS, hence its a useful way to measure food and non-food categories. After a while, the NSO can shift to the multilateral method is possible (requires a minimum of 13 months, ideally 25).\nImplementation requires research on dumping and outlier filters prior to implementing.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/sampling_with_scanner.html#step-by-step-process-1",
+    "href": "docs/notes_on_methods/sampling_with_scanner.html#step-by-step-process-1",
+    "title": "Sampling methods for scanner data",
+    "section": "Step-by-step process",
+    "text": "Step-by-step process\n\nStep 1: Calculate movement for each product in the category based on the unit value price in this month over unit value price the previous month.\n\nPre-processing is needed to calculate unit prices\nFiltering/cleaning is also applied:\n\nOutlier filter excludes anything 300% higher and 75% decline\nDumping filter is used to exclude strong simultaneous price and quantity decreases – as this dumping in prices without an offsetting price increase will have a downward effect on the index.\n\nThe unique identifier applicable (EAN in the Dutch example) is used for matched-model method, but cleaning/investigation needed to make sure identifier is stable (sometimes retailers recycle EANs for instance). SKU can be used where applicable as it may be more stable (sometimes capture the relaunch problem). If the identifier is too detailed for CPI purposes (say where two products with different codes are identical from a consumers’ point of view), these should be grouped in theory but in principle can be explicitly quality adjusted.\nOnly the first several weeks of data are used – the Dutch case its 3 weeks, consistent with field collection\n\nStep 2: Use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures\n\n\\(\\frac{s_{t}+s_{t+1}}{2}&gt;\\frac{1}{n\\times\\lambda}\\)\nWhere\n\\(\\frac{(s_t+s_{t+1})}{2}\\) – the product’s average share between the two periods\n\\(n\\) – the number of products\n\\(\\lambda\\) – 1.25\nFor example if \\(n\\) = 80 then items with an average expenditure share greater than 1% are selected\n\nStep 3: If item is missing – impute its price once (as you may have temporarily missing) by multiplying the last observed price by the Jevons of the category movement (i.e. ‘class mean imputation’ method). This is needed as a strict matched-item method will exclude temporary observed items from the computation.\nStep 4: If explicit adjustments needed such as package changes – can be made manually\n\nExamples are change in package sizes that are really the same for the consumer (i.e. EANs are basically too detailed, and we need a way to link/group 2 products together).\nOther implicit quality adjustment stays as per the matched model approach\n\nStep 5: Integrate retailer specific COICOP6 indices together using annual chained Laspeyres method (i.e. higher-level aggregation). Scanner data can be used to weigh different retailers (when present) but sub-COICOP6 weight may be needed to separate out non-scanner data sources that use a different aggregation method.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/sampling_with_scanner.html#categories-applicable",
+    "href": "docs/notes_on_methods/sampling_with_scanner.html#categories-applicable",
+    "title": "Sampling methods for scanner data",
+    "section": "Categories applicable",
+    "text": "Categories applicable\nThe Dutch case showcased the application of the method for several COICOP categories, specifically Food (01), Wine and Beer (0212, 0213), Tools, household maintenance tools (055, 056), medical and pharmaceutical products (061), pet food (0934), and personal care products (1313). This showcases the application of the method.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/notes_on_methods/sampling_with_scanner.html#resources-1",
+    "href": "docs/notes_on_methods/sampling_with_scanner.html#resources-1",
+    "title": "Sampling methods for scanner data",
+    "section": "Resources",
+    "text": "Resources\nThe following articles go through the process in depth\n\nvan der Grient and Jan de Haan (2010) The use of supermarket scanner data in the Dutch CPI\nvan der Grient and Jan de Haan (2011) Scanner Data Price Indexes: The “Dutch Method” versus Rolling Year GEKS",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
     ]
   },
   {

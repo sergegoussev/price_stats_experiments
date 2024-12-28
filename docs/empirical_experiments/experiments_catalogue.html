@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Serge Goussev">
-<meta name="dcterms.date" content="2024-11-01">
+<meta name="dcterms.date" content="2024-09-20">
 
-<title>Sampling methods for scanner data – Experiments with price stats</title>
+<title>Experiments catalogue – Experiments with price stats</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,26 +25,27 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../docs/empirical_experiments.html" rel="next">
-<link href="../docs/notes_on_bilateral_index_methods.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a68d576f93b57464e23d983d685fe254.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-a71619196f4f5e4e93c7baa22a6c2c91.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/notes_on_methods/sampling_with_scanner.html" rel="prev">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a68d576f93b57464e23d983d685fe254.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-a71619196f4f5e4e93c7baa22a6c2c91.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,9 +73,38 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-experiments-experiments .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: [],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-experiments-experiments'] = new List('listing-experiments-experiments', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -103,7 +133,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../docs/styles.css">
+<link rel="stylesheet" href="../../docs/styles.css">
 </head>
 
 <body class="nav-sidebar docked">
@@ -115,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/notes_on_bilateral_index_methods.html">Notes by method</a></li><li class="breadcrumb-item"><a href="../docs/sampling_methods.html">Sampling methods for scanner data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/empirical_experiments/experiments_catalogue.html">Experiments catalogue</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -129,11 +159,11 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../index.html" class="sidebar-logo-link">
-      <img src="../docs/images/logo_bauhaus.jpeg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <a href="https://sergegoussev.github.io/price_stats_experiments/docs/" class="sidebar-logo-link">
+      <img src="../../docs/images/logo_bauhaus.jpeg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Experiments with price stats</a> 
+      <a href="../../">Experiments with price stats</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
@@ -163,7 +193,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../docs/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
@@ -178,13 +208,13 @@ window.Quarto = {
       <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../docs/notes_on_bilateral_index_methods.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/notes_on_methods/bilateral_indices.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes on bilateral price index methods</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../docs/sampling_methods.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../docs/notes_on_methods/sampling_with_scanner.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sampling methods for scanner data</span></a>
   </div>
 </li>
@@ -192,7 +222,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../docs/empirical_experiments.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/empirical_experiments/experiments_catalogue.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Experiments catalogue</span></a>
   </div>
 </li>
@@ -206,29 +236,16 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#fixed-sample-method" id="toc-fixed-sample-method" class="nav-link" data-scroll-target="#fixed-sample-method">Fixed sample method</a>
-  <ul class="collapse">
-  <li><a href="#the-concept" id="toc-the-concept" class="nav-link" data-scroll-target="#the-concept">The concept</a></li>
-  <li><a href="#step-by-step-process" id="toc-step-by-step-process" class="nav-link" data-scroll-target="#step-by-step-process">Step-by-step process</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  </ul></li>
-  <li><a href="#dynamic-sample-method" id="toc-dynamic-sample-method" class="nav-link" data-scroll-target="#dynamic-sample-method">Dynamic sample method</a>
-  <ul class="collapse">
-  <li><a href="#the-concept-1" id="toc-the-concept-1" class="nav-link" data-scroll-target="#the-concept-1">The concept</a></li>
-  <li><a href="#step-by-step-process-1" id="toc-step-by-step-process-1" class="nav-link" data-scroll-target="#step-by-step-process-1">Step-by-step process</a></li>
-  <li><a href="#categories-applicable" id="toc-categories-applicable" class="nav-link" data-scroll-target="#categories-applicable">Categories applicable</a></li>
-  <li><a href="#resources-1" id="toc-resources-1" class="nav-link" data-scroll-target="#resources-1">Resources</a></li>
-  </ul></li>
+  <li><a href="#list-of-empirical-price-statistics-experiments" id="toc-list-of-empirical-price-statistics-experiments" class="nav-link active" data-scroll-target="#list-of-empirical-price-statistics-experiments">List of empirical price statistics experiments</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://sergegoussev.github.io/price_stats_experiments/docs/blob/main/docs/sampling_methods.qmd" class="toc-action"><i class="bi bi-git"></i>View source</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf"><i class="bi bi-link-45deg"></i>van der Grient and de Haan (2010) Use of Supermarket scanner data in the Dutch CPI</a></li><li><a href="https://unece.org/sites/default/files/2021-05/Session_1_Eurostat_Paper.pdf"><i class="bi bi-link-45deg"></i>Lamboray (2021) Index Compilation Techniques for Scanner Data: An overview</a></li><li><a href="https://circabc.europa.eu/ui/group/7b031f10-ac19-4da3-a36f-58708a70133d/library/8e1333df-ca16-40fc-bc6a-1ce1be37247c/details"><i class="bi bi-link-45deg"></i>Eurostat (2017) Practical Guide for Processing Supermarket Scanner Data</a></li><li><a href="https://unstats.un.org/wiki/display/GWGSD/Product+sampling+for+price+index+calculation"><i class="bi bi-link-45deg"></i>UN Task Team e-handbook: Product sampling for price index calculation</a></li></ul></div></nav>
-    </div>
+<div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/main/docs/empirical_experiments/experiments_catalogue.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../docs/notes_on_bilateral_index_methods.html">Notes by method</a></li><li class="breadcrumb-item"><a href="../docs/sampling_methods.html">Sampling methods for scanner data</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sampling methods for scanner data</h1>
+<h1 class="title">Experiments catalogue</h1>
 </div>
 
 
@@ -245,7 +262,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 1, 2024</p>
+      <p class="date">September 20, 2024</p>
     </div>
   </div>
   
@@ -257,117 +274,37 @@ window.Quarto = {
 </header>
 
 
-<section id="overview" class="level1">
-<h1>Overview</h1>
-<p>Even when scanner data is available, not all data necessarily needs to be used to calculate elementary price indices. There are two sampling approaches that are typically used as they are quite effective ways to use a subset of the data but - the static and dynamic sample methods. A requirement for sampling is that each unique product is already classified to categories within which the elementary price indices are calculated.</p>
-</section>
-<section id="fixed-sample-method" class="level1">
-<h1>Fixed sample method</h1>
-<section id="the-concept" class="level2">
-<h2 class="anchored" data-anchor-id="the-concept">The concept</h2>
-<ul>
-<li>The fixed sample method simulates a traditional approach, similar to field collection. The sample is refreshed every year to stay representative and replacement is used to maintain the sample following a traditional methodology (except that as scanner data is available to evaluation, i.e.&nbsp;seeing all products and all transactions provides a lot of additional detail of what product to replace with).</li>
-<li>The method is simple (in the sense that it follows a traditional methodology and can be combined with other data in a traditional way), however it is resource intensive as replacement must be dealt with manually (for example <a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">the Netherlands found it too costly to extend to 6 scanner retailers and shifted to the dynamic sample method</a>). It is also typically used with only a small (although representative) sample of data. It is also similar to traditional methods so its easy to implement when starting out with scanner data.</li>
-<li>The fixed sample method favors comparability over representativity as the same items are compared over time, however the representativity of the sample deteriorates over time:
-<ul>
-<li>A consequence of the method is thus that only similar products are selected for most disappearing items (to avoid quality adjustment), which means the method is most applicable to situations where quality change is not a major factor in the category.</li>
-<li>The method is also only applicable to categories with little churn as representativity of the products in sample will decline quickly if this is not the case. Both of these consequences are only partially mitigated by the annual product resampling. In this</li>
-</ul></li>
-</ul>
-</section>
-<section id="step-by-step-process" class="level2">
-<h2 class="anchored" data-anchor-id="step-by-step-process">Step-by-step process</h2>
-<p>The summary of the overall process is best summarized by the <a href="https://circabc.europa.eu/ui/group/7b031f10-ac19-4da3-a36f-58708a70133d/library/8e1333df-ca16-40fc-bc6a-1ce1be37247c/details">Eurostat (2017) guide, chapter 6</a>:</p>
-<blockquote class="blockquote">
-<p>In the static approach, a sample is drawn from year t and used for 12 months following December of year t. The sample is kept and replacements are made as needed.</p>
-</blockquote>
-<p>In a more detailed sense, the following steps are used to select and maintain the sample:</p>
-<ul>
-<li><p>Step 1: For each category (typically COICOP 6) for which an elementary price index will be calculated, select a number of items (representative products) at the beginning of the year which were representative the previous year. For instance you can look at products that constituted the top 50% of annual turnover.</p>
-<ul>
-<li>Select unique products (such as by European Article Number (EAN)) per supermarket chain and stores (to ensure that coverage by all chains in the sample is maintained)</li>
-<li>With this approach, we may end up with a lot of observations per category, or too few, in which case a little tuning is necessary.</li>
-<li>Each item given a weight representing its relative importance</li>
-</ul></li>
-<li><p>Step 2: A monthly price index (i.e.&nbsp;relative) for each item is calculated as the unit value in the current month and unit value in the base year.</p></li>
-<li><p>Step 3: An elementary price index as the weighted average of each item’s relatives using the Laspeyres (as is done on at the higher level aggregation).</p>
-<ul>
-<li>Chain the indices at December to create a long-term series</li>
-<li>Ongoing work to replace:
-<ul>
-<li>If there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed in a select number of cases. Implicit methods (typically the bridged overlap method) are used. See CPI Manual, chapter 7 for more detail on how to maintain methods.</li>
-</ul></li>
-<li>If an item disappeared – replace it with a similar one that was present in the base period.</li>
-</ul></li>
-</ul>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<p>The following articles summarize the fixed sample method well</p>
-<ul>
-<li>Larsen (2014) <a href="https://unece.org/sites/default/files/2021-04/WS4_05_Implementing_scanner_data_in_the_Danish_CPI.pdf">Implementing scanner data in the Danish CPI</a></li>
-<li>van der Grient and Jan de Haan (2010) <a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">The use of supermarket scanner data in the Dutch CPI</a></li>
-</ul>
-</section>
-</section>
-<section id="dynamic-sample-method" class="level1">
-<h1>Dynamic sample method</h1>
-<section id="the-concept-1" class="level2">
-<h2 class="anchored" data-anchor-id="the-concept-1">The concept</h2>
-<ul>
-<li>As the distribution of expenditures is typically quite skewed, a relatively small number of items are usually representing the majority of expenditures. The method focuses on these using a cut-off-sampling approach and allows the basket (sample) to be updated (i.e.&nbsp;re-sampled) every month. Put differently, “an item will be used in the scomputation of hte index between two consecutive months if its average expenditure share (with respect tho the set of matched items) in those months is above a certain threshold value” (<a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">van der Grient and Jan de Haan, 2010</a>).</li>
-<li>An unweighted (i.e.&nbsp;not using turnover) Jevons is used and chained, thereby reducing the risk of chain drift (as weights are used implicitly for sampling of items but not explicitly for index calculation).</li>
-<li>The other added benefit is that it shifts to an automatic way to maintain the sample, as the process to maintain the fixed sample method is also too labor intensive and hard to extend to many retailers (6 in the Netherlands case).</li>
-<li>The dynamic method was also found to closely approximate the GEKS, hence its a useful way to measure food and non-food categories. After a while, the NSO can shift to the multilateral method is possible (requires a minimum of 13 months, ideally 25).</li>
-<li>Implementation requires research on dumping and outlier filters prior to implementing.</li>
-</ul>
-</section>
-<section id="step-by-step-process-1" class="level2">
-<h2 class="anchored" data-anchor-id="step-by-step-process-1">Step-by-step process</h2>
-<ul>
-<li><p>Step 1: Calculate movement for each product in the category based on the unit value price in this month over unit value price the previous month.</p>
-<ul>
-<li>Pre-processing is needed to calculate unit prices</li>
-<li>Filtering/cleaning is also applied:
-<ul>
-<li>Outlier filter excludes anything 300% higher and 75% decline</li>
-<li>Dumping filter is used to exclude strong simultaneous price and quantity decreases – as this dumping in prices without an offsetting price increase will have a downward effect on the index.</li>
-</ul></li>
-<li>The unique identifier applicable (EAN in the Dutch example) is used for matched-model method, but cleaning/investigation needed to make sure identifier is stable (sometimes retailers recycle EANs for instance). SKU can be used where applicable as it may be more stable (sometimes capture the relaunch problem). If the identifier is too detailed for CPI purposes (say where two products with different codes are identical from a consumers’ point of view), these should be grouped in theory but in principle can be explicitly quality adjusted.</li>
-<li>Only the first several weeks of data are used – the Dutch case its 3 weeks, consistent with field collection</li>
-</ul></li>
-<li><p>Step 2: Use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures</p></li>
-</ul>
-<p><span class="math inline">\(\frac{s_{t}+s_{t+1}}{2}&gt;\frac{1}{n\times\lambda}\)</span></p>
-<p>Where</p>
-<p><span class="math inline">\(\frac{(s_t+s_{t+1})}{2}\)</span> – the product’s average share between the two periods</p>
-<p><span class="math inline">\(n\)</span> – the number of products</p>
-<p><span class="math inline">\(\lambda\)</span> – 1.25</p>
-<p>For example if <span class="math inline">\(n\)</span> = 80 then items with an average expenditure share greater than 1% are selected</p>
-<ul>
-<li><p>Step 3: If item is missing – impute its price once (as you may have temporarily missing) by multiplying the last observed price by the Jevons of the category movement (i.e.&nbsp;‘class mean imputation’ method). This is needed as a strict matched-item method will exclude temporary observed items from the computation.</p></li>
-<li><p>Step 4: If explicit adjustments needed such as package changes – can be made manually</p>
-<ul>
-<li>Examples are change in package sizes that are really the same for the consumer (i.e.&nbsp;EANs are basically too detailed, and we need a way to link/group 2 products together).</li>
-<li>Other implicit quality adjustment stays as per the matched model approach</li>
-</ul></li>
-<li><p>Step 5: Integrate retailer specific COICOP6 indices together using annual chained Laspeyres method (i.e.&nbsp;higher-level aggregation). Scanner data can be used to weigh different retailers (when present) but sub-COICOP6 weight may be needed to separate out non-scanner data sources that use a different aggregation method.</p></li>
-</ul>
-</section>
-<section id="categories-applicable" class="level2">
-<h2 class="anchored" data-anchor-id="categories-applicable">Categories applicable</h2>
-<p>The Dutch case showcased the application of the method for several COICOP categories, specifically Food (01), Wine and Beer (0212, 0213), Tools, household maintenance tools (055, 056), medical and pharmaceutical products (061), pet food (0934), and personal care products (1313). This showcases the application of the method.</p>
-</section>
-<section id="resources-1" class="level2">
-<h2 class="anchored" data-anchor-id="resources-1">Resources</h2>
-<p>The following articles go through the process in depth</p>
-<ul>
-<li>van der Grient and Jan de Haan (2010) <a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">The use of supermarket scanner data in the Dutch CPI</a></li>
-<li>van der Grient and Jan de Haan (2011) <a href="https://stats.unece.org/ottawagroup/download/f319.pdf">Scanner Data Price Indexes: The “Dutch Method” versus Rolling Year GEKS</a></li>
-</ul>
+<p>This pages lists the experiments done by topic on specific topics related in some way to price statistics</p>
+<section id="list-of-empirical-price-statistics-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="list-of-empirical-price-statistics-experiments">List of empirical price statistics experiments</h2>
+<div id="listing-experiments-experiments" class="quarto-listing quarto-listing-container-table">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Title
+</th>
+<th>
+Categories
+</th>
+</tr>
+</thead>
+<tbody class="list">
+</tbody>
+</table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
 
 
-</section>
+
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -934,14 +871,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../docs/notes_on_bilateral_index_methods.html" class="pagination-link" aria-label="Notes on bilateral price index methods">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes on bilateral price index methods</span>
+      <a href="../../docs/notes_on_methods/sampling_with_scanner.html" class="pagination-link" aria-label="Sampling methods for scanner data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Sampling methods for scanner data</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../docs/empirical_experiments.html" class="pagination-link" aria-label="Experiments catalogue">
-        <span class="nav-page-text">Experiments catalogue</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -949,4 +883,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://sergegoussev.github.io/price_stats_experiments/docs/blob/main/docs/sampling_methods.qmd" class="toc-action"><i class="bi bi-git"></i>View source</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/main/docs/empirical_experiments/experiments_catalogue.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
