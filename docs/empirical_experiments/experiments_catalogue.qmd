@@ -4,7 +4,7 @@ author: Serge Goussev
 date: 2024-09-20
 listing:
   id: experiments-experiments
-  contents: ../notebooks/*.ipynb
+  contents: ../../notebooks/*.ipynb
   sort: "title"
   type: table
   categories: true
