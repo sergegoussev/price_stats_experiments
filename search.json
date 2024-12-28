@@ -18,7 +18,84 @@
     "href": "docs/sampling_methods.html",
     "title": "Sampling methods for scanner data",
     "section": "",
-    "text": "Overview\nEven when scanner data is available, not all data necessarily needs to be used to calculate the elementary aggregate price index. There are two sampling approaches that are also typically used as they are quite effective ways to use the data - the static and dynamic sample methods. For a good overview of the topic, see van der Grient and de Haan (2010).\n\n\nFixed sample method\nSimulates field collection but uses scanner data\n\nStep 1: select a large number of items at the beginning of the year which were representative the previous year (need to do analysis to choose this sample)\n\nEach item identified by an EAN (in the Dutch case, stable unique identifier is needed)\nEach item given a weight representing its relative importance\n\nStep 2: a monthly price index for each item is calculated as the unit value in the current month and unit value in the base month\n\nNeed cleaning to make sure unit value is determined\n\nStep 3: an EA is calculated as the weighted average of these item’s relatives using the Laspeyres (as is done on at the higher level).\n\nChain the indices at December to create a long-term series\nOngoing work to replace:\n\nIf there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed\n\nTO DO: Flush out process of bridged overlap method and explicit quality adjustment used in this case\n\n\nIf an item disappeared – replace it with a similar one (but not with totally new products as these will only be available once the sample is refreshed in December).\n\n\n\n\nDynamic sample method\nPurpose/Idea:\n\nProcedure to do fixed sample method is too labor intensive to extend to many retailers (6 in the Netherlands case) from the a few when the fixed sample method was sufficient. This procedure requires much less manual work.\nThe dynamic method was also found to closely approximate the GEKS\nAn unweighted Jevons is used to avoid chain drifta\nNot used by Netherlands everywhere, only some traditional categories.\n\nProcess as follows:\n\nStep 1: use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures\n\n\\(\\frac{s_{t}+s_{t+1}}{2}&gt;\\frac{1}{n\\times\\lambda}\\)\nWhere\n\\(\\frac{(s_t+s\\_(t+1))}{2}\\) – the product’s average share between the two periods\n\\(n\\) – the number of products\n\\(\\lambda\\) – 1.25\n\nStep 2: Calculate movement for category based on the unit value price in this month over unit value price the previous month.\n\nPre-processing is needed at this stage to get unit prices\nAlso filtering/cleaning applied:\n\nOutlier filter excludes anything 300% higher and 75% decline\nDumping filter is used to exclude strong simultaneous price and quantity decreases – as this dumping in prices without an offsetting price increase will have a downward effect on the index.\n\nEAN used for matched model method, but cleaning/investigation needed to make sure EAN is stable (sometimes retailers recycle EANs). SKU can be used where applicable as it may be more stable (sometimes capture the relaunch problem)\nOnly the first several weeks of data are used – the Dutch case its 3 weeks, consistent with field collection\n\nStep 3: If item is missing – impute its price once (as you may have temporarily missing) by multiplying the last observed price by the Jevons of the category movement\nStep 4: If explicit adjustments needed such as package changes – can be made manually\n\nExamples are change in package sizes that are really the same for the consumer (i.e. EANs are basically too detailed, and we need a way to link/group 2 products together).\nOther implicit quality adjustment stays as per the matched model approach\nTO DO: flush out example\n\nStep 6: Integrate retailer specific COICOP6 indices together using Laspeyres method – i.e. higher-level aggregation unchanged\n\n\n\n\n\n Back to top",
+    "text": "Even when scanner data is available, not all data necessarily needs to be used to calculate elementary price indices. There are two sampling approaches that are typically used as they are quite effective ways to use a subset of the data but - the static and dynamic sample methods. A requirement for sampling is that each unique product is already classified to categories within which the elementary price indices are calculated.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/sampling_methods.html#the-concept",
+    "href": "docs/sampling_methods.html#the-concept",
+    "title": "Sampling methods for scanner data",
+    "section": "The concept",
+    "text": "The concept\n\nThe fixed sample method simulates a traditional approach, similar to field collection. The sample is refreshed every year to stay representative and replacement is used to maintain the sample following a traditional methodology (except that as scanner data is available to evaluation, i.e. seeing all products and all transactions provides a lot of additional detail of what product to replace with).\nThe method is simple (in the sense that it follows a traditional methodology and can be combined with other data in a traditional way), however it is resource intensive as replacement must be dealt with manually (for example the Netherlands found it too costly to extend to 6 scanner retailers and shifted to the dynamic sample method). It is also typically used with only a small (although representative) sample of data. It is also similar to traditional methods so its easy to implement when starting out with scanner data.\nThe fixed sample method favors comparability over representativity as the same items are compared over time, however the representativity of the sample deteriorates over time:\n\nA consequence of the method is thus that only similar products are selected for most disappearing items (to avoid quality adjustment), which means the method is most applicable to situations where quality change is not a major factor in the category.\nThe method is also only applicable to categories with little churn as representativity of the products in sample will decline quickly if this is not the case. Both of these consequences are only partially mitigated by the annual product resampling. In this",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/sampling_methods.html#step-by-step-process",
+    "href": "docs/sampling_methods.html#step-by-step-process",
+    "title": "Sampling methods for scanner data",
+    "section": "Step-by-step process",
+    "text": "Step-by-step process\nThe summary of the overall process is best summarized by the Eurostat (2017) guide, chapter 6:\n\nIn the static approach, a sample is drawn from year t and used for 12 months following December of year t. The sample is kept and replacements are made as needed.\n\nIn a more detailed sense, the following steps are used to select and maintain the sample:\n\nStep 1: For each category (typically COICOP 6) for which an elementary price index will be calculated, select a number of items (representative products) at the beginning of the year which were representative the previous year. For instance you can look at products that constituted the top 50% of annual turnover.\n\nSelect unique products (such as by European Article Number (EAN)) per supermarket chain and stores (to ensure that coverage by all chains in the sample is maintained)\nWith this approach, we may end up with a lot of observations per category, or too few, in which case a little tuning is necessary.\nEach item given a weight representing its relative importance\n\nStep 2: A monthly price index (i.e. relative) for each item is calculated as the unit value in the current month and unit value in the base year.\nStep 3: An elementary price index as the weighted average of each item’s relatives using the Laspeyres (as is done on at the higher level aggregation).\n\nChain the indices at December to create a long-term series\nOngoing work to replace:\n\nIf there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed in a select number of cases. Implicit methods (typically the bridged overlap method) are used. See CPI Manual, chapter 7 for more detail on how to maintain methods.\n\nIf an item disappeared – replace it with a similar one that was present in the base period.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/sampling_methods.html#resources",
+    "href": "docs/sampling_methods.html#resources",
+    "title": "Sampling methods for scanner data",
+    "section": "Resources",
+    "text": "Resources\nThe following articles summarize the fixed sample method well\n\nLarsen (2014) Implementing scanner data in the Danish CPI\nvan der Grient and Jan de Haan (2010) The use of supermarket scanner data in the Dutch CPI",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/sampling_methods.html#the-concept-1",
+    "href": "docs/sampling_methods.html#the-concept-1",
+    "title": "Sampling methods for scanner data",
+    "section": "The concept",
+    "text": "The concept\n\nAs the distribution of expenditures is typically quite skewed, a relatively small number of items are usually representing the majority of expenditures. The method focuses on these using a cut-off-sampling approach and allows the basket (sample) to be updated (i.e. re-sampled) every month. Put differently, “an item will be used in the scomputation of hte index between two consecutive months if its average expenditure share (with respect tho the set of matched items) in those months is above a certain threshold value” (van der Grient and Jan de Haan, 2010).\nAn unweighted (i.e. not using turnover) Jevons is used and chained, thereby reducing the risk of chain drift (as weights are used implicitly for sampling of items but not explicitly for index calculation).\nThe other added benefit is that it shifts to an automatic way to maintain the sample, as the process to maintain the fixed sample method is also too labor intensive and hard to extend to many retailers (6 in the Netherlands case).\nThe dynamic method was also found to closely approximate the GEKS, hence its a useful way to measure food and non-food categories. After a while, the NSO can shift to the multilateral method is possible (requires a minimum of 13 months, ideally 25).\nImplementation requires research on dumping and outlier filters prior to implementing.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/sampling_methods.html#step-by-step-process-1",
+    "href": "docs/sampling_methods.html#step-by-step-process-1",
+    "title": "Sampling methods for scanner data",
+    "section": "Step-by-step process",
+    "text": "Step-by-step process\n\nStep 1: Calculate movement for each product in the category based on the unit value price in this month over unit value price the previous month.\n\nPre-processing is needed to calculate unit prices\nFiltering/cleaning is also applied:\n\nOutlier filter excludes anything 300% higher and 75% decline\nDumping filter is used to exclude strong simultaneous price and quantity decreases – as this dumping in prices without an offsetting price increase will have a downward effect on the index.\n\nThe unique identifier applicable (EAN in the Dutch example) is used for matched-model method, but cleaning/investigation needed to make sure identifier is stable (sometimes retailers recycle EANs for instance). SKU can be used where applicable as it may be more stable (sometimes capture the relaunch problem). If the identifier is too detailed for CPI purposes (say where two products with different codes are identical from a consumers’ point of view), these should be grouped in theory but in principle can be explicitly quality adjusted.\nOnly the first several weeks of data are used – the Dutch case its 3 weeks, consistent with field collection\n\nStep 2: Use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures\n\n\\(\\frac{s_{t}+s_{t+1}}{2}&gt;\\frac{1}{n\\times\\lambda}\\)\nWhere\n\\(\\frac{(s_t+s_{t+1})}{2}\\) – the product’s average share between the two periods\n\\(n\\) – the number of products\n\\(\\lambda\\) – 1.25\nFor example if \\(n\\) = 80 then items with an average expenditure share greater than 1% are selected\n\nStep 3: If item is missing – impute its price once (as you may have temporarily missing) by multiplying the last observed price by the Jevons of the category movement (i.e. ‘class mean imputation’ method). This is needed as a strict matched-item method will exclude temporary observed items from the computation.\nStep 4: If explicit adjustments needed such as package changes – can be made manually\n\nExamples are change in package sizes that are really the same for the consumer (i.e. EANs are basically too detailed, and we need a way to link/group 2 products together).\nOther implicit quality adjustment stays as per the matched model approach\n\nStep 5: Integrate retailer specific COICOP6 indices together using annual chained Laspeyres method (i.e. higher-level aggregation). Scanner data can be used to weigh different retailers (when present) but sub-COICOP6 weight may be needed to separate out non-scanner data sources that use a different aggregation method.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/sampling_methods.html#categories-applicable",
+    "href": "docs/sampling_methods.html#categories-applicable",
+    "title": "Sampling methods for scanner data",
+    "section": "Categories applicable",
+    "text": "Categories applicable\nThe Dutch case showcased the application of the method for several COICOP categories, specifically Food (01), Wine and Beer (0212, 0213), Tools, household maintenance tools (055, 056), medical and pharmaceutical products (061), pet food (0934), and personal care products (1313). This showcases the application of the method.",
+    "crumbs": [
+      "Notes by method",
+      "Sampling methods for scanner data"
+    ]
+  },
+  {
+    "objectID": "docs/sampling_methods.html#resources-1",
+    "href": "docs/sampling_methods.html#resources-1",
+    "title": "Sampling methods for scanner data",
+    "section": "Resources",
+    "text": "Resources\nThe following articles go through the process in depth\n\nvan der Grient and Jan de Haan (2010) The use of supermarket scanner data in the Dutch CPI\nvan der Grient and Jan de Haan (2011) Scanner Data Price Indexes: The “Dutch Method” versus Rolling Year GEKS",
     "crumbs": [
       "Notes by method",
       "Sampling methods for scanner data"
@@ -126,7 +203,7 @@
     "href": "docs/index.html",
     "title": "Overview",
     "section": "",
-    "text": "This is a personal site that I used to render experiments and workflows that relate to the price statistics domain within official statistics. It is meant to show work in a reproducible manner for anyone else who chooses to look at this. As its personal, it is not meant in any formal capacity.",
+    "text": "This is a personal site that I used to render experiments and workflows that relate to the price statistics domain within official statistics. It is meant to log various experiments and notes to myself in a reproducible manner. Anyone else can use this if they choose but it is not explicitly meant for any formal capacity.",
     "crumbs": [
       "Overview"
     ]
@@ -136,7 +213,7 @@
     "href": "docs/index.html#purpose-of-site",
     "title": "Overview",
     "section": "",
-    "text": "This is a personal site that I used to render experiments and workflows that relate to the price statistics domain within official statistics. It is meant to show work in a reproducible manner for anyone else who chooses to look at this. As its personal, it is not meant in any formal capacity.",
+    "text": "This is a personal site that I used to render experiments and workflows that relate to the price statistics domain within official statistics. It is meant to log various experiments and notes to myself in a reproducible manner. Anyone else can use this if they choose but it is not explicitly meant for any formal capacity.",
     "crumbs": [
       "Overview"
     ]

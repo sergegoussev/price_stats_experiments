@@ -207,8 +207,19 @@ window.Quarto = {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#fixed-sample-method" id="toc-fixed-sample-method" class="nav-link" data-scroll-target="#fixed-sample-method">Fixed sample method</a></li>
-  <li><a href="#dynamic-sample-method" id="toc-dynamic-sample-method" class="nav-link" data-scroll-target="#dynamic-sample-method">Dynamic sample method</a></li>
+  <li><a href="#fixed-sample-method" id="toc-fixed-sample-method" class="nav-link" data-scroll-target="#fixed-sample-method">Fixed sample method</a>
+  <ul class="collapse">
+  <li><a href="#the-concept" id="toc-the-concept" class="nav-link" data-scroll-target="#the-concept">The concept</a></li>
+  <li><a href="#step-by-step-process" id="toc-step-by-step-process" class="nav-link" data-scroll-target="#step-by-step-process">Step-by-step process</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul></li>
+  <li><a href="#dynamic-sample-method" id="toc-dynamic-sample-method" class="nav-link" data-scroll-target="#dynamic-sample-method">Dynamic sample method</a>
+  <ul class="collapse">
+  <li><a href="#the-concept-1" id="toc-the-concept-1" class="nav-link" data-scroll-target="#the-concept-1">The concept</a></li>
+  <li><a href="#step-by-step-process-1" id="toc-step-by-step-process-1" class="nav-link" data-scroll-target="#step-by-step-process-1">Step-by-step process</a></li>
+  <li><a href="#categories-applicable" id="toc-categories-applicable" class="nav-link" data-scroll-target="#categories-applicable">Categories applicable</a></li>
+  <li><a href="#resources-1" id="toc-resources-1" class="nav-link" data-scroll-target="#resources-1">Resources</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://sergegoussev.github.io/price_stats_experiments/docs/blob/main/docs/sampling_methods.qmd" class="toc-action"><i class="bi bi-git"></i>View source</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf"><i class="bi bi-link-45deg"></i>van der Grient and de Haan (2010) Use of Supermarket scanner data in the Dutch CPI</a></li><li><a href="https://unece.org/sites/default/files/2021-05/Session_1_Eurostat_Paper.pdf"><i class="bi bi-link-45deg"></i>Lamboray (2021) Index Compilation Techniques for Scanner Data: An overview</a></li><li><a href="https://circabc.europa.eu/ui/group/7b031f10-ac19-4da3-a36f-58708a70133d/library/8e1333df-ca16-40fc-bc6a-1ce1be37247c/details"><i class="bi bi-link-45deg"></i>Eurostat (2017) Practical Guide for Processing Supermarket Scanner Data</a></li><li><a href="https://unstats.un.org/wiki/display/GWGSD/Product+sampling+for+price+index+calculation"><i class="bi bi-link-45deg"></i>UN Task Team e-handbook: Product sampling for price index calculation</a></li></ul></div></nav>
     </div>
@@ -248,76 +259,115 @@ window.Quarto = {
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>Even when scanner data is available, not all data necessarily needs to be used to calculate the elementary aggregate price index. There are two sampling approaches that are also typically used as they are quite effective ways to use the data - the static and dynamic sample methods. For a good overview of the topic, see <a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">van der Grient and de Haan (2010)</a>.</p>
+<p>Even when scanner data is available, not all data necessarily needs to be used to calculate elementary price indices. There are two sampling approaches that are typically used as they are quite effective ways to use a subset of the data but - the static and dynamic sample methods. A requirement for sampling is that each unique product is already classified to categories within which the elementary price indices are calculated.</p>
 </section>
 <section id="fixed-sample-method" class="level1">
 <h1>Fixed sample method</h1>
-<p>Simulates field collection but uses scanner data</p>
+<section id="the-concept" class="level2">
+<h2 class="anchored" data-anchor-id="the-concept">The concept</h2>
 <ul>
-<li><p>Step 1: select a large number of items at the beginning of the year which were representative the previous year (need to do analysis to choose this sample)</p>
+<li>The fixed sample method simulates a traditional approach, similar to field collection. The sample is refreshed every year to stay representative and replacement is used to maintain the sample following a traditional methodology (except that as scanner data is available to evaluation, i.e.&nbsp;seeing all products and all transactions provides a lot of additional detail of what product to replace with).</li>
+<li>The method is simple (in the sense that it follows a traditional methodology and can be combined with other data in a traditional way), however it is resource intensive as replacement must be dealt with manually (for example <a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">the Netherlands found it too costly to extend to 6 scanner retailers and shifted to the dynamic sample method</a>). It is also typically used with only a small (although representative) sample of data. It is also similar to traditional methods so its easy to implement when starting out with scanner data.</li>
+<li>The fixed sample method favors comparability over representativity as the same items are compared over time, however the representativity of the sample deteriorates over time:
 <ul>
-<li>Each item identified by an EAN (in the Dutch case, stable unique identifier is needed)</li>
+<li>A consequence of the method is thus that only similar products are selected for most disappearing items (to avoid quality adjustment), which means the method is most applicable to situations where quality change is not a major factor in the category.</li>
+<li>The method is also only applicable to categories with little churn as representativity of the products in sample will decline quickly if this is not the case. Both of these consequences are only partially mitigated by the annual product resampling. In this</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-by-step-process" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-process">Step-by-step process</h2>
+<p>The summary of the overall process is best summarized by the <a href="https://circabc.europa.eu/ui/group/7b031f10-ac19-4da3-a36f-58708a70133d/library/8e1333df-ca16-40fc-bc6a-1ce1be37247c/details">Eurostat (2017) guide, chapter 6</a>:</p>
+<blockquote class="blockquote">
+<p>In the static approach, a sample is drawn from year t and used for 12 months following December of year t. The sample is kept and replacements are made as needed.</p>
+</blockquote>
+<p>In a more detailed sense, the following steps are used to select and maintain the sample:</p>
+<ul>
+<li><p>Step 1: For each category (typically COICOP 6) for which an elementary price index will be calculated, select a number of items (representative products) at the beginning of the year which were representative the previous year. For instance you can look at products that constituted the top 50% of annual turnover.</p>
+<ul>
+<li>Select unique products (such as by European Article Number (EAN)) per supermarket chain and stores (to ensure that coverage by all chains in the sample is maintained)</li>
+<li>With this approach, we may end up with a lot of observations per category, or too few, in which case a little tuning is necessary.</li>
 <li>Each item given a weight representing its relative importance</li>
 </ul></li>
-<li><p>Step 2: a monthly price index for each item is calculated as the unit value in the current month and unit value in the base month</p>
-<ul>
-<li>Need cleaning to make sure unit value is determined</li>
-</ul></li>
-<li><p>Step 3: an EA is calculated as the weighted average of these item’s relatives using the Laspeyres (as is done on at the higher level).</p>
+<li><p>Step 2: A monthly price index (i.e.&nbsp;relative) for each item is calculated as the unit value in the current month and unit value in the base year.</p></li>
+<li><p>Step 3: An elementary price index as the weighted average of each item’s relatives using the Laspeyres (as is done on at the higher level aggregation).</p>
 <ul>
 <li>Chain the indices at December to create a long-term series</li>
 <li>Ongoing work to replace:
 <ul>
-<li>If there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed
-<ul>
-<li>TO DO: Flush out process of bridged overlap method and explicit quality adjustment used in this case</li>
+<li>If there is a big shift (but no exit), a product could be replaced manually using the bridged overlap method. Explicit quality adjustment used only when needed in a select number of cases. Implicit methods (typically the bridged overlap method) are used. See CPI Manual, chapter 7 for more detail on how to maintain methods.</li>
 </ul></li>
-</ul></li>
-<li>If an item disappeared – replace it with a similar one (but not with totally new products as these will only be available once the sample is refreshed in December).</li>
+<li>If an item disappeared – replace it with a similar one that was present in the base period.</li>
 </ul></li>
 </ul>
 </section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<p>The following articles summarize the fixed sample method well</p>
+<ul>
+<li>Larsen (2014) <a href="https://unece.org/sites/default/files/2021-04/WS4_05_Implementing_scanner_data_in_the_Danish_CPI.pdf">Implementing scanner data in the Danish CPI</a></li>
+<li>van der Grient and Jan de Haan (2010) <a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">The use of supermarket scanner data in the Dutch CPI</a></li>
+</ul>
+</section>
+</section>
 <section id="dynamic-sample-method" class="level1">
 <h1>Dynamic sample method</h1>
-<p>Purpose/Idea:</p>
+<section id="the-concept-1" class="level2">
+<h2 class="anchored" data-anchor-id="the-concept-1">The concept</h2>
 <ul>
-<li><p>Procedure to do fixed sample method is too labor intensive to extend to many retailers (6 in the Netherlands case) from the a few when the fixed sample method was sufficient. This procedure requires much less manual work.</p></li>
-<li><p>The dynamic method was also found to closely approximate the GEKS</p></li>
-<li><p>An unweighted Jevons is used to avoid chain drifta</p></li>
-<li><p>Not used by Netherlands everywhere, only some traditional categories.</p></li>
+<li>As the distribution of expenditures is typically quite skewed, a relatively small number of items are usually representing the majority of expenditures. The method focuses on these using a cut-off-sampling approach and allows the basket (sample) to be updated (i.e.&nbsp;re-sampled) every month. Put differently, “an item will be used in the scomputation of hte index between two consecutive months if its average expenditure share (with respect tho the set of matched items) in those months is above a certain threshold value” (<a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">van der Grient and Jan de Haan, 2010</a>).</li>
+<li>An unweighted (i.e.&nbsp;not using turnover) Jevons is used and chained, thereby reducing the risk of chain drift (as weights are used implicitly for sampling of items but not explicitly for index calculation).</li>
+<li>The other added benefit is that it shifts to an automatic way to maintain the sample, as the process to maintain the fixed sample method is also too labor intensive and hard to extend to many retailers (6 in the Netherlands case).</li>
+<li>The dynamic method was also found to closely approximate the GEKS, hence its a useful way to measure food and non-food categories. After a while, the NSO can shift to the multilateral method is possible (requires a minimum of 13 months, ideally 25).</li>
+<li>Implementation requires research on dumping and outlier filters prior to implementing.</li>
 </ul>
-<p>Process as follows:</p>
+</section>
+<section id="step-by-step-process-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-process-1">Step-by-step process</h2>
 <ul>
-<li>Step 1: use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures</li>
-</ul>
-<p><span class="math inline">\(\frac{s_{t}+s_{t+1}}{2}&gt;\frac{1}{n\times\lambda}\)</span></p>
-<p>Where</p>
-<p><span class="math inline">\(\frac{(s_t+s\_(t+1))}{2}\)</span> – the product’s average share between the two periods</p>
-<p><span class="math inline">\(n\)</span> – the number of products</p>
-<p><span class="math inline">\(\lambda\)</span> – 1.25</p>
+<li><p>Step 1: Calculate movement for each product in the category based on the unit value price in this month over unit value price the previous month.</p>
 <ul>
-<li><p>Step 2: Calculate movement for category based on the unit value price in this month over unit value price the previous month.</p>
-<ul>
-<li>Pre-processing is needed at this stage to get unit prices</li>
-<li>Also filtering/cleaning applied:
+<li>Pre-processing is needed to calculate unit prices</li>
+<li>Filtering/cleaning is also applied:
 <ul>
 <li>Outlier filter excludes anything 300% higher and 75% decline</li>
 <li>Dumping filter is used to exclude strong simultaneous price and quantity decreases – as this dumping in prices without an offsetting price increase will have a downward effect on the index.</li>
 </ul></li>
-<li>EAN used for matched model method, but cleaning/investigation needed to make sure EAN is stable (sometimes retailers recycle EANs). SKU can be used where applicable as it may be more stable (sometimes capture the relaunch problem)</li>
+<li>The unique identifier applicable (EAN in the Dutch example) is used for matched-model method, but cleaning/investigation needed to make sure identifier is stable (sometimes retailers recycle EANs for instance). SKU can be used where applicable as it may be more stable (sometimes capture the relaunch problem). If the identifier is too detailed for CPI purposes (say where two products with different codes are identical from a consumers’ point of view), these should be grouped in theory but in principle can be explicitly quality adjusted.</li>
 <li>Only the first several weeks of data are used – the Dutch case its 3 weeks, consistent with field collection</li>
 </ul></li>
-<li><p>Step 3: If item is missing – impute its price once (as you may have temporarily missing) by multiplying the last observed price by the Jevons of the category movement</p></li>
+<li><p>Step 2: Use a cut off method to select a products with most of the sales – as in general a relatively small proportion of products will be responsible for the majority of expenditures and carry the most weight in weighted indices. The threshold chosen in the Dutch case was that 50% of the items are selected to represent 80-85% of expenditures</p></li>
+</ul>
+<p><span class="math inline">\(\frac{s_{t}+s_{t+1}}{2}&gt;\frac{1}{n\times\lambda}\)</span></p>
+<p>Where</p>
+<p><span class="math inline">\(\frac{(s_t+s_{t+1})}{2}\)</span> – the product’s average share between the two periods</p>
+<p><span class="math inline">\(n\)</span> – the number of products</p>
+<p><span class="math inline">\(\lambda\)</span> – 1.25</p>
+<p>For example if <span class="math inline">\(n\)</span> = 80 then items with an average expenditure share greater than 1% are selected</p>
+<ul>
+<li><p>Step 3: If item is missing – impute its price once (as you may have temporarily missing) by multiplying the last observed price by the Jevons of the category movement (i.e.&nbsp;‘class mean imputation’ method). This is needed as a strict matched-item method will exclude temporary observed items from the computation.</p></li>
 <li><p>Step 4: If explicit adjustments needed such as package changes – can be made manually</p>
 <ul>
 <li>Examples are change in package sizes that are really the same for the consumer (i.e.&nbsp;EANs are basically too detailed, and we need a way to link/group 2 products together).</li>
 <li>Other implicit quality adjustment stays as per the matched model approach</li>
-<li>TO DO: flush out example</li>
 </ul></li>
-<li><p>Step 6: Integrate retailer specific COICOP6 indices together using Laspeyres method – i.e.&nbsp;higher-level aggregation unchanged</p></li>
+<li><p>Step 5: Integrate retailer specific COICOP6 indices together using annual chained Laspeyres method (i.e.&nbsp;higher-level aggregation). Scanner data can be used to weigh different retailers (when present) but sub-COICOP6 weight may be needed to separate out non-scanner data sources that use a different aggregation method.</p></li>
+</ul>
+</section>
+<section id="categories-applicable" class="level2">
+<h2 class="anchored" data-anchor-id="categories-applicable">Categories applicable</h2>
+<p>The Dutch case showcased the application of the method for several COICOP categories, specifically Food (01), Wine and Beer (0212, 0213), Tools, household maintenance tools (055, 056), medical and pharmaceutical products (061), pet food (0934), and personal care products (1313). This showcases the application of the method.</p>
+</section>
+<section id="resources-1" class="level2">
+<h2 class="anchored" data-anchor-id="resources-1">Resources</h2>
+<p>The following articles go through the process in depth</p>
+<ul>
+<li>van der Grient and Jan de Haan (2010) <a href="https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf">The use of supermarket scanner data in the Dutch CPI</a></li>
+<li>van der Grient and Jan de Haan (2011) <a href="https://stats.unece.org/ottawagroup/download/f319.pdf">Scanner Data Price Indexes: The “Dutch Method” versus Rolling Year GEKS</a></li>
 </ul>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
