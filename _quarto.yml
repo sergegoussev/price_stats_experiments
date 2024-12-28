@@ -6,8 +6,9 @@ execute:
 
 website:
   title: "Experiments with price stats"
-  repo-url: https://sergegoussev.github.io/price_stats_experiments/docs/
-  repo-actions: [source]
+  repo-url: https://github.com/sergegoussev/price_stats_experiments
+  issue-url: https://github.com/sergegoussev/price_stats_experiments/issues/new
+  repo-actions: [source, issue]
   bread-crumbs: true
   page-navigation: true
   back-to-top-navigation: true
@@ -17,6 +18,7 @@ website:
     type: "dark"
     search: true
     logo: docs/images/logo_bauhaus.jpeg
+    logo-href: https://sergegoussev.github.io/price_stats_experiments/docs/
     title: "Experiments with price stats"
     border: true
     tools:
@@ -32,9 +34,9 @@ website:
       - section:
         text: Notes by method
         contents:
-        - href: docs/notes_on_bilateral_index_methods.qmd
-        - href: docs/sampling_methods.qmd
-      - href: docs/empirical_experiments.qmd
+        - href: docs/notes_on_methods/bilateral_indices.qmd
+        - href: docs/notes_on_methods/sampling_with_scanner.qmd
+      - href: docs/empirical_experiments/experiments_catalogue.qmd
 
 
 
