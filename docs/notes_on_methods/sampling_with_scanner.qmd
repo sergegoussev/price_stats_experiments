@@ -11,7 +11,9 @@ format:
       url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     other-links:
       - text: van der Grient and de Haan (2010) Use of Supermarket scanner data in the Dutch CPI
-        href: https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf    
+        href: https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.22/2010/zip.6.e.pdf
+      - text: "Van der Grient and Jan de Haan (2011) Scanner Data Price Indexes: The 'Dutch Method' versus Rolling Year GEKS"
+        href: https://stats.unece.org/ottawagroup/download/f319.pdf
       - text: "Lamboray (2021) Index Compilation Techniques for Scanner Data: An overview"
         href: https://unece.org/sites/default/files/2021-05/Session_1_Eurostat_Paper.pdf
       - text: "Eurostat (2017) Practical Guide for Processing Supermarket Scanner Data"
