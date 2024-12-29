@@ -43,8 +43,8 @@ website:
 format:
   html:
     theme: 
-      dark: darkly
-      light: cosmo
+      dark: slate
+      light: flatly
     css: docs/styles.css
     toc: true
 
