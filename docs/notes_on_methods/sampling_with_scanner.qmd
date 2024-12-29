@@ -107,7 +107,7 @@ The following articles summarize the fixed sample method well
 
      For example, if $n$ = 80 then items with an average expenditure share greater than 1% are selected
 
--   Step 3: If an item is missing – impute its price once by multiplying the last observed price by the Jevons of the category movement (i.e. 'class mean imputation' method). This is needed as a strict matched-item method will exclude temporary observed items from the computation.
+-   Step 3: If an item is missing – impute its price once by multiplying the last observed price by the Jevons of the category movement (i.e. 'class mean imputation' method), i.e. the output of step 5 below. This is needed as a strict matched-item method will exclude temporary observed items from the computation.
 
 -   Step 4: If explicit adjustments needed such as package changes – can be made manually:
 
