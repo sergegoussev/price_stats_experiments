@@ -43,7 +43,7 @@ website:
 format:
   html:
     theme: 
-      dark: slate
+      dark: cyborg
       light: flatly
     css: docs/styles.css
     toc: true
