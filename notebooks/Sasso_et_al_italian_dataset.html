@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-09-14">
 
-<title>Explore Sasso et al () dataset – Experiments with price stats</title>
+<title>Explore italian web scraped grocery dataset – Experiments with price stats</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,6 +106,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../docs/styles.css">
@@ -277,8 +281,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#explore-sasso-et-al-dataset" id="toc-explore-sasso-et-al-dataset" class="nav-link active" data-scroll-target="#explore-sasso-et-al-dataset">Explore Sasso et al dataset</a>
+  <ul class="collapse">
+  <li><a href="#general-eda" id="toc-general-eda" class="nav-link" data-scroll-target="#general-eda">General EDA</a></li>
+  <li><a href="#geographic-distribution-of-unique-products-by-region" id="toc-geographic-distribution-of-unique-products-by-region" class="nav-link" data-scroll-target="#geographic-distribution-of-unique-products-by-region">Geographic distribution of unique products by region</a></li>
+  <li><a href="#basic-analysis-average-price-trend-over-time-by-coicop4" id="toc-basic-analysis-average-price-trend-over-time-by-coicop4" class="nav-link" data-scroll-target="#basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/main/notebooks/Sasso_et_al_italian_dataset.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -286,14 +301,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Explore Sasso et al () dataset</h1>
-</div>
+<h1 class="title">Explore italian web scraped grocery dataset</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">dataset</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 14, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -303,6 +327,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="explore-sasso-et-al-dataset" class="level1">
+<h1>Explore Sasso et al dataset</h1>
 <p>Daniele Sasso and a few others made their dataset availible on Zenodo - https://doi.org/10.5281/zenodo.14927602</p>
 <p>This dataset was manually downloaded to <code>/data/bronze/</code> and will be explored here</p>
 <div id="4cb9e96c" class="cell" data-execution_count="1">
@@ -311,64 +337,171 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="e749c6f8" class="cell" data-execution_count="4">
+<section id="general-eda" class="level2">
+<h2 class="anchored" data-anchor-id="general-eda">General EDA</h2>
+<div id="e749c6f8" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert date column</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>])  <span class="co"># Format: YYYY-MM-DD</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define category colors</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>category_colors <span class="op">=</span> {<span class="st">"Fruit"</span>: <span class="st">"blue"</span>, <span class="st">"Vegetable"</span>: <span class="st">"green"</span>, <span class="st">"Meat"</span>: <span class="st">"red"</span>}</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Geographic distribution of unique products by region</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>geo <span class="op">=</span> df.groupby([<span class="st">"region"</span>, <span class="st">"COICOP4"</span>])[<span class="st">"product_id"</span>].nunique().reset_index()</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>pivot_geo <span class="op">=</span> geo.pivot(index<span class="op">=</span><span class="st">"region"</span>, columns<span class="op">=</span><span class="st">"COICOP4"</span>, values<span class="op">=</span><span class="st">"product_id"</span>).fillna(<span class="dv">0</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>pivot_geo[<span class="st">"Total"</span>] <span class="op">=</span> pivot_geo.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>pivot_geo <span class="op">=</span> pivot_geo.sort_values(<span class="st">"Total"</span>, ascending<span class="op">=</span><span class="va">False</span>).drop(columns<span class="op">=</span><span class="st">"Total"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>pivot_geo <span class="op">=</span> pivot_geo[[<span class="st">"Fruit"</span>, <span class="st">"Meat"</span>, <span class="st">"Vegetable"</span>]]</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>pivot_geo.plot(kind<span class="op">=</span><span class="st">"bar"</span>, stacked<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>), color<span class="op">=</span>[<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>])</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Unique Products"</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Geographic Distribution by Region and Category (Sorted)"</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Category"</span>)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="3f634895" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">price</th>
+<th data-quarto-table-cell-role="th">product_id</th>
+<th data-quarto-table-cell-role="th">store_id</th>
+<th data-quarto-table-cell-role="th">region</th>
+<th data-quarto-table-cell-role="th">product</th>
+<th data-quarto-table-cell-role="th">COICOP5</th>
+<th data-quarto-table-cell-role="th">COICOP4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2020-12-03</td>
+<td>1.99</td>
+<td>2</td>
+<td>2</td>
+<td>calabria</td>
+<td>arance navelina italia calibro 1.5 kg</td>
+<td>Oranges</td>
+<td>Fruit</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2020-12-03</td>
+<td>2.48</td>
+<td>2</td>
+<td>3</td>
+<td>lazio</td>
+<td>arance navelina italia calibro 1.5 kg</td>
+<td>Oranges</td>
+<td>Fruit</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2020-12-03</td>
+<td>2.49</td>
+<td>2</td>
+<td>4</td>
+<td>calabria</td>
+<td>arance navelina italia calibro 1.5 kg</td>
+<td>Oranges</td>
+<td>Fruit</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2020-12-03</td>
+<td>1.99</td>
+<td>2</td>
+<td>5</td>
+<td>calabria</td>
+<td>arance navelina italia calibro 1.5 kg</td>
+<td>Oranges</td>
+<td>Fruit</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2020-12-03</td>
+<td>2.49</td>
+<td>2</td>
+<td>8</td>
+<td>lazio</td>
+<td>arance navelina italia calibro 1.5 kg</td>
+<td>Oranges</td>
+<td>Fruit</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="c8d20fa5" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 4033211 entries, 0 to 4033210
+Data columns (total 8 columns):
+ #   Column      Dtype  
+---  ------      -----  
+ 0   date        object 
+ 1   price       float64
+ 2   product_id  int64  
+ 3   store_id    int64  
+ 4   region      object 
+ 5   product     object 
+ 6   COICOP5     object 
+ 7   COICOP4     object 
+dtypes: float64(1), int64(2), object(5)
+memory usage: 246.2+ MB</code></pre>
+</div>
+</div>
+</section>
+<section id="geographic-distribution-of-unique-products-by-region" class="level2">
+<h2 class="anchored" data-anchor-id="geographic-distribution-of-unique-products-by-region">Geographic distribution of unique products by region</h2>
+<div id="742f5f96" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert date column</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>])  <span class="co"># Format: YYYY-MM-DD</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define category colors</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>category_colors <span class="op">=</span> {<span class="st">"Fruit"</span>: <span class="st">"blue"</span>, <span class="st">"Vegetable"</span>: <span class="st">"green"</span>, <span class="st">"Meat"</span>: <span class="st">"red"</span>}</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>geo <span class="op">=</span> df.groupby([<span class="st">"region"</span>, <span class="st">"COICOP4"</span>])[<span class="st">"product_id"</span>].nunique().reset_index()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>pivot_geo <span class="op">=</span> geo.pivot(index<span class="op">=</span><span class="st">"region"</span>, columns<span class="op">=</span><span class="st">"COICOP4"</span>, values<span class="op">=</span><span class="st">"product_id"</span>).fillna(<span class="dv">0</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>pivot_geo[<span class="st">"Total"</span>] <span class="op">=</span> pivot_geo.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>pivot_geo <span class="op">=</span> pivot_geo.sort_values(<span class="st">"Total"</span>, ascending<span class="op">=</span><span class="va">False</span>).drop(columns<span class="op">=</span><span class="st">"Total"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>pivot_geo <span class="op">=</span> pivot_geo[[<span class="st">"Fruit"</span>, <span class="st">"Meat"</span>, <span class="st">"Vegetable"</span>]]</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>pivot_geo.plot(kind<span class="op">=</span><span class="st">"bar"</span>, stacked<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>), color<span class="op">=</span>[<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>])</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Unique Products"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Geographic Distribution by Region and Category (Sorted)"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Category"</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="7cfb2793" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic analysis: average price trend over time (by COICOP4)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>price_trend <span class="op">=</span> df.groupby([<span class="st">"date"</span>, <span class="st">"COICOP4"</span>])[<span class="st">"price"</span>].mean().reset_index()</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>price_trend, x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"price"</span>, hue<span class="op">=</span><span class="st">"COICOP4"</span>, palette<span class="op">=</span>category_colors)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Average Price Over Time by COICOP4 Category"</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Date"</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average Price (€)"</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Category"</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="basic-analysis-average-price-trend-over-time-by-coicop4" class="level2">
+<h2 class="anchored" data-anchor-id="basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</h2>
+<div id="7cfb2793" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>price_trend <span class="op">=</span> df.groupby([<span class="st">"date"</span>, <span class="st">"COICOP4"</span>])[<span class="st">"price"</span>].mean().reset_index()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>price_trend, x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"price"</span>, hue<span class="op">=</span><span class="st">"COICOP4"</span>, palette<span class="op">=</span>category_colors)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Average Price Over Time by COICOP4 Category"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Date"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average Price (€)"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Category"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -789,4 +922,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/main/notebooks/Sasso_et_al_italian_dataset.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/main/notebooks/Sasso_et_al_italian_dataset.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
