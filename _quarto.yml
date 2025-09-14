@@ -6,7 +6,7 @@ execute:
 
 website:
   title: "Experiments with price stats"
-  repo-url: https://sergegoussev.github.io/price_stats_experiments/docs/index.html
+  repo-url: https://github.com/sergegoussev/price_stats_experiments
   issue-url: https://github.com/sergegoussev/price_stats_experiments/issues/new
   repo-actions: [source, issue]
   bread-crumbs: true
