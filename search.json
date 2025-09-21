@@ -136,34 +136,6 @@
     "text": "Basic analysis: average price trend over time (by COICOP4)\n\nprice_trend = df.groupby([\"date\", \"COICOP4\"])[\"price\"].mean().reset_index()\n\nplt.figure(figsize=(10,5))\nsns.lineplot(data=price_trend, x=\"date\", y=\"price\", hue=\"COICOP4\", palette=category_colors)\nplt.title(\"Average Price Over Time by COICOP4 Category\")\nplt.xlabel(\"Date\")\nplt.ylabel(\"Average Price (€)\")\nplt.legend(title=\"Category\")\nplt.tight_layout()\nplt.show()"
   },
   {
-    "objectID": "notebooks/aizcorbe_example_2.2.html",
-    "href": "notebooks/aizcorbe_example_2.2.html",
-    "title": "Aizcorbe (2014), ex 2.2. Bilateral indices",
-    "section": "",
-    "text": "Example of bilateral indices with product churn (from Aizcorbe 2014, example 2.2)\nIn Example 2.2, Aizcorbe uses the DRAM dataset to demonstrate how to construct bilateral price indices with product churn.\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "notebooks/aizcorbe_example_3.2.html",
-    "href": "notebooks/aizcorbe_example_3.2.html",
-    "title": "Aizcorbe (2014), ex 3.2. Hedonic dummy variable method",
-    "section": "",
-    "text": "Example of dummy variable hedonic method (from Aizcorbe 2014, example 3.2)\nIn Example 3.2, constructed a sythentic scanner dataset\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "notebooks/aizcorbe_example_2.1.html",
-    "href": "notebooks/aizcorbe_example_2.1.html",
-    "title": "Aizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices",
-    "section": "",
-    "text": "This notebook goes through a fixed-base and chained bilateral indices methods demonstrated by Aizcorbe (2014) in 2.1. This this example Ana Aizcorbe uses US National Income and Product Accounts data from the BEA to demonstrate how the Laspeyres, Paasche, and Fisher behave differently when you use a fixed base versus when they are chained.\n\nimport pandas as pd\nimport numpy as np\nfrom PriceIndexCalc.pandas_modules.index_methods import bilateral_methods\n\n\n#if not run before, use the helper to clean the data and make it analysis ready\nfrom src.nipa_helper import clean_nipa_data\n\nclean_nipa_data()\n\n\n---------------------------------------------------------------------------\nModuleNotFoundError                       Traceback (most recent call last)\nCell In[82], line 2\n      1 #if not run before, use the helper to clean the data and make it analysis ready\n----&gt; 2 from src.nipa_helper import clean_nipa_data\n      4 clean_nipa_data()\n\nModuleNotFoundError: No module named 'src'\n\n\n\n\n\nWhile the raw data is a tad hard to work with (and looks awkward in Table 2.3), this data is provided in cleaned csv format in the data\\bronze folder\n\ndf = pd.read_csv(\"../data/silver/NIPA_ard.csv\")\ndf.head()\n\n\n\n\n\n\n\n\nUnnamed: 0\nYears\nid\nquantity\nprice\n\n\n\n\n0\n0\n2000\nMotor Vehicles and Parts\n363.2\n102.00\n\n\n1\n1\n2001\nMotor Vehicles and Parts\n383.3\n102.40\n\n\n2\n2\n2002\nMotor Vehicles and Parts\n401.3\n101.86\n\n\n3\n3\n2003\nMotor Vehicles and Parts\n401.0\n99.08\n\n\n4\n4\n2004\nMotor Vehicles and Parts\n403.9\n98.40\n\n\n\n\n\n\n\nTry the base bilateral indices\n\nbilateral_methods(\n    df_merged, \n    price_col='index',\n    quantity_col='spending',\n    product_id_col='product_name',\n    date_col='Years',\n    method='fisher',\n    plot=True\n    )\n\n\n\n\n\n\n\n\nindex_value\n\n\n\n\n2000\n1.000000\n\n\n2001\n0.976995\n\n\n2002\n0.950021\n\n\n2003\n0.914880\n\n\n2004\n0.895824\n\n\n2005\n0.885266\n\n\n2006\n0.870273\n\n\n2007\n0.854862\n\n\n2008\n0.837859\n\n\n2009\n0.827529\n\n\n2010\n0.822435\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntry the Laspeyres\n\nbilateral_methods(\n    df_merged, \n    price_col='index',\n    quantity_col='spending',\n    product_id_col='product_name',\n    date_col='Years',\n    method='laspeyres',\n    plot=True\n    )\n\n\n\n\n\n\n\n\nindex_value\n\n\n\n\n2000\n1.000000\n\n\n2001\n0.976905\n\n\n2002\n0.949844\n\n\n2003\n0.915297\n\n\n2004\n0.897443\n\n\n2005\n0.888531\n\n\n2006\n0.875934\n\n\n2007\n0.861710\n\n\n2008\n0.847423\n\n\n2009\n0.837340\n\n\n2010\n0.834129"
-  },
-  {
-    "objectID": "notebooks/aizcorbe_example_2.1.html#explore-the-data",
-    "href": "notebooks/aizcorbe_example_2.1.html#explore-the-data",
-    "title": "Aizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices",
-    "section": "",
-    "text": "While the raw data is a tad hard to work with (and looks awkward in Table 2.3), this data is provided in cleaned csv format in the data\\bronze folder\n\ndf = pd.read_csv(\"../data/silver/NIPA_ard.csv\")\ndf.head()\n\n\n\n\n\n\n\n\nUnnamed: 0\nYears\nid\nquantity\nprice\n\n\n\n\n0\n0\n2000\nMotor Vehicles and Parts\n363.2\n102.00\n\n\n1\n1\n2001\nMotor Vehicles and Parts\n383.3\n102.40\n\n\n2\n2\n2002\nMotor Vehicles and Parts\n401.3\n101.86\n\n\n3\n3\n2003\nMotor Vehicles and Parts\n401.0\n99.08\n\n\n4\n4\n2004\nMotor Vehicles and Parts\n403.9\n98.40\n\n\n\n\n\n\n\nTry the base bilateral indices\n\nbilateral_methods(\n    df_merged, \n    price_col='index',\n    quantity_col='spending',\n    product_id_col='product_name',\n    date_col='Years',\n    method='fisher',\n    plot=True\n    )\n\n\n\n\n\n\n\n\nindex_value\n\n\n\n\n2000\n1.000000\n\n\n2001\n0.976995\n\n\n2002\n0.950021\n\n\n2003\n0.914880\n\n\n2004\n0.895824\n\n\n2005\n0.885266\n\n\n2006\n0.870273\n\n\n2007\n0.854862\n\n\n2008\n0.837859\n\n\n2009\n0.827529\n\n\n2010\n0.822435\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntry the Laspeyres\n\nbilateral_methods(\n    df_merged, \n    price_col='index',\n    quantity_col='spending',\n    product_id_col='product_name',\n    date_col='Years',\n    method='laspeyres',\n    plot=True\n    )\n\n\n\n\n\n\n\n\nindex_value\n\n\n\n\n2000\n1.000000\n\n\n2001\n0.976905\n\n\n2002\n0.949844\n\n\n2003\n0.915297\n\n\n2004\n0.897443\n\n\n2005\n0.888531\n\n\n2006\n0.875934\n\n\n2007\n0.861710\n\n\n2008\n0.847423\n\n\n2009\n0.837340\n\n\n2010\n0.834129"
-  },
-  {
     "objectID": "notebooks/File_type_benchmark.html",
     "href": "notebooks/File_type_benchmark.html",
     "title": "Benchmark test in file formats",
@@ -227,21 +199,53 @@
     "text": "Detailed results\nWe can print out the dataframes of interst to see the detailed data for all the files, including the outliers\n\ndf_file_size_test\n\n\n\n\n\n\n\n\ntype\nfile size (MB)\n\n\n\n\n0\ncsv\n547.119179\n\n\n1\npickle\n579.979185\n\n\n2\ncompressed pickle\n14.979172\n\n\n3\nfeather\n104.476992\n\n\n4\nparquet\n20.218006\n\n\n5\nhdf5\n2088.185272\n\n\n6\nxlsx\n288.665235\n\n\n\n\n\n\n\n\ndf_processing_test\n\n\n\n\n\n\n\n\ntask\ntime taken\n\n\n\n\n0\npickle - write\n3.344310\n\n\n1\npickle - read\n1.997607\n\n\n2\ncompressed pickle - write\n7.953267\n\n\n3\ncompressed pickle - read\n12.442646\n\n\n4\ncsv - write\n40.201943\n\n\n5\ncsv - read\n6.481310\n\n\n6\nparquet - write\n4.330219\n\n\n7\nparquet - read\n3.246392\n\n\n8\nfeather - write\n2.894822\n\n\n9\nfeather - read\n1.323537\n\n\n10\nhdf5 - write\n3.991776\n\n\n11\nhdf5 - read\n5.148564\n\n\n12\nxlsx - write\n1143.868652\n\n\n13\nxlsx - read\n706.332365"
   },
   {
+    "objectID": "notebooks/aizcorbe_example_2.1.html",
+    "href": "notebooks/aizcorbe_example_2.1.html",
+    "title": "Aizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices",
+    "section": "",
+    "text": "This notebook goes through a fixed-base and chained bilateral indices methods demonstrated by Aizcorbe (2014) in 2.1. This this example Ana Aizcorbe uses US National Income and Product Accounts data from the BEA to demonstrate how the Laspeyres, Paasche, and Fisher behave differently when you use a fixed base versus when they are chained.\n\nimport pandas as pd\nimport numpy as np\nfrom PriceIndexCalc.pandas_modules.index_methods import bilateral_methods\n\n\n#if not run before, use the helper to clean the data and make it analysis ready\nfrom src.nipa_helper import clean_nipa_data\n\nclean_nipa_data()\n\n\n---------------------------------------------------------------------------\nModuleNotFoundError                       Traceback (most recent call last)\nCell In[82], line 2\n      1 #if not run before, use the helper to clean the data and make it analysis ready\n----&gt; 2 from src.nipa_helper import clean_nipa_data\n      4 clean_nipa_data()\n\nModuleNotFoundError: No module named 'src'\n\n\n\n\n\nWhile the raw data is a tad hard to work with (and looks awkward in Table 2.3), this data is provided in cleaned csv format in the data\\bronze folder\n\ndf = pd.read_csv(\"../data/silver/NIPA_ard.csv\")\ndf.head()\n\n\n\n\n\n\n\n\nUnnamed: 0\nYears\nid\nquantity\nprice\n\n\n\n\n0\n0\n2000\nMotor Vehicles and Parts\n363.2\n102.00\n\n\n1\n1\n2001\nMotor Vehicles and Parts\n383.3\n102.40\n\n\n2\n2\n2002\nMotor Vehicles and Parts\n401.3\n101.86\n\n\n3\n3\n2003\nMotor Vehicles and Parts\n401.0\n99.08\n\n\n4\n4\n2004\nMotor Vehicles and Parts\n403.9\n98.40\n\n\n\n\n\n\n\nTry the base bilateral indices\n\nbilateral_methods(\n    df_merged, \n    price_col='index',\n    quantity_col='spending',\n    product_id_col='product_name',\n    date_col='Years',\n    method='fisher',\n    plot=True\n    )\n\n\n\n\n\n\n\n\nindex_value\n\n\n\n\n2000\n1.000000\n\n\n2001\n0.976995\n\n\n2002\n0.950021\n\n\n2003\n0.914880\n\n\n2004\n0.895824\n\n\n2005\n0.885266\n\n\n2006\n0.870273\n\n\n2007\n0.854862\n\n\n2008\n0.837859\n\n\n2009\n0.827529\n\n\n2010\n0.822435\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntry the Laspeyres\n\nbilateral_methods(\n    df_merged, \n    price_col='index',\n    quantity_col='spending',\n    product_id_col='product_name',\n    date_col='Years',\n    method='laspeyres',\n    plot=True\n    )\n\n\n\n\n\n\n\n\nindex_value\n\n\n\n\n2000\n1.000000\n\n\n2001\n0.976905\n\n\n2002\n0.949844\n\n\n2003\n0.915297\n\n\n2004\n0.897443\n\n\n2005\n0.888531\n\n\n2006\n0.875934\n\n\n2007\n0.861710\n\n\n2008\n0.847423\n\n\n2009\n0.837340\n\n\n2010\n0.834129"
+  },
+  {
+    "objectID": "notebooks/aizcorbe_example_2.1.html#explore-the-data",
+    "href": "notebooks/aizcorbe_example_2.1.html#explore-the-data",
+    "title": "Aizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices",
+    "section": "",
+    "text": "While the raw data is a tad hard to work with (and looks awkward in Table 2.3), this data is provided in cleaned csv format in the data\\bronze folder\n\ndf = pd.read_csv(\"../data/silver/NIPA_ard.csv\")\ndf.head()\n\n\n\n\n\n\n\n\nUnnamed: 0\nYears\nid\nquantity\nprice\n\n\n\n\n0\n0\n2000\nMotor Vehicles and Parts\n363.2\n102.00\n\n\n1\n1\n2001\nMotor Vehicles and Parts\n383.3\n102.40\n\n\n2\n2\n2002\nMotor Vehicles and Parts\n401.3\n101.86\n\n\n3\n3\n2003\nMotor Vehicles and Parts\n401.0\n99.08\n\n\n4\n4\n2004\nMotor Vehicles and Parts\n403.9\n98.40\n\n\n\n\n\n\n\nTry the base bilateral indices\n\nbilateral_methods(\n    df_merged, \n    price_col='index',\n    quantity_col='spending',\n    product_id_col='product_name',\n    date_col='Years',\n    method='fisher',\n    plot=True\n    )\n\n\n\n\n\n\n\n\nindex_value\n\n\n\n\n2000\n1.000000\n\n\n2001\n0.976995\n\n\n2002\n0.950021\n\n\n2003\n0.914880\n\n\n2004\n0.895824\n\n\n2005\n0.885266\n\n\n2006\n0.870273\n\n\n2007\n0.854862\n\n\n2008\n0.837859\n\n\n2009\n0.827529\n\n\n2010\n0.822435\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntry the Laspeyres\n\nbilateral_methods(\n    df_merged, \n    price_col='index',\n    quantity_col='spending',\n    product_id_col='product_name',\n    date_col='Years',\n    method='laspeyres',\n    plot=True\n    )\n\n\n\n\n\n\n\n\nindex_value\n\n\n\n\n2000\n1.000000\n\n\n2001\n0.976905\n\n\n2002\n0.949844\n\n\n2003\n0.915297\n\n\n2004\n0.897443\n\n\n2005\n0.888531\n\n\n2006\n0.875934\n\n\n2007\n0.861710\n\n\n2008\n0.847423\n\n\n2009\n0.837340\n\n\n2010\n0.834129"
+  },
+  {
+    "objectID": "notebooks/aizcorbe_example_3.2.html",
+    "href": "notebooks/aizcorbe_example_3.2.html",
+    "title": "Aizcorbe (2014), ex 3.2. Hedonic dummy variable method",
+    "section": "",
+    "text": "Example of dummy variable hedonic method (from Aizcorbe 2014, example 3.2)\nIn Example 3.2, constructed a sythentic scanner dataset\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "notebooks/aizcorbe_example_2.2.html",
+    "href": "notebooks/aizcorbe_example_2.2.html",
+    "title": "Aizcorbe (2014), ex 2.2. Bilateral indices",
+    "section": "",
+    "text": "Example of bilateral indices with product churn (from Aizcorbe 2014, example 2.2)\nIn Example 2.2, Aizcorbe uses the DRAM dataset to demonstrate how to construct bilateral price indices with product churn.\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "notebooks/explore-turvey.html",
+    "href": "notebooks/explore-turvey.html",
+    "title": "Explore Turvey dataset",
+    "section": "",
+    "text": "This notebook explores the turvey dataset, a classic in price statistics discipline."
+  },
+  {
+    "objectID": "notebooks/explore-turvey.html#context",
+    "href": "notebooks/explore-turvey.html#context",
+    "title": "Explore Turvey dataset",
+    "section": "Context",
+    "text": "Context\nThe initial dataset was introduced by Turvey (1979) “The treatment of seasonal items in consumer price indices”, and a slightly different version was made availible on page 395 of the 2004 CPI Manual.\n\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport matplotlib.ticker as ticker\n\n\ndf = pd.read_csv(\"../data/silver/turvey.csv\")\ndf.head()\n\n\n\n\n\n\n\n\nmonth\ncommodity\nprice\nquantity\n\n\n\n\n0\n1970-01-31\nApples\n1.14\n3086\n\n\n1\n1970-01-31\nGrapes\n2.48\n82\n\n\n2\n1970-01-31\nOranges\n1.30\n10266\n\n\n3\n1970-02-28\nApples\n1.17\n3765\n\n\n4\n1970-02-28\nGrapes\n2.75\n35\n\n\n\n\n\n\n\n\ndf.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 176 entries, 0 to 175\nData columns (total 4 columns):\n #   Column     Non-Null Count  Dtype  \n---  ------     --------------  -----  \n 0   month      176 non-null    object \n 1   commodity  176 non-null    object \n 2   price      176 non-null    float64\n 3   quantity   176 non-null    int64  \ndtypes: float64(1), int64(1), object(2)\nmemory usage: 5.6+ KB\n\n\n\nfig, ax = plt.subplots(figsize=(12, 6))\nsns.lineplot(\n    data=df, \n    x='month', \n    y='price',\n    hue='commodity',\n    linewidth=1,\n    ax=ax\n)\n\nplt.legend(\n    title=\"Commodities\",\n    bbox_to_anchor=(1.0, 1),\n)\n\ntick_locs = ax.get_xticks()\nax.set_xticks(tick_locs, labels=ax.get_xticklabels(), rotation=45, ha='right', rotation_mode='anchor')\n\n\nplt.title('Artificial prices of seasonal products based on the modified Turvey dataset')\nplt.tight_layout()\nplt.show()"
+  },
+  {
     "objectID": "docs/empirical_experiments/experiments_catalogue.html",
     "href": "docs/empirical_experiments/experiments_catalogue.html",
     "title": "Experiments catalogue",
     "section": "",
-    "text": "This pages lists the experiments done by topic on specific topics related in some way to price statistics",
-    "crumbs": [
-      "Experiments catalogue"
-    ]
-  },
-  {
-    "objectID": "docs/empirical_experiments/experiments_catalogue.html#list-of-empirical-price-statistics-experiments",
-    "href": "docs/empirical_experiments/experiments_catalogue.html#list-of-empirical-price-statistics-experiments",
-    "title": "Experiments catalogue",
-    "section": "List of empirical price statistics experiments",
-    "text": "List of empirical price statistics experiments\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\nCategories\n\n\n\n\n\n\n\n\nAizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices\n\n\nbilateral index methods, fixed-base indices, chained indices\n\n\n\n\n\n\nAizcorbe (2014), ex 2.2. Bilateral indices\n\n\nbilateral index methods, product churn\n\n\n\n\n\n\nAizcorbe (2014), ex 3.2. Hedonic dummy variable method\n\n\nhedonic methods\n\n\n\n\n\n\nBenchmark test in file formats\n\n\ndata engineering, file format benchmarks\n\n\n\n\n\n\nExplore Italian web scraped grocery dataset\n\n\ndataset\n\n\n\n\n\n\nNo matching items",
+    "text": "This pages lists the experiments done by topic related in some way to price statistics, whether its a method replication or an exploration of a dataset.\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\nCategories\n\n\n\n\n\n\n\n\nAizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices\n\n\nbilateral index methods, fixed-base indices, chained indices\n\n\n\n\n\n\nAizcorbe (2014), ex 2.2. Bilateral indices\n\n\nbilateral index methods, product churn\n\n\n\n\n\n\nAizcorbe (2014), ex 3.2. Hedonic dummy variable method\n\n\nhedonic methods\n\n\n\n\n\n\nBenchmark test in file formats\n\n\ndata engineering, file format benchmarks\n\n\n\n\n\n\nExplore Italian web scraped grocery dataset\n\n\ndataset\n\n\n\n\n\n\nExplore Turvey dataset\n\n\ndataset\n\n\n\n\n\n\nNo matching items\n\n\n\n\n\n Back to top",
     "crumbs": [
       "Experiments catalogue"
     ]
