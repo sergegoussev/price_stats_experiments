@@ -15,9 +15,7 @@ format:
     toc-expand: 2
 ---
 
-This pages lists the experiments done by topic on specific topics related in some way to price statistics
-
-## List of empirical price statistics experiments
+This pages lists the experiments done by topic related in some way to price statistics, whether its a method replication or an exploration of a dataset.
 
 ::: {#experiments-experiments}
 :::
