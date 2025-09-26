@@ -77,8 +77,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a78570760e97b3bef20fb487cfb43a4a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-4044c88bcb152e1529196a377c7ac6e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-fb7c9abc17d36d8f171624f5bcedd762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-479e557835eae99354a883599766f3c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -289,6 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#general-eda" id="toc-general-eda" class="nav-link active" data-scroll-target="#general-eda">General EDA</a></li>
   <li><a href="#geographic-distribution-of-unique-products-by-region" id="toc-geographic-distribution-of-unique-products-by-region" class="nav-link" data-scroll-target="#geographic-distribution-of-unique-products-by-region">Geographic distribution of unique products by region</a></li>
   <li><a href="#basic-analysis-average-price-trend-over-time-by-coicop4" id="toc-basic-analysis-average-price-trend-over-time-by-coicop4" class="nav-link" data-scroll-target="#basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</a></li>
+  <li><a href="#other-informative-information-about-the-dataset" id="toc-other-informative-information-about-the-dataset" class="nav-link" data-scroll-target="#other-informative-information-about-the-dataset">Other informative information about the dataset</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/main/notebooks/Sasso_et_al_italian_dataset.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -334,13 +335,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="general-eda" class="level2">
 <h2 class="anchored" data-anchor-id="general-eda">General EDA</h2>
-<div id="e749c6f8" class="cell" data-execution_count="7">
+<div id="e749c6f8" class="cell" data-execution_count="63">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3f634895" class="cell" data-execution_count="8">
+<div id="3f634895" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -420,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="c8d20fa5" class="cell" data-execution_count="9">
+<div id="c8d20fa5" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -443,7 +444,7 @@ memory usage: 246.2+ MB</code></pre>
 </section>
 <section id="geographic-distribution-of-unique-products-by-region" class="level2">
 <h2 class="anchored" data-anchor-id="geographic-distribution-of-unique-products-by-region">Geographic distribution of unique products by region</h2>
-<div id="742f5f96" class="cell" data-execution_count="13">
+<div id="742f5f96" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert date column</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>])  <span class="co"># Format: YYYY-MM-DD</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -474,7 +475,7 @@ memory usage: 246.2+ MB</code></pre>
 </section>
 <section id="basic-analysis-average-price-trend-over-time-by-coicop4" class="level2">
 <h2 class="anchored" data-anchor-id="basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</h2>
-<div id="7cfb2793" class="cell" data-execution_count="14">
+<div id="7cfb2793" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>price_trend <span class="op">=</span> df.groupby([<span class="st">"date"</span>, <span class="st">"COICOP4"</span>])[<span class="st">"price"</span>].mean().reset_index()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
@@ -489,6 +490,196 @@ memory usage: 246.2+ MB</code></pre>
 <div>
 <figure class="figure">
 <p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="other-informative-information-about-the-dataset" class="level1">
+<h1>Other informative information about the dataset</h1>
+<p>First, check out the number of unique products</p>
+<div id="c748f1a5" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(df[<span class="st">'product'</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>2361</code></pre>
+</div>
+</div>
+<p>Number of stores</p>
+<div id="3ea7257c" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(df[<span class="st">'store_id'</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>20</code></pre>
+</div>
+</div>
+<p>Average number of products scraped per store per day</p>
+<div id="d2c05b67" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">"date"</span>, <span class="st">"store_id"</span>])[<span class="st">"product_id"</span>].count().reset_index()[<span class="st">'product_id'</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<pre><code>239.81513854203828</code></pre>
+</div>
+</div>
+<p>Get some info on how many scrapes there were and how many products were captured on average per scrape</p>
+<div id="1d17ff1a" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">"date"</span>, <span class="st">"store_id"</span>])[<span class="st">"product_id"</span>].count().reset_index()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">store_id</th>
+<th data-quarto-table-cell-role="th">product_id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2020-12-03</td>
+<td>2</td>
+<td>244</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2020-12-03</td>
+<td>3</td>
+<td>207</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2020-12-03</td>
+<td>4</td>
+<td>170</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2020-12-03</td>
+<td>5</td>
+<td>152</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2020-12-03</td>
+<td>6</td>
+<td>366</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16813</th>
+<td>2023-04-14</td>
+<td>17</td>
+<td>261</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">16814</th>
+<td>2023-04-14</td>
+<td>18</td>
+<td>50</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16815</th>
+<td>2023-04-14</td>
+<td>19</td>
+<td>179</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">16816</th>
+<td>2023-04-14</td>
+<td>20</td>
+<td>197</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16817</th>
+<td>2023-04-14</td>
+<td>21</td>
+<td>117</td>
+</tr>
+</tbody>
+</table>
+
+<p>16818 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<div id="e7499ce3" class="cell" data-execution_count="90">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(df2[<span class="st">'date'</span>])</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df2.set_index(<span class="st">'date'</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># df2.head()</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>df_scrapes <span class="op">=</span> df2.resample(<span class="st">'M'</span>)[<span class="st">'product_id'</span>].count().to_frame()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>df_scrapes.head()</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># df.info()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\Serge_dev\AppData\Local\Temp\ipykernel_107724\2073670758.py:5: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  df_scrapes = df2.resample('M')['product_id'].count().to_frame()</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="90">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product_id</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2020-12-31</th>
+<td>141664</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2021-01-31</th>
+<td>155193</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021-02-28</th>
+<td>144178</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2021-03-31</th>
+<td>163449</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021-04-30</th>
+<td>166847</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="037645c1" class="cell" data-execution_count="92">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(df_scrapes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="92">
+<pre><code>29</code></pre>
+</div>
+</div>
+<div id="c17dc5e9" class="cell" data-execution_count="97">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_scrapes.plot(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">'bar'</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Number of unique products scraped per scrape time"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"number of products scraped"</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
