@@ -9,6 +9,8 @@ dependencies:
   - ipykernel
   - pandas
   - scipy
+  - jupyter
+  - nbformat
   - jupyterlab
   - scikit-learn
   - pyarrow
