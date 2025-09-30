@@ -28,6 +28,13 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      # Optional: Add a verification step to confirm the environment is active
+      - name: Verify Conda environment is active
+        run: |
+          which python
+          conda info --envs
+          conda list
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
