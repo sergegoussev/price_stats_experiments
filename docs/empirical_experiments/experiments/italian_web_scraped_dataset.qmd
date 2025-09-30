@@ -21,20 +21,20 @@ First off - what is the shape and columns in the data:
 
 # Required libraries
 import pandas as pd
-# import matplotlib.pyplot as plt
-# import seaborn as sns
-# from datetime import datetime
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import datetime
 
-# Load dataset
-# df = pd.read_csv("../../../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv")
-# # df.head()
+Load dataset
+df = pd.read_csv("../../../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv")
+# df.head()
 
-# df.info()
+df.info()
 ```
 
 Its a tabular dataset. Lets look at the web scrape data in a bit more detail:
 
-```
+```{python}
 #| echo: true
 
 stats = {}
