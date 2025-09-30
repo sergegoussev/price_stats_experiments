@@ -34,7 +34,7 @@ jobs:
       # Register the Jupyter kernel with
       - name: Register Jupyter kernel
         run: |
-          python -m ipykernel install --user --name price_stats_experiments --display-name "Price Stats Experiments"
+          python -m ipykernel install --name price_stats_experiments --display-name "Price Stats Experiments"
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
