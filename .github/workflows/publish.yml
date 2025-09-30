@@ -31,15 +31,24 @@ jobs:
           environment-name: price_stats_experiments
           cache-environment: true
 
+      # Register the Jupyter kernel with
+      - name: Register Jupyter kernel
+        run: |
+          python -m ipykernel install --user --name price_stats_experiments --display-name "Price Stats Experiments"
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
       # Optional: Add a verification step to confirm the environment is active
       - name: Verify Conda environment is active
         run: |
+          echo "Virify python interpreter path"
           which python
+          echo "List envs and installed packages in the active env"
           conda info --envs
           conda list
+          echo "List installed kernelspecs"
+          jupyter kernelspec list
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
