@@ -196,10 +196,17 @@
     "href": "docs/empirical_experiments/experiments_catalogue.html#list-of-empirical-price-statistics-experiments",
     "title": "Experiments catalogue",
     "section": "List of empirical price statistics experiments",
-    "text": "List of empirical price statistics experiments\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\nCategories\n\n\n\n\n\n\n\n\nAizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices\n\n\nbilateral index methods, fixed-base indices, chained indices\n\n\n\n\n\n\nAizcorbe (2014), ex 2.2. Bilateral indices\n\n\nbilateral index methods, product churn\n\n\n\n\n\n\nAizcorbe (2014), ex 3.2. Hedonic dummy variable method\n\n\nhedonic methods\n\n\n\n\n\n\nBenchmark test in file formats\n\n\ndata engineering, file format benchmarks\n\n\n\n\n\n\nExplore Italian web scraped grocery dataset\n\n\ndataset\n\n\n\n\n\n\nNo matching items",
+    "text": "List of empirical price statistics experiments\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\nCategories\n\n\n\n\n\n\n\n\nAizcorbe (2014), ex 2.1. Bilateral fixed-base and chained indices\n\n\nbilateral index methods, fixed-base indices, chained indices\n\n\n\n\n\n\nAizcorbe (2014), ex 2.2. Bilateral indices\n\n\nbilateral index methods, product churn\n\n\n\n\n\n\nAizcorbe (2014), ex 3.2. Hedonic dummy variable method\n\n\nhedonic methods\n\n\n\n\n\n\nBenchmark test in file formats\n\n\ndata engineering, file format benchmarks\n\n\n\n\n\n\nExplore Italian web scraped grocery dataset\n\n\ndataset\n\n\n\n\n\n\nExplore Italian web scraped grocery dataset\n\n\ndataset\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Experiments catalogue"
     ]
+  },
+  {
+    "objectID": "docs/empirical_experiments/experiments/italian_web_scraped_dataset.html",
+    "href": "docs/empirical_experiments/experiments/italian_web_scraped_dataset.html",
+    "title": "Explore Italian web scraped grocery dataset",
+    "section": "",
+    "text": "Let’s explore a web scrape dataset that Daniele Sasso and a few others made availible on Zenodo - https://doi.org/10.5281/zenodo.14927602\nFirst off - what is the shape and columns in the data:\n\n# Required libraries\nimport pandas as pd\n# import matplotlib.pyplot as plt\n# import seaborn as sns\n# from datetime import datetime\n\n# Load dataset\n# df = pd.read_csv(\"../../../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv\")\n# # df.head()\n\n# df.info()\n\nIts a tabular dataset. Lets look at the web scrape data in a bit more detail:\n#| echo: true\n\nstats = {}\nstats['Number of unique products'] = df['product'].nunique()\nstats['Number of unique stores'] = df['store_id'].nunique()\nstats['Number of unique regions'] = df['region'].nunique()\nstats['Number of COICOP5 categories'] = df['COICOP5'].nunique()\nstats['Number of unique scrapes'] = df['date'].nunique()\nstats['Number of average unique products per store per date'] = round(df.groupby([\"date\", \"store_id\"])[\"product_id\"].nunique().reset_index()['product_id'].mean(),1)\nd_end = datetime.fromisoformat(df['date'].max())\nd_start = datetime.fromisoformat(df['date'].min())\nd = d_end-d_start\nstats['number of days in sample'] = d.days\npd.DataFrame.from_dict(stats, orient='index', columns=['statistic'])\n\n\n\n Back to top"
   },
   {
     "objectID": "docs/index.html",
