@@ -1,7 +1,6 @@
 name: price_stats_experiments
 
 channels:
-  - defaults
   - conda-forge
 
 dependencies:
