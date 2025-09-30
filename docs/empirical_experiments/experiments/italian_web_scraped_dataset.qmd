@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
 
-Load dataset
+# Load dataset
 df = pd.read_csv("../../../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv")
 # df.head()
 
