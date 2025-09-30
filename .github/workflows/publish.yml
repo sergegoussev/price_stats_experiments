@@ -28,7 +28,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           environment-file: environment.yml
-          environment-name: quarto-env
+          environment-name: price_stats_experiments
           cache-environment: true
 
       - name: Set up Quarto
