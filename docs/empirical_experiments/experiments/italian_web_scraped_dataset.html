@@ -315,34 +315,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Let’s explore a web scrape dataset that Daniele Sasso and a few others made availible on Zenodo - <a href="https://doi.org/10.5281/zenodo.14927602">https://doi.org/10.5281/zenodo.14927602</a></p>
 <p>First off - what is the shape and columns in the data:</p>
-<div id="34b9e9f0" class="cell" data-execution_count="1">
+<div id="c35ba6fe" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Required libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># import matplotlib.pyplot as plt</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import seaborn as sns</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># from datetime import datetime</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># # Load dataset</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df = pd.read_csv("../../../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv")</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># # df.head()</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># df.info()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># print(df.info())</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Its a tabular dataset. Lets look at the web scrape data in a bit more detail:</p>
-<pre><code>#| echo: true
-
-stats = {}
-stats['Number of unique products'] = df['product'].nunique()
-stats['Number of unique stores'] = df['store_id'].nunique()
-stats['Number of unique regions'] = df['region'].nunique()
-stats['Number of COICOP5 categories'] = df['COICOP5'].nunique()
-stats['Number of unique scrapes'] = df['date'].nunique()
-stats['Number of average unique products per store per date'] = round(df.groupby(["date", "store_id"])["product_id"].nunique().reset_index()['product_id'].mean(),1)
-d_end = datetime.fromisoformat(df['date'].max())
-d_start = datetime.fromisoformat(df['date'].min())
-d = d_end-d_start
-stats['number of days in sample'] = d.days
-pd.DataFrame.from_dict(stats, orient='index', columns=['statistic'])</code></pre>
+<div id="7317e24b" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stats = {}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># stats['Number of unique products'] = df['product'].nunique()</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># stats['Number of unique stores'] = df['store_id'].nunique()</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># stats['Number of unique regions'] = df['region'].nunique()</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># stats['Number of COICOP5 categories'] = df['COICOP5'].nunique()</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># stats['Number of unique scrapes'] = df['date'].nunique()</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># stats['Number of average unique products per store per date'] = round(df.groupby(["date", "store_id"])["product_id"].nunique().reset_index()['product_id'].mean(),1)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># d_end = datetime.fromisoformat(df['date'].max())</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># d_start = datetime.fromisoformat(df['date'].min())</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># d = d_end-d_start</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># stats['number of days in sample'] = d.days</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># pd.DataFrame.from_dict(stats, orient='index', columns=['statistic'])</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
 
