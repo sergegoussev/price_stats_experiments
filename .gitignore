@@ -34,3 +34,4 @@ build/*
 # Quarto components
 /.quarto/
 /_site/
+*.quarto_ipynb
