@@ -6,7 +6,6 @@ listing:
   id: experiments-experiments
   contents: 
     - ../../notebooks/*.ipynb
-    - experiments/*.qmd
   sort: "title"
   type: table
   categories: true

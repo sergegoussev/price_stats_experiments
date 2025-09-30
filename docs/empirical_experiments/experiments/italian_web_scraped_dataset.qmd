@@ -25,11 +25,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
 
-# Load dataset
-df = pd.read_csv("../../../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv")
-# df.head()
+# # Load dataset
+# df = pd.read_csv("../../../data/bronze/Variations_Food_Prices_Italian_Supermarkets_raw.csv")
+# # df.head()
 
-df.info()
+# print(df.info())
 ```
 
 Its a tabular dataset. Lets look at the web scrape data in a bit more detail:
@@ -37,16 +37,16 @@ Its a tabular dataset. Lets look at the web scrape data in a bit more detail:
 ```{python}
 #| echo: true
 
-stats = {}
-stats['Number of unique products'] = df['product'].nunique()
-stats['Number of unique stores'] = df['store_id'].nunique()
-stats['Number of unique regions'] = df['region'].nunique()
-stats['Number of COICOP5 categories'] = df['COICOP5'].nunique()
-stats['Number of unique scrapes'] = df['date'].nunique()
-stats['Number of average unique products per store per date'] = round(df.groupby(["date", "store_id"])["product_id"].nunique().reset_index()['product_id'].mean(),1)
-d_end = datetime.fromisoformat(df['date'].max())
-d_start = datetime.fromisoformat(df['date'].min())
-d = d_end-d_start
-stats['number of days in sample'] = d.days
-pd.DataFrame.from_dict(stats, orient='index', columns=['statistic'])
+# stats = {}
+# stats['Number of unique products'] = df['product'].nunique()
+# stats['Number of unique stores'] = df['store_id'].nunique()
+# stats['Number of unique regions'] = df['region'].nunique()
+# stats['Number of COICOP5 categories'] = df['COICOP5'].nunique()
+# stats['Number of unique scrapes'] = df['date'].nunique()
+# stats['Number of average unique products per store per date'] = round(df.groupby(["date", "store_id"])["product_id"].nunique().reset_index()['product_id'].mean(),1)
+# d_end = datetime.fromisoformat(df['date'].max())
+# d_start = datetime.fromisoformat(df['date'].min())
+# d = d_end-d_start
+# stats['number of days in sample'] = d.days
+# pd.DataFrame.from_dict(stats, orient='index', columns=['statistic'])
 ```
