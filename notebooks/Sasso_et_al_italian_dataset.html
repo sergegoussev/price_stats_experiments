@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,8 +73,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-fb7c9abc17d36d8f171624f5bcedd762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -475,7 +475,7 @@ memory usage: 246.2+ MB</code></pre>
 </section>
 <section id="basic-analysis-average-price-trend-over-time-by-coicop4" class="level2">
 <h2 class="anchored" data-anchor-id="basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</h2>
-<div id="7cfb2793" class="cell">
+<div id="7cfb2793" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>price_trend <span class="op">=</span> df.groupby([<span class="st">"date"</span>, <span class="st">"COICOP4"</span>])[<span class="st">"price"</span>].mean().reset_index()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
@@ -498,30 +498,26 @@ memory usage: 246.2+ MB</code></pre>
 <section id="other-informative-information-about-the-dataset" class="level1">
 <h1>Other informative information about the dataset</h1>
 <p>First, check out the number of unique products</p>
-<div id="c748f1a5" class="cell" data-execution_count="26">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(df[<span class="st">'product'</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
-<pre><code>2361</code></pre>
-</div>
-</div>
-<p>Number of stores</p>
-<div id="3ea7257c" class="cell" data-execution_count="29">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(df[<span class="st">'store_id'</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c748f1a5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> {}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of unique products'</span>] <span class="op">=</span> <span class="bu">len</span>(df[<span class="st">'product'</span>].value_counts())</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of unique stores'</span>] <span class="op">=</span> <span class="bu">len</span>(df[<span class="st">'store_id'</span>].value_counts())</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of unique regions'</span>] <span class="op">=</span> <span class="bu">len</span>(df[<span class="st">'region'</span>].value_counts())</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of COICOP5 categories'</span>] <span class="op">=</span> <span class="bu">len</span>(df[<span class="st">'COICOP5'</span>].value_counts())</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of unique scrapes'</span>] <span class="op">=</span> <span class="bu">len</span>(df[<span class="st">'date'</span>].value_counts())</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
-<pre><code>20</code></pre>
+<pre><code>{'Number of unique products': 2361,
+ 'Number of unique stores': 20,
+ 'Number of unique scrapes': 841,
+ 'Number of unique regions': 7,
+ 'Number of COICOP5 categories': 24}</code></pre>
 </div>
 </div>
-<p>Average number of products scraped per store per day</p>
-<div id="d2c05b67" class="cell" data-execution_count="35">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">"date"</span>, <span class="st">"store_id"</span>])[<span class="st">"product_id"</span>].count().reset_index()[<span class="st">'product_id'</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="35">
-<pre><code>239.81513854203828</code></pre>
-</div>
-</div>
-<p>Get some info on how many scrapes there were and how many products were captured on average per scrape</p>
-<div id="1d17ff1a" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">"date"</span>, <span class="st">"store_id"</span>])[<span class="st">"product_id"</span>].count().reset_index()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<p>Example summary of scrape statistics - number of unique products scraped by store per region</p>
+<div id="32b01fda" class="cell" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span><span class="st">'date'</span>, columns<span class="op">=</span>[<span class="st">'region'</span>,<span class="st">'store_id'</span>], aggfunc<span class="op">=</span><span class="st">'count'</span>).head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
 <div>
 
 
@@ -529,86 +525,347 @@ memory usage: 246.2+ MB</code></pre>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">date</th>
+<th colspan="10" data-quarto-table-cell-role="th" data-halign="left">COICOP4</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th colspan="10" data-quarto-table-cell-role="th" data-halign="left">product_id</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">region</th>
+<th colspan="4" data-quarto-table-cell-role="th" data-halign="left">calabria</th>
+<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">campania</th>
+<th colspan="2" data-quarto-table-cell-role="th" data-halign="left">emilia-romagna</th>
+<th data-quarto-table-cell-role="th">lazio</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">lazio</th>
+<th colspan="5" data-quarto-table-cell-role="th" data-halign="left">lombardia</th>
+<th data-quarto-table-cell-role="th">sicilia</th>
+<th data-quarto-table-cell-role="th">umbria</th>
+</tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th">store_id</th>
-<th data-quarto-table-cell-role="th">product_id</th>
+<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">4</th>
+<th data-quarto-table-cell-role="th">5</th>
+<th data-quarto-table-cell-role="th">11</th>
+<th data-quarto-table-cell-role="th">12</th>
+<th data-quarto-table-cell-role="th">18</th>
+<th data-quarto-table-cell-role="th">20</th>
+<th data-quarto-table-cell-role="th">7</th>
+<th data-quarto-table-cell-role="th">15</th>
+<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">8</th>
+<th data-quarto-table-cell-role="th">19</th>
+<th data-quarto-table-cell-role="th">21</th>
+<th data-quarto-table-cell-role="th">6</th>
+<th data-quarto-table-cell-role="th">9</th>
+<th data-quarto-table-cell-role="th">10</th>
+<th data-quarto-table-cell-role="th">14</th>
+<th data-quarto-table-cell-role="th">16</th>
+<th data-quarto-table-cell-role="th">13</th>
+<th data-quarto-table-cell-role="th">17</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>2020-12-03</td>
-<td>2</td>
-<td>244</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>2020-12-03</td>
-<td>3</td>
-<td>207</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>2020-12-03</td>
-<td>4</td>
-<td>170</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>2020-12-03</td>
-<td>5</td>
-<td>152</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>2020-12-03</td>
-<td>6</td>
-<td>366</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">2020-12-03</th>
+<td>244.0</td>
+<td>170.0</td>
+<td>152.0</td>
+<td>123.0</td>
+<td>210.0</td>
+<td>108.0</td>
+<td>309.0</td>
+<td>275.0</td>
+<td>378.0</td>
+<td>207.0</td>
 <td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">16813</th>
-<td>2023-04-14</td>
-<td>17</td>
-<td>261</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">16814</th>
-<td>2023-04-14</td>
-<td>18</td>
-<td>50</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">16815</th>
-<td>2023-04-14</td>
-<td>19</td>
-<td>179</td>
+<td>237.0</td>
+<td>128.0</td>
+<td>184.0</td>
+<td>366.0</td>
+<td>251.0</td>
+<td>238.0</td>
+<td>74.0</td>
+<td>305.0</td>
+<td>196.0</td>
+<td>255.0</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">16816</th>
-<td>2023-04-14</td>
-<td>20</td>
-<td>197</td>
+<th data-quarto-table-cell-role="th">2020-12-04</th>
+<td>247.0</td>
+<td>174.0</td>
+<td>148.0</td>
+<td>123.0</td>
+<td>207.0</td>
+<td>108.0</td>
+<td>308.0</td>
+<td>348.0</td>
+<td>488.0</td>
+<td>207.0</td>
+<td>...</td>
+<td>235.0</td>
+<td>130.0</td>
+<td>181.0</td>
+<td>450.0</td>
+<td>315.0</td>
+<td>331.0</td>
+<td>112.0</td>
+<td>372.0</td>
+<td>195.0</td>
+<td>253.0</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">16817</th>
-<td>2023-04-14</td>
-<td>21</td>
-<td>117</td>
+<th data-quarto-table-cell-role="th">2020-12-05</th>
+<td>243.0</td>
+<td>180.0</td>
+<td>147.0</td>
+<td>122.0</td>
+<td>207.0</td>
+<td>108.0</td>
+<td>299.0</td>
+<td>340.0</td>
+<td>495.0</td>
+<td>207.0</td>
+<td>...</td>
+<td>233.0</td>
+<td>130.0</td>
+<td>179.0</td>
+<td>448.0</td>
+<td>309.0</td>
+<td>323.0</td>
+<td>113.0</td>
+<td>370.0</td>
+<td>196.0</td>
+<td>251.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2020-12-06</th>
+<td>243.0</td>
+<td>180.0</td>
+<td>147.0</td>
+<td>122.0</td>
+<td>208.0</td>
+<td>108.0</td>
+<td>304.0</td>
+<td>347.0</td>
+<td>502.0</td>
+<td>207.0</td>
+<td>...</td>
+<td>233.0</td>
+<td>130.0</td>
+<td>179.0</td>
+<td>464.0</td>
+<td>320.0</td>
+<td>330.0</td>
+<td>130.0</td>
+<td>374.0</td>
+<td>196.0</td>
+<td>251.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2020-12-07</th>
+<td>242.0</td>
+<td>171.0</td>
+<td>148.0</td>
+<td>127.0</td>
+<td>208.0</td>
+<td>105.0</td>
+<td>304.0</td>
+<td>344.0</td>
+<td>512.0</td>
+<td>207.0</td>
+<td>...</td>
+<td>232.0</td>
+<td>133.0</td>
+<td>177.0</td>
+<td>470.0</td>
+<td>331.0</td>
+<td>339.0</td>
+<td>121.0</td>
+<td>381.0</td>
+<td>185.0</td>
+<td>253.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2020-12-08</th>
+<td>248.0</td>
+<td>178.0</td>
+<td>148.0</td>
+<td>127.0</td>
+<td>213.0</td>
+<td>105.0</td>
+<td>306.0</td>
+<td>341.0</td>
+<td>503.0</td>
+<td>207.0</td>
+<td>...</td>
+<td>232.0</td>
+<td>135.0</td>
+<td>178.0</td>
+<td>478.0</td>
+<td>333.0</td>
+<td>336.0</td>
+<td>126.0</td>
+<td>393.0</td>
+<td>191.0</td>
+<td>257.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2020-12-09</th>
+<td>251.0</td>
+<td>182.0</td>
+<td>147.0</td>
+<td>125.0</td>
+<td>211.0</td>
+<td>105.0</td>
+<td>310.0</td>
+<td>339.0</td>
+<td>510.0</td>
+<td>207.0</td>
+<td>...</td>
+<td>236.0</td>
+<td>135.0</td>
+<td>182.0</td>
+<td>444.0</td>
+<td>307.0</td>
+<td>306.0</td>
+<td>110.0</td>
+<td>369.0</td>
+<td>187.0</td>
+<td>257.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2020-12-10</th>
+<td>252.0</td>
+<td>181.0</td>
+<td>149.0</td>
+<td>127.0</td>
+<td>215.0</td>
+<td>106.0</td>
+<td>315.0</td>
+<td>335.0</td>
+<td>501.0</td>
+<td>207.0</td>
+<td>...</td>
+<td>235.0</td>
+<td>134.0</td>
+<td>184.0</td>
+<td>450.0</td>
+<td>310.0</td>
+<td>315.0</td>
+<td>109.0</td>
+<td>370.0</td>
+<td>187.0</td>
+<td>257.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2020-12-11</th>
+<td>253.0</td>
+<td>181.0</td>
+<td>151.0</td>
+<td>126.0</td>
+<td>215.0</td>
+<td>106.0</td>
+<td>313.0</td>
+<td>330.0</td>
+<td>502.0</td>
+<td>207.0</td>
+<td>...</td>
+<td>238.0</td>
+<td>135.0</td>
+<td>182.0</td>
+<td>480.0</td>
+<td>336.0</td>
+<td>327.0</td>
+<td>117.0</td>
+<td>350.0</td>
+<td>185.0</td>
+<td>257.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2020-12-12</th>
+<td>253.0</td>
+<td>182.0</td>
+<td>152.0</td>
+<td>125.0</td>
+<td>220.0</td>
+<td>106.0</td>
+<td>309.0</td>
+<td>327.0</td>
+<td>502.0</td>
+<td>207.0</td>
+<td>...</td>
+<td>238.0</td>
+<td>136.0</td>
+<td>180.0</td>
+<td>477.0</td>
+<td>332.0</td>
+<td>325.0</td>
+<td>116.0</td>
+<td>349.0</td>
+<td>190.0</td>
+<td>259.0</td>
 </tr>
 </tbody>
 </table>
 
-<p>16818 rows × 3 columns</p>
+<p>10 rows × 100 columns</p>
 </div>
 </div>
 </div>
-<div id="e7499ce3" class="cell" data-execution_count="4">
+<p>Average number of products scraped per store per day</p>
+<div id="d2c05b67" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">"date"</span>, <span class="st">"store_id"</span>])[<span class="st">"product_id"</span>].count().reset_index()[<span class="st">'product_id'</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>239.81513854203828</code></pre>
+</div>
+</div>
+<p>Get some info on how many scrapes there were and how many products were captured on average per scrape</p>
+<div id="5ced87ea" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">"date"</span>])[<span class="st">'product_id'</span>].count()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>date
+2020-12-03    4410
+2020-12-04    4932
+2020-12-05    4900
+2020-12-06    4975
+2020-12-07    4990
+              ... 
+2023-04-10    3219
+2023-04-11    3172
+2023-04-12    3029
+2023-04-13    2984
+2023-04-14    3095
+Name: product_id, Length: 841, dtype: int64</code></pre>
+</div>
+</div>
+<p>Evaluate average monthly of web offers captured per month</p>
+<div id="e7499ce3" class="cell" data-execution_count="40">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(df2[<span class="st">'date'</span>])</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df2.set_index(<span class="st">'date'</span>)</span>
@@ -616,7 +873,7 @@ memory usage: 246.2+ MB</code></pre>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>df_scrapes <span class="op">=</span> df2.resample(<span class="st">'ME'</span>)[<span class="st">'product_id'</span>].count().to_frame()</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>df_scrapes.head()</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># df.info()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="40">
 <div>
 
 
@@ -658,35 +915,28 @@ memory usage: 246.2+ MB</code></pre>
 </div>
 </div>
 </div>
-<div id="037645c1" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(df_scrapes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>29</code></pre>
-</div>
-</div>
 <div id="0c7fb3be" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_scrapes[<span class="st">'product_id'</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_scrapes[<span class="st">'product_id'</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>139076.24137931035</code></pre>
 </div>
 </div>
-<div id="c17dc5e9" class="cell" data-execution_count="100">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_scrapes.plot(</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">'bar'</span>,</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>),</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Number of unique products scraped per scrape time"</span>,</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"number of products scraped"</span>)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c17dc5e9" class="cell" data-execution_count="42">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_scrapes.plot(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">'bar'</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Number of web offers scraped per month"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"number of web offers"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>So there were 29 distinct web scrapes of the stores in the sample, with an average number of products captured each time is 139K</p>
 
 
 </section>
