@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write
+      id-token: write
 
     defaults:
       run:
@@ -34,7 +36,7 @@ jobs:
       # Register the Jupyter kernel with
       - name: Register Jupyter kernel
         run: |
-          python -m ipykernel install --name price_stats_experiments --display-name "Price Stats Experiments"
+          python -m ipykernel install --sys-prefix --name price_stats_experiments --display-name "Price Stats Experiments"
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
