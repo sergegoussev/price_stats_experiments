@@ -6,6 +6,7 @@ listing:
   id: experiments-experiments
   contents: 
     - ../../notebooks/*.ipynb
+    - '!../../notebooks/*_draft.ipynb'
   sort: "title"
   type: table
   categories: true

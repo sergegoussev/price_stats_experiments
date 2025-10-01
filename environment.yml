@@ -16,6 +16,7 @@ dependencies:
   - openpyxl
   - matplotlib
   - plotly
+  - wordcloud
   - git
   - pip
   - pip:
