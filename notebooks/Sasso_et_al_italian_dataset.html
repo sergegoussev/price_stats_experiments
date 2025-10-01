@@ -251,10 +251,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general-overview-of-the-dataset" id="toc-general-overview-of-the-dataset" class="nav-link active" data-scroll-target="#general-overview-of-the-dataset">General overview of the dataset</a></li>
+  <li><a href="#dataset-structure" id="toc-dataset-structure" class="nav-link active" data-scroll-target="#dataset-structure">Dataset structure</a></li>
+  <li><a href="#general-overview-of-the-dataset" id="toc-general-overview-of-the-dataset" class="nav-link" data-scroll-target="#general-overview-of-the-dataset">General overview of the dataset</a></li>
+  <li><a href="#detailed-info-about-the-dataset" id="toc-detailed-info-about-the-dataset" class="nav-link" data-scroll-target="#detailed-info-about-the-dataset">Detailed info about the dataset</a></li>
+  <li><a href="#trends-about-what-was-captured" id="toc-trends-about-what-was-captured" class="nav-link" data-scroll-target="#trends-about-what-was-captured">Trends about what was captured</a>
+  <ul class="collapse">
+  <li><a href="#by-category" id="toc-by-category" class="nav-link" data-scroll-target="#by-category">By category</a></li>
+  <li><a href="#over-time" id="toc-over-time" class="nav-link" data-scroll-target="#over-time">Over time</a></li>
+  </ul></li>
+  <li><a href="#price-and-product-analysis" id="toc-price-and-product-analysis" class="nav-link" data-scroll-target="#price-and-product-analysis">Price and Product analysis</a>
+  <ul class="collapse">
   <li><a href="#geographic-distribution-of-unique-products-by-region" id="toc-geographic-distribution-of-unique-products-by-region" class="nav-link" data-scroll-target="#geographic-distribution-of-unique-products-by-region">Geographic distribution of unique products by region</a></li>
   <li><a href="#basic-analysis-average-price-trend-over-time-by-coicop4" id="toc-basic-analysis-average-price-trend-over-time-by-coicop4" class="nav-link" data-scroll-target="#basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</a></li>
-  <li><a href="#overall-statistics-about-the-dataset" id="toc-overall-statistics-about-the-dataset" class="nav-link" data-scroll-target="#overall-statistics-about-the-dataset">Overall statistics about the dataset</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/main/notebooks/Sasso_et_al_italian_dataset.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -290,11 +299,26 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Daniele Sasso and a few others made their dataset availible on Zenodo - <a href="https://doi.org/10.5281/zenodo.14927602">https://doi.org/10.5281/zenodo.14927602</a> - daily webscraping data from different shops of an Italian supermarket chain.</p>
-<p>Manually manually downloaded the dataset to <code>/data/bronze/</code> for a quick exploration</p>
+<p>Daniele Sasso and a few others made their dataset availible on Zenodo - <a href="https://doi.org/10.5281/zenodo.14927602">https://doi.org/10.5281/zenodo.14927602</a> - daily webscraped data from different shops of an Italian supermarket chain. This blog summarizes the dataset and explores its various facets. Detailed overview of the data is available on the <a href="https://un-task-team-for-scanner-data.github.io/price-stats-data-catalogue/italian-food-supermakets.html">Price Stats Catalogue record of this dataset</a> and some explorations below are summarized there.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reproduce this blog
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This blog is a jupyter article under the hood - have a look at the source. Save a copy of the data to <code>/data/bronze/</code> and re-render.</p>
+</div>
+</div>
+<section id="dataset-structure" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-structure">Dataset structure</h2>
+</section>
 <section id="general-overview-of-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="general-overview-of-the-dataset">General overview of the dataset</h2>
-<p>BN</p>
+<p>First off - lets look at the data itself, its columns, and some statistics about the web scraping itself.</p>
 <div id="3f634895" class="cell">
 <div class="cell-output cell-output-display" data-execution_count="194">
 <div>
@@ -396,43 +420,11 @@ memory usage: 246.2+ MB</code></pre>
 </div>
 </div>
 </section>
-<section id="geographic-distribution-of-unique-products-by-region" class="level2">
-<h2 class="anchored" data-anchor-id="geographic-distribution-of-unique-products-by-region">Geographic distribution of unique products by region</h2>
-<div id="742f5f96" class="cell">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="70585897" class="cell">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="basic-analysis-average-price-trend-over-time-by-coicop4" class="level2">
-<h2 class="anchored" data-anchor-id="basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</h2>
-<div id="7cfb2793" class="cell">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="overall-statistics-about-the-dataset" class="level1">
-<h1>Overall statistics about the dataset</h1>
-<p>Lets look at some key statistics about the web scrape dataset</p>
-<div id="c748f1a5" class="cell">
+<section id="detailed-info-about-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="detailed-info-about-the-dataset">Detailed info about the dataset</h2>
+<p>As this is web scrape data for several years - its saved all in one analytical table.</p>
+<p>Let’s look at it in a bit more detail:</p>
+<div id="c748f1a5" class="cell" data-execution_count="217">
 <div class="cell-output cell-output-display" data-execution_count="217">
 <div>
 
@@ -479,8 +471,8 @@ memory usage: 246.2+ MB</code></pre>
 </div>
 </div>
 </div>
-<p>There seem to be a few days when no scraping happened - i.e.&nbsp;21 days that were missed. Lets find those days</p>
-<div id="5a5cda65" class="cell">
+<p>It seems that there are 863 days but 841 scrapes - that means that there were no scrapes during 22 days:</p>
+<div id="5a5cda65" class="cell" data-execution_count="213">
 <div class="cell-output cell-output-display" data-execution_count="213">
 <pre><code>DatetimeIndex(['2021-02-13', '2021-02-14', '2021-03-23', '2021-03-28',
                '2021-06-24', '2021-08-22', '2021-08-23', '2021-08-24',
@@ -491,28 +483,9 @@ memory usage: 246.2+ MB</code></pre>
               dtype='datetime64[ns]', freq=None)</code></pre>
 </div>
 </div>
-<p>Now we can consider some web scraping statistics, such as the number of unique products per category and the number of web offers per category</p>
-<div id="aaf24b72" class="cell">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="c7245742" class="cell">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>An example of the dataset (as a pivot of date and region/store) is shown with each cell showing the count of products per store</p>
-<div id="32b01fda" class="cell">
-<div class="cell-output cell-output-display" data-execution_count="29">
+<p>If we pivot the raw data and show the number of prices captured per store per region - it looks like this:</p>
+<div id="32b01fda" class="cell" data-execution_count="222">
+<div class="cell-output cell-output-display" data-execution_count="222">
 <div>
 
 
@@ -713,8 +686,75 @@ memory usage: 246.2+ MB</code></pre>
 </div>
 </div>
 </div>
-<p>The amount of captured web offers a month is also shown</p>
-<div id="e7499ce3" class="cell">
+<p>Lets also look at the number of stores per region (i.e.&nbsp;the above but visually)</p>
+<div id="4ef45f68" class="cell" data-execution_count="225">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="trends-about-what-was-captured" class="level2">
+<h2 class="anchored" data-anchor-id="trends-about-what-was-captured">Trends about what was captured</h2>
+<section id="by-category" class="level3">
+<h3 class="anchored" data-anchor-id="by-category">By category</h3>
+<p>Lets look at the number of unique products and the number of web offers captured by COICOP5 category</p>
+<div id="39e8713c" class="cell" data-execution_count="223">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="9843de20" class="cell" data-execution_count="224">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="over-time" class="level3">
+<h3 class="anchored" data-anchor-id="over-time">Over time</h3>
+<p>We can also consider how much data was captured across time</p>
+<div id="9d81a053" class="cell" data-execution_count="226">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It seems that the amount of web offers started to decline. This should probably be investigated (if its region or store coverage) to see if longitudinal time series should exclude any of this data</p>
+</section>
+</section>
+<section id="price-and-product-analysis" class="level1">
+<h1>Price and Product analysis</h1>
+<section id="geographic-distribution-of-unique-products-by-region" class="level2">
+<h2 class="anchored" data-anchor-id="geographic-distribution-of-unique-products-by-region">Geographic distribution of unique products by region</h2>
+<p>There is some example code in <a href="https://zenodo.org/records/14927602">the zenodo page for the dataset</a> that shows well some of the price/product info captured</p>
+<div id="742f5f96" class="cell">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Sasso_et_al_italian_dataset_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="basic-analysis-average-price-trend-over-time-by-coicop4" class="level2">
+<h2 class="anchored" data-anchor-id="basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</h2>
+<p>We can also look at average prices by COICOP4 over time</p>
+<div id="7cfb2793" class="cell">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -723,13 +763,9 @@ memory usage: 246.2+ MB</code></pre>
 </div>
 </div>
 </div>
-<div id="4a93856f" class="cell" data-execution_count="210">
-<div class="cell-output cell-output-stdout">
-<pre><code>Oranges</code></pre>
-</div>
-</div>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
