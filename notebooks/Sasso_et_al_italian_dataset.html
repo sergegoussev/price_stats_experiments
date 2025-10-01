@@ -21,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -286,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general-eda" id="toc-general-eda" class="nav-link active" data-scroll-target="#general-eda">General EDA</a></li>
+  <li><a href="#general-overview-of-the-dataset" id="toc-general-overview-of-the-dataset" class="nav-link active" data-scroll-target="#general-overview-of-the-dataset">General overview of the dataset</a></li>
   <li><a href="#geographic-distribution-of-unique-products-by-region" id="toc-geographic-distribution-of-unique-products-by-region" class="nav-link" data-scroll-target="#geographic-distribution-of-unique-products-by-region">Geographic distribution of unique products by region</a></li>
   <li><a href="#basic-analysis-average-price-trend-over-time-by-coicop4" id="toc-basic-analysis-average-price-trend-over-time-by-coicop4" class="nav-link" data-scroll-target="#basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</a></li>
   <li><a href="#overall-statistics-about-the-dataset" id="toc-overall-statistics-about-the-dataset" class="nav-link" data-scroll-target="#overall-statistics-about-the-dataset">Overall statistics about the dataset</a></li>
@@ -327,9 +292,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Daniele Sasso and a few others made their dataset availible on Zenodo - <a href="https://doi.org/10.5281/zenodo.14927602">https://doi.org/10.5281/zenodo.14927602</a> - daily webscraping data from different shops of an Italian supermarket chain.</p>
 <p>Manually manually downloaded the dataset to <code>/data/bronze/</code> for a quick exploration</p>
-<section id="general-eda" class="level2">
-<h2 class="anchored" data-anchor-id="general-eda">General EDA</h2>
-<div id="3f634895" class="cell" data-execution_count="194">
+<section id="general-overview-of-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="general-overview-of-the-dataset">General overview of the dataset</h2>
+<p>BN</p>
+<div id="3f634895" class="cell">
 <div class="cell-output cell-output-display" data-execution_count="194">
 <div>
 
@@ -410,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="c8d20fa5" class="cell" data-execution_count="148">
+<div id="c8d20fa5" class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 4033211 entries, 0 to 4033210
@@ -433,25 +399,6 @@ memory usage: 246.2+ MB</code></pre>
 <section id="geographic-distribution-of-unique-products-by-region" class="level2">
 <h2 class="anchored" data-anchor-id="geographic-distribution-of-unique-products-by-region">Geographic distribution of unique products by region</h2>
 <div id="742f5f96" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert date column</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>])  <span class="co"># Format: YYYY-MM-DD</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define category colors</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>category_colors <span class="op">=</span> {<span class="st">"Fruit"</span>: <span class="st">"blue"</span>, <span class="st">"Vegetable"</span>: <span class="st">"green"</span>, <span class="st">"Meat"</span>: <span class="st">"red"</span>}</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>geo <span class="op">=</span> df.groupby([<span class="st">"region"</span>, <span class="st">"COICOP4"</span>])[<span class="st">"product_id"</span>].nunique().reset_index()</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>pivot_geo <span class="op">=</span> geo.pivot(index<span class="op">=</span><span class="st">"region"</span>, columns<span class="op">=</span><span class="st">"COICOP4"</span>, values<span class="op">=</span><span class="st">"product_id"</span>).fillna(<span class="dv">0</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>pivot_geo[<span class="st">"Total"</span>] <span class="op">=</span> pivot_geo.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>pivot_geo <span class="op">=</span> pivot_geo.sort_values(<span class="st">"Total"</span>, ascending<span class="op">=</span><span class="va">False</span>).drop(columns<span class="op">=</span><span class="st">"Total"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>pivot_geo <span class="op">=</span> pivot_geo[[<span class="st">"Fruit"</span>, <span class="st">"Meat"</span>, <span class="st">"Vegetable"</span>]]</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>pivot_geo.plot(kind<span class="op">=</span><span class="st">"bar"</span>, stacked<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>), color<span class="op">=</span>[<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>])</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Unique Products"</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Geographic Distribution by Region and Category (Sorted)"</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Category"</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -460,14 +407,7 @@ memory usage: 246.2+ MB</code></pre>
 </div>
 </div>
 </div>
-<div id="70585897" class="cell" data-execution_count="150">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_number_of_stores_per_region <span class="op">=</span> df.groupby([<span class="st">"region"</span>])[<span class="st">"store_id"</span>].nunique().to_frame()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_number_of_stores_per_region.plot(kind<span class="op">=</span><span class="st">'bar'</span>, color<span class="op">=</span><span class="st">'green'</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Number of stores per region'</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'region'</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of stores'</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.xticks(rotation=1)  # Keep x-axis labels horizontal</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="70585897" class="cell">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -479,17 +419,7 @@ memory usage: 246.2+ MB</code></pre>
 </section>
 <section id="basic-analysis-average-price-trend-over-time-by-coicop4" class="level2">
 <h2 class="anchored" data-anchor-id="basic-analysis-average-price-trend-over-time-by-coicop4">Basic analysis: average price trend over time (by COICOP4)</h2>
-<div id="7cfb2793" class="cell" data-execution_count="151">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>price_trend <span class="op">=</span> df.groupby([<span class="st">"date"</span>, <span class="st">"COICOP4"</span>])[<span class="st">"price"</span>].mean().reset_index()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>price_trend, x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"price"</span>, hue<span class="op">=</span><span class="st">"COICOP4"</span>, palette<span class="op">=</span>category_colors)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Average Price Over Time by COICOP4 Category"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Date"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average Price (€)"</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Category"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7cfb2793" class="cell">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -502,19 +432,7 @@ memory usage: 246.2+ MB</code></pre>
 <section id="overall-statistics-about-the-dataset" class="level1">
 <h1>Overall statistics about the dataset</h1>
 <p>Lets look at some key statistics about the web scrape dataset</p>
-<div id="c748f1a5" class="cell" data-execution_count="217">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> {}</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of unique products'</span>] <span class="op">=</span> df[<span class="st">'product'</span>].nunique()</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of unique stores'</span>] <span class="op">=</span> df[<span class="st">'store_id'</span>].nunique()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of unique regions'</span>] <span class="op">=</span> df[<span class="st">'region'</span>].nunique()</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of COICOP5 categories'</span>] <span class="op">=</span> df[<span class="st">'COICOP5'</span>].nunique()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of unique scrapes'</span>] <span class="op">=</span> df[<span class="st">'date'</span>].nunique()</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'Number of average unique products per store per date'</span>] <span class="op">=</span> <span class="bu">round</span>(df.groupby([<span class="st">"date"</span>, <span class="st">"store_id"</span>])[<span class="st">"product_id"</span>].nunique().reset_index()[<span class="st">'product_id'</span>].mean(),<span class="dv">1</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>d_end <span class="op">=</span> datetime.fromisoformat(df[<span class="st">'date'</span>].<span class="bu">max</span>())</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>d_start <span class="op">=</span> datetime.fromisoformat(df[<span class="st">'date'</span>].<span class="bu">min</span>())</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> d_end<span class="op">-</span>d_start</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>stats[<span class="st">'number of days in sample'</span>] <span class="op">=</span> d.days <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>pd.DataFrame.from_dict(stats, orient<span class="op">=</span><span class="st">'index'</span>, columns<span class="op">=</span>[<span class="st">'statistic'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c748f1a5" class="cell">
 <div class="cell-output cell-output-display" data-execution_count="217">
 <div>
 
@@ -562,7 +480,7 @@ memory usage: 246.2+ MB</code></pre>
 </div>
 </div>
 <p>There seem to be a few days when no scraping happened - i.e.&nbsp;21 days that were missed. Lets find those days</p>
-<div id="5a5cda65" class="cell" data-execution_count="213">
+<div id="5a5cda65" class="cell">
 <div class="cell-output cell-output-display" data-execution_count="213">
 <pre><code>DatetimeIndex(['2021-02-13', '2021-02-14', '2021-03-23', '2021-03-28',
                '2021-06-24', '2021-08-22', '2021-08-23', '2021-08-24',
@@ -574,31 +492,7 @@ memory usage: 246.2+ MB</code></pre>
 </div>
 </div>
 <p>Now we can consider some web scraping statistics, such as the number of unique products per category and the number of web offers per category</p>
-<div id="aaf24b72" class="cell" data-execution_count="156">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_coicop_categories <span class="op">=</span> df.groupby([<span class="st">"COICOP5"</span>])[<span class="st">"product_id"</span>].nunique()</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> df_coicop_categories.mean()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>fix, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df_coicop_categories.plot(</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>),</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Number of unique products per COICOP5 category"</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'darkblue'</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>ax.axhline(mean, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>ax.text(</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="dv">19</span>,</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>mean,</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="ss">f'Average: </span><span class="sc">{</span><span class="bu">round</span>(mean,<span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'red'</span>,</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="aaf24b72" class="cell">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
