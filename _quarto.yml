@@ -9,6 +9,7 @@ website:
   repo-url: https://github.com/sergegoussev/price_stats_experiments
   issue-url: https://github.com/sergegoussev/price_stats_experiments/issues/new
   repo-actions: [source, issue]
+  repo-branch: master
   bread-crumbs: true
   page-navigation: true
   back-to-top-navigation: true
