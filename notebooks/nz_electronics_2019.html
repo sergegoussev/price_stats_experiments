@@ -287,9 +287,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#dataset-structure" id="toc-dataset-structure" class="nav-link active" data-scroll-target="#dataset-structure">Dataset structure</a></li>
-  <li><a href="#nuances-in-the-data" id="toc-nuances-in-the-data" class="nav-link" data-scroll-target="#nuances-in-the-data">Nuances in the data</a>
+  <li><a href="#important-nuances-in-the-data" id="toc-important-nuances-in-the-data" class="nav-link" data-scroll-target="#important-nuances-in-the-data">Important nuances in the data</a>
   <ul class="collapse">
   <li><a href="#every-period-has-some-duplicated-products" id="toc-every-period-has-some-duplicated-products" class="nav-link" data-scroll-target="#every-period-has-some-duplicated-products">Every period has some duplicated products</a></li>
+  </ul></li>
+  <li><a href="#product-and-price-trends" id="toc-product-and-price-trends" class="nav-link" data-scroll-target="#product-and-price-trends">Product and price trends</a>
+  <ul class="collapse">
+  <li><a href="#average-prices-across-time" id="toc-average-prices-across-time" class="nav-link" data-scroll-target="#average-prices-across-time">Average prices across time</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/master/notebooks/nz_electronics_2019.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -344,8 +348,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataset-structure" class="level2">
 <h2 class="anchored" data-anchor-id="dataset-structure">Dataset structure</h2>
 <p>The data is tabular and it shows products sold per period with a large number of characteristics already pre-cleaned</p>
-<div id="58894df1" class="cell" data-execution_count="35">
-<div class="cell-output cell-output-display" data-execution_count="35">
+<div id="58894df1" class="cell" data-execution_count="105">
+<div class="cell-output cell-output-display" data-execution_count="105">
 <div>
 
 
@@ -555,9 +559,9 @@ memory usage: 645.7+ KB</code></pre>
 </div>
 </div>
 </section>
-<section id="nuances-in-the-data" class="level1">
-<h1>Nuances in the data</h1>
-<p>While it may not be explicit issues, there are some nuances to work through if you use it</p>
+<section id="important-nuances-in-the-data" class="level1">
+<h1>Important nuances in the data</h1>
+<p>While it may not be explicit issues, there are some nuances to work through if you use it. Before using the data for price statistics, its important to consider these nuances</p>
 <section id="every-period-has-some-duplicated-products" class="level2">
 <h2 class="anchored" data-anchor-id="every-period-has-some-duplicated-products">Every period has some duplicated products</h2>
 <p>Every period has products that seem to be duplicated - i.e.&nbsp;products are identical in all but sale information. We can see this by comparing the number of unique products (if we use the <code>prodid_num</code> column) and comparing it with just a count of the same products (without de-duplication).</p>
@@ -595,12 +599,12 @@ memory usage: 645.7+ KB</code></pre>
 </div>
 </div>
 <p>Looking at a few examples - it is clear that all product features are identical <em>except</em> the <code>quanity</code> and the <code>value</code> counts</p>
-<div id="4b433bf5" class="cell">
+<div id="4b433bf5" class="cell" data-execution_count="96">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_first_period.groupby([<span class="st">'prodid_num'</span>]).<span class="bu">filter</span>(<span class="kw">lambda</span> x: x[<span class="st">'char11'</span>].count() <span class="op">&gt;</span> <span class="dv">1</span>).head(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="64">
+<div class="cell-output cell-output-display" data-execution_count="96">
 <div>
 
 
@@ -668,6 +672,7 @@ memory usage: 645.7+ KB</code></pre>
 </div>
 </div>
 </div>
+<p>Lets look at another example</p>
 <div id="8006def2" class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -741,6 +746,7 @@ memory usage: 645.7+ KB</code></pre>
 </div>
 </div>
 </div>
+<p>And another</p>
 <div id="b6e93fe4" class="cell" data-execution_count="86">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -811,6 +817,55 @@ memory usage: 645.7+ KB</code></pre>
 </tbody>
 </table>
 
+</div>
+</div>
+</div>
+<p>While its unclear why this is the case – to use the data it may be useful to do a groupby and sum <code>quantity</code> and <code>value</code> columns when calculating a unit price</p>
+</section>
+</section>
+<section id="product-and-price-trends" class="level1">
+<h1>Product and price trends</h1>
+<section id="average-prices-across-time" class="level2">
+<h2 class="anchored" data-anchor-id="average-prices-across-time">Average prices across time</h2>
+<p>Lets first consider an average price of each category</p>
+<div id="6108d27d" class="cell" data-execution_count="121">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>agg_dict <span class="op">=</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char11'</span>: <span class="st">'first'</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char1'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char2'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char3'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char4'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char5'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char6'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char7'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char8'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char9'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'char10'</span>:<span class="st">'first'</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'quantity'</span>:<span class="st">'sum'</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'value'</span>:<span class="st">'sum'</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>df_aggregated <span class="op">=</span> df.groupby([<span class="st">'month_num'</span>,<span class="st">'prodid_num'</span>]).agg(agg_dict)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>df_aggregated[<span class="st">'unit_price'</span>] <span class="op">=</span> df_aggregated[<span class="st">'value'</span>]<span class="op">/</span>df_aggregated[<span class="st">'quantity'</span>]</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>price_trend <span class="op">=</span> df_aggregated.groupby([<span class="st">"month_num"</span>])[<span class="st">"unit_price"</span>].mean().reset_index()</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>price_trend, x<span class="op">=</span><span class="st">"month_num"</span>, y<span class="op">=</span><span class="st">"unit_price"</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Average Price of all in sample products per month"</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Month"</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average Price"</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="nz_electronics_2019_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
 </div>
