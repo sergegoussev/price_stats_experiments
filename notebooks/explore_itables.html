@@ -281,8 +281,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#purpose-of-the-blog" id="toc-purpose-of-the-blog" class="nav-link active" data-scroll-target="#purpose-of-the-blog">Purpose of the blog</a></li>
+  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data">Example data</a></li>
+  <li><a href="#default-visual" id="toc-default-visual" class="nav-link" data-scroll-target="#default-visual">Default visual</a></li>
+  <li><a href="#advanced-version" id="toc-advanced-version" class="nav-link" data-scroll-target="#advanced-version">Advanced version</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/master/notebooks/explore_itables.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -317,10 +326,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="purpose-of-the-blog" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-the-blog">Purpose of the blog</h2>
 <p>As much of the data I use is tabular - I often have to visualize the dataframe, pivot it, filter it, and then visualize it again. Since I may want to go back to the dataset later - making sure I can repeat this mini-EDA again - is quite useful. Downloading an excel for manual exploration is obviously an option but not an ideal one.</p>
-<p>Python has an <code>itables</code> library that helps render dataframes as pretty tables. These can also be integrated with quarto to render into the html.</p>
+<p>Python has an <a href="https://mwouts.github.io/itables/quick_start.html"><code>itables</code> library</a> that helps render dataframes as pretty tables. These can also be integrated with quarto to render into the html.</p>
 <p>This blog summarizes several key features and how to turn them on.</p>
-<div id="bc692240" class="cell">
+<div id="bc692240" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itables <span class="im">import</span> init_notebook_mode</span>
@@ -431,7 +442,11 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
 </div>
 </div>
 </div>
-<div id="53cf2ae0" class="cell" data-execution_count="62">
+</section>
+<section id="example-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-data">Example data</h2>
+<p>Lets generate a complex set of data that has a diverse set of columns</p>
+<div id="53cf2ae0" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_for_df <span class="op">=</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'product_id'</span>: [<span class="dv">101</span>, <span class="dv">102</span>, <span class="dv">103</span>, <span class="dv">104</span>, <span class="dv">105</span>, <span class="dv">106</span>, <span class="dv">107</span>, <span class="dv">108</span>, <span class="dv">109</span>, <span class="dv">110</span>, <span class="dv">111</span>, <span class="dv">112</span>, <span class="dv">113</span>, <span class="dv">114</span>, <span class="dv">115</span>],</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'price'</span>: [<span class="fl">12.50</span>, <span class="fl">19.99</span>, <span class="fl">5.00</span>, <span class="fl">25.75</span>, <span class="fl">45.20</span>, <span class="fl">10.99</span>, <span class="fl">8.50</span>, <span class="fl">30.00</span>, <span class="fl">9.99</span>, <span class="fl">15.25</span>, <span class="fl">20.00</span>, <span class="fl">7.50</span>, <span class="fl">22.40</span>, <span class="fl">18.99</span>, <span class="fl">35.10</span>],</span>
@@ -474,44 +489,17 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
 <span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    ]</span>
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame.from_dict(data_for_df)</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>df.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="62">
-<pre><code>(15, 7)</code></pre>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame.from_dict(data_for_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<div id="3b553b88" class="cell" data-execution_count="74">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show(</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     df,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     style="width:auto; margin:auto",</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     columnDefs=[</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#         # Set the width of the second column (index 1) to 150 pixels.</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#         {"width": "100px", "targets": [4]},</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#         # Set the width of the first column (index 0) to 80 pixels.</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#         {"width": "80px", "targets": [6]},</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     ],</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     scrollX = False,</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>show(</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    df,</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Disable auto-width and use a fixed layout for reliable column width.</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    autoWidth<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># style="table-layout:fixed; width:600px;",</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    buttons<span class="op">=</span>[<span class="st">'pageLength'</span>, <span class="st">'csvHtml15'</span>],</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    layout<span class="op">=</span>{<span class="st">"top1"</span>:<span class="st">'searchPanes'</span>},</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Use columnDefs to set width and assign a class for word wrapping.</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    columnDefs<span class="op">=</span>[</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># {"width": "80px", "targets": 4},</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"width"</span>: <span class="st">"300px"</span>, <span class="st">"targets"</span>: [<span class="dv">4</span>, <span class="dv">6</span>], <span class="st">"className"</span>: <span class="st">"word-wrap"</span>}, <span class="co"># Target 'Description' column (index 1)</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"targets"</span>: <span class="dv">2</span>, <span class="st">"visible"</span>: <span class="va">False</span>},</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    columnControl<span class="op">=</span>[<span class="st">"order"</span>, <span class="st">"colVisDropdown"</span>],</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ordering={"indicators": False, "handler": False},</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now lets see some ways this can be worked with</p>
+</section>
+<section id="default-visual" class="level2">
+<h2 class="anchored" data-anchor-id="default-visual">Default visual</h2>
+<div id="d6b72590" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>show(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_ea5d04ac_7d06_4655_ba80_7ac461d0383b"><tbody><tr>
+<table id="itables_d515fddf_cd39_4cbb_b78b_12d550e38a0b"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     <a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
     <g style="fill:#d9d7fc">
@@ -578,11 +566,124 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#itables_ea5d04ac_7d06_4655_ba80_7ac461d0383b:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_d515fddf_cd39_4cbb_b78b_12d550e38a0b:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
-                let dt_args = {"autoWidth": false, "buttons": ["pageLength", "csvHtml15"], "layout": {"topStart": "buttons", "topEnd": "search", "bottomStart": "info", "bottomEnd": "paging", "top1": "searchPanes"}, "columnDefs": [{"width": "300px", "targets": [4, 6], "className": "word-wrap"}, {"targets": 2, "visible": false}], "columnControl": ["order", "colVisDropdown"], "style": {"width": "auto", "margin": "auto"}, "order": [], "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "table_html": "<table><thead>\n    <tr style=\"text-align: right;\">\n      \n      <th>product_id</th>\n      <th>price</th>\n      <th>category</th>\n      <th>customer_rating</th>\n      <th>manufacturer</th>\n      <th>region</th>\n      <th>long_description</th>\n    </tr>\n  </thead></table>", "data_json": "[[101, 12.5, \"Electronics\", 4, \"Advanced Technology Solutions, a global leader\", \"North America\", \"This is a long description for the first product, highlighting its premium features and durability.\"], [102, 19.99, \"Books\", 5, \"Independent Authors Collective, specializing in unique fiction\", \"Europe\", \"An enthralling novel with a captivating plot and unforgettable characters that will keep you on the edge of your seat.\"], [103, 5.0, \"Groceries\", 3, \"Small-Town Organic Farmers Cooperative\", \"Asia\", \"Freshly sourced organic apples, perfect for a healthy snack or for baking delicious homemade pies.\"], [104, 25.75, \"Electronics\", 5, \"Global Tech Innovations Group\", \"North America\", \"A high-performance gadget with advanced technology and a sleek, modern design that is easy to use and carry.\"], [105, 45.2, \"Books\", 4, \"The Classic Book Reprint Company, preserving literary heritage\", \"Europe\", \"A classic mystery story with an unexpected twist, a great read for all fans of the genre.\"], [106, 10.99, \"Groceries\", 5, \"Fresh Harvest Supply Chain and Distribution\", \"Asia\", \"A selection of artisanal breads, baked fresh daily with high-quality ingredients and a crispy crust.\"], [107, 8.5, \"Electronics\", 4, \"Audio Excellence, an innovative headphones manufacturer\", \"North America\", \"Innovative noise-canceling headphones providing crystal-clear audio and a comfortable fit for extended listening sessions.\"], [108, 30.0, \"Books\", 3, \"The Aspiring Coder's Press and Digital Media\", \"Europe\", \"A comprehensive guide to coding best practices, offering practical examples and detailed explanations for beginners.\"], [109, 9.99, \"Groceries\", 5, \"Sustainable Coffee Roasters Association\", \"Asia\", \"Gourmet coffee beans sourced from sustainable farms, roasted to perfection for a rich and smooth flavor.\"], [110, 15.25, \"Electronics\", 4, \"Smart Living Devices and Automation Solutions\", \"North America\", \"A versatile smart home device that can control various appliances and is compatible with most other systems.\"], [111, 20.0, \"Books\", 5, \"Renowned Historical Accounts Publishing House\", \"Europe\", \"A riveting biography of a historical figure, full of intriguing details and little-known anecdotes from their life.\"], [112, 7.5, \"Groceries\", 3, \"Local Produce Delivery for the Modern Consumer\", \"Asia\", \"Hand-picked seasonal vegetables delivered fresh to your door, perfect for preparing a wide variety of meals.\"], [113, 22.4, \"Electronics\", 4, \"Elite Computing Innovations, a leader in high-performance hardware\", \"North America\", \"An ultra-thin tablet with a high-resolution display, making it ideal for both entertainment and professional use.\"], [114, 18.99, \"Books\", 5, \"Emerging Voices Poetry Guild\", \"Europe\", \"A timeless poetry collection featuring works from both well-known and up-and-coming authors.\"], [115, 35.1, \"Groceries\", 4, \"Professional Imaging and Optics Corporation\", \"Asia\", \"A powerful and compact camera perfect for capturing high-quality photos and videos on the go.\"]]"};
+                let dt_args = {"layout": {"topStart": "pageLength", "topEnd": "search", "bottomStart": "info", "bottomEnd": "paging"}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_html": "<table><thead>\n    <tr style=\"text-align: right;\">\n      \n      <th>product_id</th>\n      <th>price</th>\n      <th>category</th>\n      <th>customer_rating</th>\n      <th>manufacturer</th>\n      <th>region</th>\n      <th>long_description</th>\n    </tr>\n  </thead></table>", "data_json": "[[101, 12.5, \"Electronics\", 4, \"Advanced Technology Solutions, a global leader\", \"North America\", \"This is a long description for the first product, highlighting its premium features and durability.\"], [102, 19.99, \"Books\", 5, \"Independent Authors Collective, specializing in unique fiction\", \"Europe\", \"An enthralling novel with a captivating plot and unforgettable characters that will keep you on the edge of your seat.\"], [103, 5.0, \"Groceries\", 3, \"Small-Town Organic Farmers Cooperative\", \"Asia\", \"Freshly sourced organic apples, perfect for a healthy snack or for baking delicious homemade pies.\"], [104, 25.75, \"Electronics\", 5, \"Global Tech Innovations Group\", \"North America\", \"A high-performance gadget with advanced technology and a sleek, modern design that is easy to use and carry.\"], [105, 45.2, \"Books\", 4, \"The Classic Book Reprint Company, preserving literary heritage\", \"Europe\", \"A classic mystery story with an unexpected twist, a great read for all fans of the genre.\"], [106, 10.99, \"Groceries\", 5, \"Fresh Harvest Supply Chain and Distribution\", \"Asia\", \"A selection of artisanal breads, baked fresh daily with high-quality ingredients and a crispy crust.\"], [107, 8.5, \"Electronics\", 4, \"Audio Excellence, an innovative headphones manufacturer\", \"North America\", \"Innovative noise-canceling headphones providing crystal-clear audio and a comfortable fit for extended listening sessions.\"], [108, 30.0, \"Books\", 3, \"The Aspiring Coder's Press and Digital Media\", \"Europe\", \"A comprehensive guide to coding best practices, offering practical examples and detailed explanations for beginners.\"], [109, 9.99, \"Groceries\", 5, \"Sustainable Coffee Roasters Association\", \"Asia\", \"Gourmet coffee beans sourced from sustainable farms, roasted to perfection for a rich and smooth flavor.\"], [110, 15.25, \"Electronics\", 4, \"Smart Living Devices and Automation Solutions\", \"North America\", \"A versatile smart home device that can control various appliances and is compatible with most other systems.\"], [111, 20.0, \"Books\", 5, \"Renowned Historical Accounts Publishing House\", \"Europe\", \"A riveting biography of a historical figure, full of intriguing details and little-known anecdotes from their life.\"], [112, 7.5, \"Groceries\", 3, \"Local Produce Delivery for the Modern Consumer\", \"Asia\", \"Hand-picked seasonal vegetables delivered fresh to your door, perfect for preparing a wide variety of meals.\"], [113, 22.4, \"Electronics\", 4, \"Elite Computing Innovations, a leader in high-performance hardware\", \"North America\", \"An ultra-thin tablet with a high-resolution display, making it ideal for both entertainment and professional use.\"], [114, 18.99, \"Books\", 5, \"Emerging Voices Poetry Guild\", \"Europe\", \"A timeless poetry collection featuring works from both well-known and up-and-coming authors.\"], [115, 35.1, \"Groceries\", 4, \"Professional Imaging and Optics Corporation\", \"Asia\", \"A powerful and compact camera perfect for capturing high-quality photos and videos on the go.\"]]"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+</section>
+<section id="advanced-version" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-version">Advanced version</h2>
+<p>Lets make some changes so that we can modify column widths, add word-wrap, and change defaults for specific columns</p>
+<div id="3b553b88" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>show(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    df,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Disable auto-width and use a fixed layout for reliable column width.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    autoWidth<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add buttons to customie actions that can be taken</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    buttons<span class="op">=</span>[<span class="st">'pageLength'</span>, <span class="st">'csvHtml15'</span>],</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a search pagen to ensure that I can filter the data in some way</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    layout<span class="op">=</span>{<span class="st">"top1"</span>:<span class="st">'searchPanes'</span>},</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Modify columns</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    columnDefs<span class="op">=</span>[</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Modify width of overly wide columns and make them word wrap</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"width"</span>: <span class="st">"200px"</span>, <span class="st">"targets"</span>: [<span class="dv">4</span>, <span class="dv">6</span>], <span class="st">"className"</span>: <span class="st">"word-wrap"</span>},</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Hide some columns by default</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"targets"</span>: <span class="dv">2</span>, <span class="st">"visible"</span>: <span class="va">False</span>},</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Allow you to re-add columns at will</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    columnControl<span class="op">=</span>[<span class="st">"order"</span>, <span class="st">"colVisDropdown"</span>],</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="itables_8d631d87_bd3d_4cea_bbd9_8b6ddef4fef7"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    <a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
+    <g style="fill:#d9d7fc">
+        <path d="M100,400H500V357H100Z"></path>
+        <path d="M100,300H400V257H100Z"></path>
+        <path d="M0,200H400V157H0Z"></path>
+        <path d="M100,100H500V57H100Z"></path>
+        <path d="M100,350H500V307H100Z"></path>
+        <path d="M100,250H400V207H100Z"></path>
+        <path d="M0,150H400V107H0Z"></path>
+        <path d="M100,50H500V7H100Z"></path>
+    </g>
+    <g style="fill:#1a1366;stroke:#1a1366;">
+   <rect x="100" y="7" width="400" height="43">
+    <animate attributename="width" values="0;400;0" dur="5s" repeatcount="indefinite"></animate>
+      <animate attributename="x" values="100;100;500" dur="5s" repeatcount="indefinite"></animate>
+  </rect>
+        <rect x="0" y="107" width="400" height="43">
+    <animate attributename="width" values="0;400;0" dur="3.5s" repeatcount="indefinite"></animate>
+    <animate attributename="x" values="0;0;400" dur="3.5s" repeatcount="indefinite"></animate>
+  </rect>
+        <rect x="100" y="207" width="300" height="43">
+    <animate attributename="width" values="0;300;0" dur="3s" repeatcount="indefinite"></animate>
+    <animate attributename="x" values="100;100;400" dur="3s" repeatcount="indefinite"></animate>
+  </rect>
+        <rect x="100" y="307" width="400" height="43">
+    <animate attributename="width" values="0;400;0" dur="4s" repeatcount="indefinite"></animate>
+      <animate attributename="x" values="100;100;500" dur="4s" repeatcount="indefinite"></animate>
+  </rect>
+        <g style="fill:transparent;stroke-width:8; stroke-linejoin:round" rx="5">
+            <g transform="translate(45 50) rotate(-45)">
+                <circle r="33" cx="0" cy="0"></circle>
+                <rect x="-8" y="32" width="16" height="30"></rect>
+            </g>
+
+            <g transform="translate(450 152)">
+                <polyline points="-15,-20 -35,-20 -35,40 25,40 25,20"></polyline>
+                <rect x="-15" y="-40" width="60" height="60"></rect>
+            </g>
+
+            <g transform="translate(50 352)">
+                <polygon points="-35,-5 0,-40 35,-5"></polygon>
+                <polygon points="-35,10 0,45 35,10"></polygon>
+            </g>
+
+            <g transform="translate(75 250)">
+                <polyline points="-30,30 -60,0 -30,-30"></polyline>
+                <polyline points="0,30 -30,0 0,-30"></polyline>
+            </g>
+
+            <g transform="translate(425 250) rotate(180)">
+                <polyline points="-30,30 -60,0 -30,-30"></polyline>
+                <polyline points="0,30 -30,0 0,-30"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
+</a>
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#itables_8d631d87_bd3d_4cea_bbd9_8b6ddef4fef7:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"autoWidth": false, "buttons": ["pageLength", "csvHtml15"], "layout": {"topStart": "buttons", "topEnd": "search", "bottomStart": "info", "bottomEnd": "paging", "top1": "searchPanes"}, "columnDefs": [{"width": "200px", "targets": [4, 6], "className": "word-wrap"}, {"targets": 2, "visible": false}], "columnControl": ["order", "colVisDropdown"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "classes": ["display", "nowrap"], "table_html": "<table><thead>\n    <tr style=\"text-align: right;\">\n      \n      <th>product_id</th>\n      <th>price</th>\n      <th>category</th>\n      <th>customer_rating</th>\n      <th>manufacturer</th>\n      <th>region</th>\n      <th>long_description</th>\n    </tr>\n  </thead></table>", "data_json": "[[101, 12.5, \"Electronics\", 4, \"Advanced Technology Solutions, a global leader\", \"North America\", \"This is a long description for the first product, highlighting its premium features and durability.\"], [102, 19.99, \"Books\", 5, \"Independent Authors Collective, specializing in unique fiction\", \"Europe\", \"An enthralling novel with a captivating plot and unforgettable characters that will keep you on the edge of your seat.\"], [103, 5.0, \"Groceries\", 3, \"Small-Town Organic Farmers Cooperative\", \"Asia\", \"Freshly sourced organic apples, perfect for a healthy snack or for baking delicious homemade pies.\"], [104, 25.75, \"Electronics\", 5, \"Global Tech Innovations Group\", \"North America\", \"A high-performance gadget with advanced technology and a sleek, modern design that is easy to use and carry.\"], [105, 45.2, \"Books\", 4, \"The Classic Book Reprint Company, preserving literary heritage\", \"Europe\", \"A classic mystery story with an unexpected twist, a great read for all fans of the genre.\"], [106, 10.99, \"Groceries\", 5, \"Fresh Harvest Supply Chain and Distribution\", \"Asia\", \"A selection of artisanal breads, baked fresh daily with high-quality ingredients and a crispy crust.\"], [107, 8.5, \"Electronics\", 4, \"Audio Excellence, an innovative headphones manufacturer\", \"North America\", \"Innovative noise-canceling headphones providing crystal-clear audio and a comfortable fit for extended listening sessions.\"], [108, 30.0, \"Books\", 3, \"The Aspiring Coder's Press and Digital Media\", \"Europe\", \"A comprehensive guide to coding best practices, offering practical examples and detailed explanations for beginners.\"], [109, 9.99, \"Groceries\", 5, \"Sustainable Coffee Roasters Association\", \"Asia\", \"Gourmet coffee beans sourced from sustainable farms, roasted to perfection for a rich and smooth flavor.\"], [110, 15.25, \"Electronics\", 4, \"Smart Living Devices and Automation Solutions\", \"North America\", \"A versatile smart home device that can control various appliances and is compatible with most other systems.\"], [111, 20.0, \"Books\", 5, \"Renowned Historical Accounts Publishing House\", \"Europe\", \"A riveting biography of a historical figure, full of intriguing details and little-known anecdotes from their life.\"], [112, 7.5, \"Groceries\", 3, \"Local Produce Delivery for the Modern Consumer\", \"Asia\", \"Hand-picked seasonal vegetables delivered fresh to your door, perfect for preparing a wide variety of meals.\"], [113, 22.4, \"Electronics\", 4, \"Elite Computing Innovations, a leader in high-performance hardware\", \"North America\", \"An ultra-thin tablet with a high-resolution display, making it ideal for both entertainment and professional use.\"], [114, 18.99, \"Books\", 5, \"Emerging Voices Poetry Guild\", \"Europe\", \"A timeless poetry collection featuring works from both well-known and up-and-coming authors.\"], [115, 35.1, \"Groceries\", 4, \"Professional Imaging and Optics Corporation\", \"Asia\", \"A powerful and compact camera perfect for capturing high-quality photos and videos on the go.\"]]"};
                 new ITable(table, dt_args);
             });
         }
@@ -600,6 +701,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
 </div>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1020,4 +1122,4 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/master/notebooks/explore_itables.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/master/notebooks/explore_itables.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
