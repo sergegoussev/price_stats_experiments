@@ -6,5 +6,5 @@
 /* Override the overall DataTables table styles for fixed layout */
 .dataframe {
     table-layout: fixed !important;
-    width: 600px !important; /* Adjust total width as needed */
+    /* width: 600px !important; Adjust total width as needed */
 }
