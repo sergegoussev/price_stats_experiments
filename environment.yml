@@ -18,6 +18,7 @@ dependencies:
   - plotly
   - wordcloud
   - itables
+  - pyarrow
   - git
   - pip
   - pip:
