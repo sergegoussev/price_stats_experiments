@@ -294,7 +294,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#product-and-price-trends" id="toc-product-and-price-trends" class="nav-link" data-scroll-target="#product-and-price-trends">Product and price trends</a>
   <ul class="collapse">
   <li><a href="#average-prices-across-time" id="toc-average-prices-across-time" class="nav-link" data-scroll-target="#average-prices-across-time">Average prices across time</a></li>
-  <li><a href="#churn-in-products" id="toc-churn-in-products" class="nav-link" data-scroll-target="#churn-in-products">Churn in products</a></li>
+  <li><a href="#churn-in-products" id="toc-churn-in-products" class="nav-link" data-scroll-target="#churn-in-products">Churn in products</a>
+  <ul class="collapse">
+  <li><a href="#product-lifetimes-gantt-like" id="toc-product-lifetimes-gantt-like" class="nav-link" data-scroll-target="#product-lifetimes-gantt-like">Product lifetimes (Gantt-like)</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/master/notebooks/nz_electronics_2019.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -349,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataset-structure" class="level2">
 <h2 class="anchored" data-anchor-id="dataset-structure">Dataset structure</h2>
 <p>The data is tabular and it shows products sold per period with a large number of characteristics already pre-cleaned</p>
-<div id="09a0a656" class="cell" data-execution_count="1">
+<div id="09a0a656" class="cell" data-execution_count="27">
 <div class="cell-output cell-output-display">
 <script type="module">
     const { set_or_remove_dark_class } = await import(window._itables_2_5_2);
@@ -448,10 +451,10 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
 </div>
 </div>
 </div>
-<div id="58894df1" class="cell" data-execution_count="7">
+<div id="58894df1" class="cell" data-execution_count="29">
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_a3f12477_55c1_437a_a2ca_76c622c62126"><tbody><tr>
+<table id="itables_cb253593_5f84_49e5_902c_603ebd21db11"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     <a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
     <g style="fill:#d9d7fc">
@@ -518,7 +521,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#itables_a3f12477_55c1_437a_a2ca_76c622c62126:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_cb253593_5f84_49e5_902c_603ebd21db11:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -538,7 +541,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
 </script>
 </div>
 </div>
-<div id="a8a3ad46" class="cell" data-execution_count="8">
+<div id="a8a3ad46" class="cell" data-execution_count="30">
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 5509 entries, 0 to 5508
@@ -565,7 +568,7 @@ memory usage: 645.7+ KB</code></pre>
 </div>
 </div>
 <p>The key question is how to interpret all these feature columns and what the overall information is in the data</p>
-<div id="6fed18bd" class="cell" data-execution_count="9">
+<div id="6fed18bd" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> {}</span>
@@ -579,9 +582,9 @@ memory usage: 645.7+ KB</code></pre>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>pd.DataFrame.from_dict(stats, orient<span class="op">=</span><span class="st">'index'</span>, columns<span class="op">=</span>[<span class="st">'statistic'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_9e373f9a_c36f_4eb3_992a_fa85251bd501"><tbody><tr>
+<table id="itables_235e1a44_a6b6_430a_a2ad_d159befdd76d"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     <a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
     <g style="fill:#d9d7fc">
@@ -648,7 +651,7 @@ memory usage: 645.7+ KB</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#itables_9e373f9a_c36f_4eb3_992a_fa85251bd501:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_235e1a44_a6b6_430a_a2ad_d159befdd76d:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -675,7 +678,7 @@ memory usage: 645.7+ KB</code></pre>
 <section id="every-period-has-some-duplicated-products" class="level2">
 <h2 class="anchored" data-anchor-id="every-period-has-some-duplicated-products">Every period has some duplicated products</h2>
 <p>Every period has products that seem to be duplicated - i.e.&nbsp;products are identical in all but sale information. We can see this by comparing the number of unique products (if we use the <code>prodid_num</code> column) and comparing it with just a count of the same products (without de-duplication).</p>
-<div id="abc1aa66" class="cell" data-execution_count="12">
+<div id="abc1aa66" class="cell" data-execution_count="32">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>series_unique <span class="op">=</span> df.groupby([<span class="st">'month_num'</span>])[<span class="st">'prodid_num'</span>].nunique()</span>
@@ -709,15 +712,15 @@ memory usage: 645.7+ KB</code></pre>
 </div>
 </div>
 <p>Looking at a few examples - it is clear that all product features are identical <em>except</em> the <code>quanity</code> and the <code>value</code> counts</p>
-<div id="4b433bf5" class="cell" data-execution_count="17">
+<div id="4b433bf5" class="cell" data-execution_count="33">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_first_period <span class="op">=</span> df[df[<span class="st">'month_num'</span>] <span class="op">==</span> df[<span class="st">'month_num'</span>].<span class="bu">min</span>()].copy()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_first_period.groupby([<span class="st">'prodid_num'</span>]).<span class="bu">filter</span>(<span class="kw">lambda</span> x: x[<span class="st">'char11'</span>].count() <span class="op">&gt;</span> <span class="dv">1</span>).head(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_8ec42dd7_a448_4ed3_81c7_e6dc2724979a"><tbody><tr>
+<table id="itables_40916259_b6e0_4eb8_b4fa_5ad4bce5daf4"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     <a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
     <g style="fill:#d9d7fc">
@@ -784,7 +787,7 @@ memory usage: 645.7+ KB</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#itables_8ec42dd7_a448_4ed3_81c7_e6dc2724979a:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_40916259_b6e0_4eb8_b4fa_5ad4bce5daf4:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -805,14 +808,14 @@ memory usage: 645.7+ KB</code></pre>
 </div>
 </div>
 <p>Lets look at another example</p>
-<div id="8006def2" class="cell" data-execution_count="18">
+<div id="8006def2" class="cell" data-execution_count="34">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_first_period.groupby([<span class="st">'prodid_num'</span>]).<span class="bu">filter</span>(<span class="kw">lambda</span> x: x[<span class="st">'char11'</span>].count() <span class="op">&gt;</span> <span class="dv">1</span>).iloc[<span class="dv">2</span>:<span class="dv">4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="34">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_4c472f77_d257_4acc_8f5b_ae7cf957065d"><tbody><tr>
+<table id="itables_33144455_de0d_4146_8a7c_4fa1e5fd3cd0"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     <a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
     <g style="fill:#d9d7fc">
@@ -879,7 +882,7 @@ memory usage: 645.7+ KB</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#itables_4c472f77_d257_4acc_8f5b_ae7cf957065d:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_33144455_de0d_4146_8a7c_4fa1e5fd3cd0:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -900,14 +903,14 @@ memory usage: 645.7+ KB</code></pre>
 </div>
 </div>
 <p>And another</p>
-<div id="b6e93fe4" class="cell">
+<div id="b6e93fe4" class="cell" data-execution_count="35">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_first_period.groupby([<span class="st">'prodid_num'</span>]).<span class="bu">filter</span>(<span class="kw">lambda</span> x: x[<span class="st">'char11'</span>].count() <span class="op">&gt;</span> <span class="dv">1</span>).iloc[<span class="dv">4</span>:<span class="dv">6</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_23c36a6b_4f03_435c_9961_71f621ed0502"><tbody><tr>
+<table id="itables_6a0165f6_ce11_4c35_8d91_06ebe0d46b04"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     <a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
     <g style="fill:#d9d7fc">
@@ -974,7 +977,7 @@ memory usage: 645.7+ KB</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#itables_23c36a6b_4f03_435c_9961_71f621ed0502:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_6a0165f6_ce11_4c35_8d91_06ebe0d46b04:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -1003,7 +1006,7 @@ memory usage: 645.7+ KB</code></pre>
 <section id="average-prices-across-time" class="level2">
 <h2 class="anchored" data-anchor-id="average-prices-across-time">Average prices across time</h2>
 <p>Lets first consider an average price of each category</p>
-<div id="6108d27d" class="cell" data-execution_count="20">
+<div id="6108d27d" class="cell" data-execution_count="36">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>agg_dict <span class="op">=</span> {</span>
@@ -1049,7 +1052,7 @@ memory usage: 645.7+ KB</code></pre>
 </section>
 <section id="churn-in-products" class="level2">
 <h2 class="anchored" data-anchor-id="churn-in-products">Churn in products</h2>
-<div id="6af428d6" class="cell" data-execution_count="15">
+<div id="6af428d6" class="cell" data-execution_count="37">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_aggregated2 <span class="op">=</span> df_aggregated.reset_index()</span>
@@ -1057,12 +1060,21 @@ memory usage: 645.7+ KB</code></pre>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">"The average length of time products are in sample: {n}"</span>.<span class="bu">format</span>(n<span class="op">=</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>'The average length of time products are in sample: 8.4'</code></pre>
 </div>
 </div>
+<section id="product-lifetimes-gantt-like" class="level3">
+<h3 class="anchored" data-anchor-id="product-lifetimes-gantt-like">Product lifetimes (Gantt-like)</h3>
+<p>We can represent visually the longevity of products in sample using a gantt -like view where a line represents a product’s time in the sample based on when it entered and existed.</p>
+<div id="7b7c30f5" class="cell" data-execution_count="38">
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 

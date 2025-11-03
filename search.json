@@ -419,6 +419,6 @@
     "href": "notebooks/nz_electronics_2019.html#churn-in-products",
     "title": "New Zealand scanner electronics dataset",
     "section": "Churn in products",
-    "text": "Churn in products\n\n\nShow the code\ndf_aggregated2 = df_aggregated.reset_index()\nn = round(df_aggregated2.groupby(['prodid_num'])['month_num'].count().mean(),1)\n\n\"The average length of time products are in sample: {n}\".format(n=n)\n\n\n'The average length of time products are in sample: 8.4'"
+    "text": "Churn in products\n\n\nShow the code\ndf_aggregated2 = df_aggregated.reset_index()\nn = round(df_aggregated2.groupby(['prodid_num'])['month_num'].count().mean(),1)\n\n\"The average length of time products are in sample: {n}\".format(n=n)\n\n\n'The average length of time products are in sample: 8.4'\n\n\n\nProduct lifetimes (Gantt-like)\nWe can represent visually the longevity of products in sample using a gantt -like view where a line represents a product’s time in the sample based on when it entered and existed.\n\n\nUnable to display output for mime type(s): application/vnd.plotly.v1+json"
   }
 ]
