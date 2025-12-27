@@ -2,24 +2,38 @@ name: price_stats_experiments
 
 channels:
   - conda-forge
+  - defaults
 
 dependencies:
-  - python=3.10
-  - ipykernel
+  # Python packages
+  - python=3.12
   - pandas
+  - numpy
   - scipy
-  - jupyter
-  - nbformat
-  - jupyterlab
   - scikit-learn
+  - ipykernel
   - pyarrow
-  - openpyxl
-  - matplotlib
-  - plotly
-  - wordcloud
   - itables
-  - pyarrow
-  - git
+  - plotly
+  - matplotlib
+  - openpyxl
+
+  # R packages
+  - r-base
+  - r-tidyverse
+  - r-irkernel
+  - r-essentials
+  - r-arrow
+  - r-dplyr
+  - r-plotly
+
+  # Other tools
+  - mamba
   - pip
+  - git
+
+  # price-index packages
+  - r-gpindex
   - pip:
     - git+https://github.com/wspackman/PriceIndexCalc.git
+  
