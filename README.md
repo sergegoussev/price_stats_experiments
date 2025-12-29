@@ -5,7 +5,8 @@ This is a personal repo for experiments and workflows that relate to the price s
 # Repo folder structure
 
 ```
-├── data                    # Folder for data used within the experiments of this repository (git ignored where applicable)
+├── data                    # Folder for data used within the experiments of this 
+│   │                       # repository (git ignored where applicable)
 │   ├── bronze              # For raw data as collected for each experiment
 │   ├── silver              # Cleaned data ready for analysis
 │   └── gold                # Final output data hosted for visualizations and other content
