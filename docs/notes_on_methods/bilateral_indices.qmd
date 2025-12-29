@@ -301,10 +301,17 @@ q_base <- quantity6$t1
 
 # 2. Loop through the periods to calculate indices for the set
 results <- mapply(function(p_curr, q_curr) {
+  # Calculate current value shares (s1) for Törnqvist weights
+  s1 <- (p_curr * q_curr) / sum(p_curr * q_curr)
+  s2 <- (p_base * q_base) / sum(p_base * q_base)
+  w_torn <- (s1 + s2) / 2
+  
   c(
-    Laspeyres = laspeyres_index(p1 = p_curr, p0 = p_base, q0 = q_base),
-    Paasche   = paasche_index(p1 = p_curr, p0 = p_base, q1 = q_curr),
-    Jevons = geometric_mean(p_curr / p_base)
+    Laspeyres = laspeyres_index(p_curr, p_base, q_base),
+    Paasche   = paasche_index(p_curr, p_base, q_curr),
+    Fisher    = fisher_index(p_curr, p_base, q_curr, q_base),
+    Tornqvist = geometric_mean(p_curr / p_base, w_torn),
+    Jevons    = geometric_mean(p_curr / p_base)
   )
 }, price6, quantity6)
 
@@ -312,26 +319,24 @@ results <- mapply(function(p_curr, q_curr) {
 df_indexes <- as.data.frame(t(results))
 df_indexes$Period <- rownames(df_indexes)
 
-# 4. Display result
-df_indexes[, c("Period", "Laspeyres", "Paasche", "Jevons")]
-
+## Now lets plot this (for which we need a few additional libraries)
 library(ggplot2)
 library(tidyr)
 
-# 1. Convert from wide to long format
+# 4. Convert from wide to long format
 df_long <- pivot_longer(df_indexes, 
-                        cols = c("Laspeyres", "Paasche", "Jevons"), 
+                        cols = c("Laspeyres", "Paasche", "Jevons", "Fisher", "Tornqvist"), 
                         names_to = "Index_Type", 
                         values_to = "Value")
 
-# 2. Create the plot
+# 5. Create the plot
 ggplot(df_long, aes(x = Period, y = Value, color = Index_Type, group = Index_Type)) +
-  geom_line(linewidth = 1) +  # Draw the lines
-  geom_point() +              # Add points for each data entry
-  theme_minimal() +           # Clean theme
+  geom_line(linewidth = 1) + 
+  geom_point() +
+  theme_minimal() +           
   labs(title = "Comparison of Price Indexes (Base = t1)",
-       subtitle = "Calculated using gpindex price6/quantity6 data",
+       subtitle = "(Uses gpindex play price6 and quantity6 data)",
        x = "Time Period",
        y = "Index Value",
-       color = "Formula")
+       color = "Method")
 ``` 
