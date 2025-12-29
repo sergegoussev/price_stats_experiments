@@ -109,6 +109,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<link href="../../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../../site_libs/datatables-binding-0.34.0/datatables.js"></script>
+<link href="../../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
@@ -838,32 +852,42 @@ P^J(p^1,p^0) =
 <span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>df_indexes<span class="sc">$</span>Period <span class="ot">&lt;-</span> <span class="fu">rownames</span>(df_indexes)</span>
 <span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Now lets plot this (for which we need a few additional libraries)</span></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Convert from wide to long format</span></span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_indexes, </span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>                        <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Laspeyres"</span>, <span class="st">"Paasche"</span>, <span class="st">"Jevons"</span>, <span class="st">"Fisher"</span>, <span class="st">"Tornqvist"</span>), </span>
-<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_to =</span> <span class="st">"Index_Type"</span>, </span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
-<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Create the plot</span></span>
-<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> Period, <span class="at">y =</span> Value, <span class="at">color =</span> Index_Type, <span class="at">group =</span> Index_Type)) <span class="sc">+</span></span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>           </span>
-<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Comparison of Price Indexes (Base = t1)"</span>,</span>
-<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"(Uses gpindex play price6 and quantity6 data)"</span>,</span>
-<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Time Period"</span>,</span>
-<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Index Value"</span>,</span>
-<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Method"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Create the plot</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(df_indexes, <span class="at">x =</span> <span class="sc">~</span>Period, <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="dv">500</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span>Laspeyres, <span class="at">name =</span> <span class="st">'Laspeyres'</span>, <span class="at">type =</span> <span class="st">'scatter'</span>, <span class="at">mode =</span> <span class="st">'lines+markers'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span>Paasche, <span class="at">name =</span> <span class="st">'Paasche'</span>, <span class="at">type =</span> <span class="st">'scatter'</span>, <span class="at">mode =</span> <span class="st">'lines+markers'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span>Fisher, <span class="at">name =</span> <span class="st">'Fisher'</span>, <span class="at">type =</span> <span class="st">'scatter'</span>, <span class="at">mode =</span> <span class="st">'lines+markers'</span>,</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>            <span class="at">line =</span> <span class="fu">list</span>(<span class="at">dash =</span> <span class="st">'dash'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span>Tornqvist, <span class="at">name =</span> <span class="st">'Törnqvist'</span>, <span class="at">type =</span> <span class="st">'scatter'</span>, <span class="at">mode =</span> <span class="st">'lines+markers'</span>,</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>            <span class="at">line =</span> <span class="fu">list</span>(<span class="at">dash =</span> <span class="st">'dot'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_trace</span>(<span class="at">y =</span> <span class="sc">~</span>Jevons, <span class="at">name =</span> <span class="st">'Jevons'</span>, <span class="at">type =</span> <span class="st">'scatter'</span>, <span class="at">mode =</span> <span class="st">'lines+markers'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Interactive Comparison of Five Price Index Formulas"</span>,</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Index Value (Base t1 = 1.0)"</span>),</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Time Period"</span>),</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">hovermode =</span> <span class="st">"x unified"</span>, <span class="co"># Show values in one tooltip when hovering</span></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend =</span> <span class="fu">list</span>(<span class="at">orientation =</span> <span class="st">'h'</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">0.2</span>) <span class="co"># Move legend to bottom</span></span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="bilateral_indices_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="htmlwidget-b03a11f75ea370310dff" style="width:100%;height:406px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b03a11f75ea370310dff">{"x":{"visdat":{"5298384e503e":["function () ","plotlyVisDat"]},"cur_data":"5298384e503e","attrs":{"5298384e503e":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"name":"Laspeyres","type":"scatter","mode":"lines+markers","inherit":true},"5298384e503e.1":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"name":"Paasche","type":"scatter","mode":"lines+markers","inherit":true},"5298384e503e.2":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"name":"Fisher","type":"scatter","mode":"lines+markers","line":{"dash":"dash"},"inherit":true},"5298384e503e.3":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"name":"Törnqvist","type":"scatter","mode":"lines+markers","line":{"dash":"dot"},"inherit":true},"5298384e503e.4":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"name":"Jevons","type":"scatter","mode":"lines+markers","inherit":true}},"layout":{"width":800,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Interactive Comparison of Five Price Index Formulas","yaxis":{"domain":[0,1],"automargin":true,"title":"Index Value (Base t1 = 1.0)"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Time Period","type":"category","categoryorder":"array","categoryarray":["t1","t2","t3","t4","t5"]},"hovermode":"x unified","legend":{"orientation":"h","y":-0.20000000000000001},"showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["t1","t2","t3","t4","t5"],"y":[1,1.4199999999999999,1.345,1.355,1.4399999999999999],"name":"Laspeyres","type":"scatter","mode":"lines+markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["t1","t2","t3","t4","t5"],"y":[1,1.3823529411764708,1.2031496062992129,1.0209302325581395,0.79681274900398402],"name":"Paasche","type":"scatter","mode":"lines+markers","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["t1","t2","t3","t4","t5"],"y":[1,1.4010500263982684,1.2720991394040173,1.1761634517006041,1.0711724224258843],"name":"Fisher","type":"scatter","mode":"lines+markers","line":{"color":"rgba(44,160,44,1)","dash":"dash"},"marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["t1","t2","t3","t4","t5"],"y":[1,1.405161748554697,1.2890132160200265,1.2268158833795584,1.2476613430867509],"name":"Törnqvist","type":"scatter","mode":"lines+markers","line":{"color":"rgba(214,39,40,1)","dash":"dot"},"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["t1","t2","t3","t4","t5"],"y":[1,1.2419200902684202,0.95633541572875125,0.72558083575802323,0.63245553203367588],"name":"Jevons","type":"scatter","mode":"lines+markers","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"line":{"color":"rgba(148,103,189,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#5. Print the dataframe to have a reference table to the graph above</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(df_indexes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-31886a0991e043ec104e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-31886a0991e043ec104e">{"x":{"filter":"none","vertical":false,"data":[["t1","t2","t3","t4","t5"],[1,1.42,1.345,1.355,1.44],[1,1.382352941176471,1.203149606299213,1.02093023255814,0.796812749003984],[1,1.401050026398268,1.272099139404017,1.176163451700604,1.071172422425884],[1,1.405161748554697,1.289013216020026,1.226815883379558,1.247661343086751],[1,1.24192009026842,0.9563354157287512,0.7255808357580232,0.6324555320336759],["t1","t2","t3","t4","t5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Laspeyres<\/th>\n      <th>Paasche<\/th>\n      <th>Fisher<\/th>\n      <th>Tornqvist<\/th>\n      <th>Jevons<\/th>\n      <th>Period<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Laspeyres","targets":1},{"name":"Paasche","targets":2},{"name":"Fisher","targets":3},{"name":"Tornqvist","targets":4},{"name":"Jevons","targets":5},{"name":"Period","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
