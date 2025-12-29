@@ -345,7 +345,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#purpose-of-site" id="toc-purpose-of-site" class="nav-link active" data-scroll-target="#purpose-of-site">Purpose of site</a></li>
+  <li><a href="#price-statistics-experiments" id="toc-price-statistics-experiments" class="nav-link active" data-scroll-target="#price-statistics-experiments">Price Statistics Experiments</a></li>
+  <li><a href="#repo-folder-structure" id="toc-repo-folder-structure" class="nav-link" data-scroll-target="#repo-folder-structure">Repo folder structure</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/price_stats_experiments/blob/master/docs/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/sergegoussev/price_stats_experiments/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -384,9 +385,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="purpose-of-site" class="level2">
-<h2 class="anchored" data-anchor-id="purpose-of-site">Purpose of site</h2>
-<p>This is a personal site that I used to render experiments and workflows that relate to the price statistics domain within official statistics. It is meant to log various experiments and notes to myself in a reproducible manner. Anyone else can use this if they choose but it is not explicitly meant for any formal capacity.</p>
+<section id="price-statistics-experiments" class="level1">
+<h1>Price Statistics Experiments</h1>
+<p>This is a personal repo for experiments and workflows that relate to the price statistics domain. It is meant to show work in a reproducible manner for anyone else who chooses to look at this. As its personal, it is not meant in any official capacity.</p>
+</section>
+<section id="repo-folder-structure" class="level1">
+<h1>Repo folder structure</h1>
+<pre><code>├── data                    # Folder for data used within the experiments of this 
+│   │                       # repository (git ignored where applicable)
+│   ├── bronze              # For raw data as collected for each experiment
+│   ├── silver              # Cleaned data ready for analysis
+│   └── gold                # Final output data hosted for visualizations and other content
+├── docs                    # Folder for documentation site that accompanies all experiments
+├── src                     # Scripts used to simplify the analysis
+└── notebooks               # Exploration notebooks where specific experiments are run</code></pre>
 
 
 </section>

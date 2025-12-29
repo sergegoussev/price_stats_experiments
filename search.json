@@ -197,17 +197,7 @@
     "href": "docs/index.html",
     "title": "Overview",
     "section": "",
-    "text": "This is a personal site that I used to render experiments and workflows that relate to the price statistics domain within official statistics. It is meant to log various experiments and notes to myself in a reproducible manner. Anyone else can use this if they choose but it is not explicitly meant for any formal capacity.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "docs/index.html#purpose-of-site",
-    "href": "docs/index.html#purpose-of-site",
-    "title": "Overview",
-    "section": "",
-    "text": "This is a personal site that I used to render experiments and workflows that relate to the price statistics domain within official statistics. It is meant to log various experiments and notes to myself in a reproducible manner. Anyone else can use this if they choose but it is not explicitly meant for any formal capacity.",
+    "text": "Price Statistics Experiments\nThis is a personal repo for experiments and workflows that relate to the price statistics domain. It is meant to show work in a reproducible manner for anyone else who chooses to look at this. As its personal, it is not meant in any official capacity.\n\n\nRepo folder structure\n├── data                    # Folder for data used within the experiments of this \n│   │                       # repository (git ignored where applicable)\n│   ├── bronze              # For raw data as collected for each experiment\n│   ├── silver              # Cleaned data ready for analysis\n│   └── gold                # Final output data hosted for visualizations and other content\n├── docs                    # Folder for documentation site that accompanies all experiments\n├── src                     # Scripts used to simplify the analysis\n└── notebooks               # Exploration notebooks where specific experiments are run\n\n\n\n\n Back to top",
     "crumbs": [
       "Overview"
     ]
