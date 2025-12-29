@@ -26,6 +26,7 @@ dependencies:
   - r-arrow
   - r-dplyr
   - r-plotly
+  - r-DT
 
   # Other tools
   - mamba

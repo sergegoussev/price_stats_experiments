@@ -294,6 +294,9 @@ Using the full toy dataset - lets compare the price indices
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
+#| out-width: "100%"
+#| out-height: "100%"
+#| warning: false
 
 # 1. Use t1 as the base period
 p_base <- price6$t1
@@ -320,23 +323,30 @@ df_indexes <- as.data.frame(t(results))
 df_indexes$Period <- rownames(df_indexes)
 
 ## Now lets plot this (for which we need a few additional libraries)
+library(plotly)
 library(ggplot2)
 library(tidyr)
 
-# 4. Convert from wide to long format
-df_long <- pivot_longer(df_indexes, 
-                        cols = c("Laspeyres", "Paasche", "Jevons", "Fisher", "Tornqvist"), 
-                        names_to = "Index_Type", 
-                        values_to = "Value")
+# 4. Create the plot
+fig <- plot_ly(df_indexes, x = ~Period, width = 800, height = 500) %>%
+  add_trace(y = ~Laspeyres, name = 'Laspeyres', type = 'scatter', mode = 'lines+markers') %>%
+  add_trace(y = ~Paasche, name = 'Paasche', type = 'scatter', mode = 'lines+markers') %>%
+  add_trace(y = ~Fisher, name = 'Fisher', type = 'scatter', mode = 'lines+markers',
+            line = list(dash = 'dash')) %>% 
+  add_trace(y = ~Tornqvist, name = 'Törnqvist', type = 'scatter', mode = 'lines+markers',
+            line = list(dash = 'dot')) %>%
+  add_trace(y = ~Jevons, name = 'Jevons', type = 'scatter', mode = 'lines+markers') %>%
+  layout(
+    title = "Interactive Comparison of Five Price Index Formulas",
+    yaxis = list(title = "Index Value (Base t1 = 1.0)"),
+    xaxis = list(title = "Time Period"),
+    hovermode = "x unified", # Show values in one tooltip when hovering
+    legend = list(orientation = 'h', y = -0.2) # Move legend to bottom
+  )
 
-# 5. Create the plot
-ggplot(df_long, aes(x = Period, y = Value, color = Index_Type, group = Index_Type)) +
-  geom_line(linewidth = 1) + 
-  geom_point() +
-  theme_minimal() +           
-  labs(title = "Comparison of Price Indexes (Base = t1)",
-       subtitle = "(Uses gpindex play price6 and quantity6 data)",
-       x = "Time Period",
-       y = "Index Value",
-       color = "Method")
+fig
+
+#5. Print the dataframe to have a reference table to the graph above
+library(DT)
+datatable(df_indexes)
 ``` 
