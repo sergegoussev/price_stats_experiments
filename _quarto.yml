@@ -36,6 +36,7 @@ website:
         text: Notes by method
         contents:
         - href: docs/notes_on_methods/bilateral_indices.qmd
+        - href: docs/notes_on_methods/tpd-and-tdh.qmd
         - href: docs/notes_on_methods/sampling_with_scanner.qmd
       - href: docs/empirical_experiments/experiments_catalogue.qmd
 

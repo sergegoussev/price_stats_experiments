@@ -1,7 +1,12 @@
 ---
 title: "Notes on bilateral price index methods"
+subtitle: Overview with examples of common bilateral methods
 author: Serge Goussev
 date: 2024-09-27
+date-modified: last-modified
+execute:
+  echo: true
+  output: true
 format:
   html:
     toc: true
@@ -18,15 +23,38 @@ format:
         href: https://www.imf.org/-/media/Files/Data/CPI/cpi-manual-concepts-and-methods.ashx
       - text: "UN Task Team e-handbook: Bilateral Price Index Methods"      
         href: https://unstats.un.org/wiki/display/GWGSD/Bilateral+price+index+methods
+
+categories:
+  - Bilateral price indices
 ---
 
 # Overview
 
-This page provides an overview of Bilateral Price Index methods. Several sources are used (included in the links to the page) to go over key concepts. Emprical examples are linked from this page or can be found in the main guide
-
 ## The concept of price index methods
 
 > A price index provides an aggregate measure of price change for a particular product segment, industry, or overall economy. ... \[They compare\] the cost of purchasing a set of goods at different points in time. This "set of goods" is often referred to as the "market basket" or the "bundle" of goods. - Aizcorbe (2014)
+
+## Example datasets
+
+To illustrate how each index can be calculated, I'll illustrate using some example datasets and some common price index methods.
+
+::: {.callout-note collapse="true"}
+## Setup with `gpindex`
+
+[gpindex](https://marberts.github.io/gpindex/index.html) is a convenient R package for price index calculation. It has a simple play dataset built in that we can use to demonstrate how to construct various price indices.
+
+```{r}
+library(gpindex)
+
+p1 <- price6$t1
+p2 <- price6$t2
+q1 <- quantity6$t1
+q2 <- quantity6$t2
+
+head(price6)
+head(quantity6)
+```
+:::
 
 # Main formulas
 
@@ -34,57 +62,276 @@ This page provides an overview of Bilateral Price Index methods. Several sources
 
 The simplest formula (and one that is commonly used) is the Laspeyres index:
 
-$I^{L}_{0,1} = \frac{\sum_{m=1}^{M}(P_{m,1}Q_{m,0})}{\sum_{m=1}^{M}(P_{m,0}Q_{m,0})}$
+$$
+I^{L}_{0,1} = \frac{\sum_{n=1}^{N}(p_n^1q_n^0)}{\sum_{n=1}^{N}(p_n^0q_n^0)}
+$$
 
-Where P's and Q's denote prices and quantities, and 0 and 1 denote two points in time.
+Where $p$ and $q$ denote prices and quantities, and 0 and 1 denote two points in time.
 
-If M goods are sold in both periods (note that an overlap is needed), we can compare the the cost of purchasing the same goods we bought in period 1 with a certain period in the future.
+If $N$ goods are sold in both periods (note that an overlap is needed), we can compare the the cost of purchasing the same goods we bought in period 1 with a certain period in the future.
 
 We can also write the Laspeyres as the weighted arithmetic average of the price change of the individual products in the index
 
-$I^L_{0,1} = \sum_{m=1}^{M} (w_{m,0}\frac{P_{m,1}}{P_{m,0}})$ such that $w_{m,0} = (P_{m,0}Q_{m,0})/\sum_{m=1}^{M}(P_{m,0}Q_{m,0})$
+$$
+I^L_{0,1} = \sum_{n=1}^{N} (w_n^0\frac{p_n^1}{p_n^0})
+$$ 
 
-give the ratio of good m's expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:
+<center>
+such that
+</center>
+
+$$
+w_m^0 = (p_n^0q_n^0)/\sum_{n=1}^{N}(p_n^0q_n^0)
+$$
+
+give the ratio of good $n$ expenditure to total expenditure, or could also be considered the relative importance or share of the product. There are some key nuances with this approach:
 
 -   Products sold in both periods are included in both periods, thus new products are omitted.
 -   We fix the relative importance of the goods for both periods based on period 1 weight, thus we do not reflect changes in composition over time (substitution). This can be convenient as we need weights only for the base period.
-    -   Most price indices are variants of the Laspeyres, such as the Lowe (which compare the prices from the current month with the previous month, but use weights from a year before that)
+    -   Most price indices are variants of the Laspeyres, such as the Lowe (which compare the prices from the current month with the previous month, but use weights from a year before that).
+
+::: {.callout-note collapse="true"}
+## Example with `gpindex`
+
+There are two ways that we can use the package to compare the two periods - one using the `laspeyres_index()` function, the other using the `arithmetic_mean()` function.
+```{r}
+laspeyres_index(p2, p1, q1)
+```
+
+```{r}
+arithmetic_mean(p2 / p1, index_weights("Laspeyres")(p1, q1))
+```
+:::
 
 ## Paashe Index
 
-Similar to the Lasperyes, however uses a different basket (the one from the pricing period:
+Similar to the Lasperyes, however uses a different basket (the one from the pricing period):
 
-$I^P_{0,1} = \sum_{m=1}^M (P_{m,1}Q_{m,1}) / \sum_{m=1}^M
- (P_{m,0}Q_{m,1})$ The Paasche may also be expressed as a function of the weighted average (i.e. shares):
+$$
+I^P_{0,1} = 
+  \sum_{n=1}^N 
+    (
+      p_n^1
+      q_n^1
+    ) / 
+  \sum_{n=1}^N
+    (
+      p_n^0
+      q_n^1
+    )
+$$
 
-$I^P_{0,1} = 1/ \sum_{m=1}^M (w_{m,1} \frac{P_{m,0}}{P_{m,1}})$ such that $w_{m,1} = (P_{m,1}Q_{m,1})/ \sum_{m=1}^M (w_{m,1}P_{m,0}Q_{m,1})$
+The Paasche may also be expressed as a function of the weighted average (i.e. shares):
+
+$$
+I^P_{0,1} = 
+  1/ 
+  \sum_{n=1}^N 
+    (
+      w_n^1
+      \frac
+        {p_n^0}
+        {p_n^1}
+    )
+$$
+
+<center>
+such that
+</center>
+
+$$
+w_{n,1} = 
+  (
+    p_n^1
+    q_n^1
+  )/ 
+  \sum_{n=1}^n
+  (
+    w_n^1
+    p_n^0
+    q_n^1
+  )
+$$
 
 The Laspeyres and Paasche include prices and quantities in both periods, and both use the same relatives with different expenditure shares.
+
+::: {.callout-note collapse="true"}
+## Example with `gpindex`
+
+There are two ways that we can use the package to compare the two periods - one using the `paasche_index()` function, the other using the `arithmetic_mean()` function.
+```{r}
+paasche_index(p2, p1, q2)
+```
+
+```{r}
+arithmetic_mean(p2 / p1, index_weights("Paasche")(p1, q2))
+```
+:::
+
 
 ## Fisher Index
 
 The Fisher does a geometric average of the Laspeyres and the Paasche:
 
-$I^F_{0,1} = (I^L_{0,1}I^P_{0,1})^\frac{1}{2}$
+$$
+I^F_{0,1} = (
+  I^L_{0,1}
+  I^P_{0,1})^\frac{1}{2}
+$$
 
 The Fisher thus uses expenditure from both periods and thus provides relative importance that are more closely aligned with the goods actually sold. As the Fisher satisfies homogeneity, symmetry, and the time reversal test (the price change from the base to the current should be the inverse of the current to the base) - thus it doesn't matter what period is chosen as the base.
+
+::: {.callout-note collapse="true"}
+## Example with `gpindex`
+
+There is an out of the box function we can use - the `fisher_index()` function.
+```{r}
+fisher_index(p2, p1, q2, q1)
+```
+:::
 
 ## Törnqvist Index
 
 Similar to the Fisher, however it takes the average of the weights instead of averaging the two indices
 
 In logged form:
+$$
+lnI^T_{0,1}=
+  \sum^N_{n=1}
+  (
+    w_{n,0}+
+    w_{n,1}
+  )/2
+  (
+    ln\frac
+      {p_{n,1}}
+      {p_{n,0}}
+  )
+$$
 
-$lnI^T_{0,1}=\sum^M_{m=1}(w_{m,0}+w_{m,1})/2(ln\frac{P_{m,1}}{P_{m,0}})$
+We can also view the Törnqvist as an exponenet of logged form (quite similar to the above):
+
+$$
+P^T(p^1,q^1,p^0,q^0) = exp\{
+  \sum_{n=1}^N
+    \frac{1}{2}
+      (s_n^1+s_n^1)
+      ln(p_n^1/p_n^0)
+  \}
+$$
+
+And also in more traditional form:
+
+$$
+P^T(p^1,q^1,p^0,q^0) = 
+ \prod_{n=1}^N
+ \left(
+ \frac{p_n^1}{p_n^0}
+ \right)
+ ^{\frac{s_n^1+s_n^0}{2}}
+$$
+
+::: {.callout-note collapse="true"}
+## Example with `gpindex`
+
+As there is no out of the box function for the Törnqvist, we can use the `geometric_mean()` function.
+```{r}
+# 1. Calculate value shares for both periods
+s1 <- (p1 * q1) / sum(p1 * q1)
+s2 <- (p2 * q2) / sum(p2 * q2)
+
+# 2. Calculate Törnqvist weights (arithmetic average of shares)
+w_tornqvist <- (s1 + s2) / 2
+
+# 3. Compute the index using geometric_mean()
+geometric_mean(p2/p1, w_tornqvist)
+```
+:::
 
 ## Jevons Index
 
 The Jevons is unweighted geometric mean. Similar to the Törnqvist, in logged form:
 
-$lnI^J_{0,1} = \frac{1}{M} \sum^M_{m=1}ln(P_{m,1}/P_{m,0})$
+$$
+lnI^J_{0,1} = 
+  \frac{1}{N} 
+  \sum^N_{n=1}
+    ln(p_n^1/p_n^0)
+$$
 
 The Jevons takes the unweighted average by replacing the $(w_{m,0}+w_{m,1})/2$ with $1/M$, thus giving each model equal weight
 
-# Empirical examples
+The Jevons can also be written in simpler form as per Balk(2008) (formula 1.5).
 
--   See an application of these methods locally using [various data examples](https://sergegoussev.github.io/price_stats_experiments/docs/price_index_experiments.html#category=bilateral%20index%20methods)
+$$
+P^J(p^1,p^0) = 
+ \prod_{n=1}^N
+ \left(
+ \frac{p_n^1}{p_n^0}
+ \right)
+ ^{1/N}
+$$
+
+
+::: {.callout-note collapse="true"}
+## Example with `gpindex`
+
+There are two ways that we can use the package to compare the two periods - one using the `jevons_index()` function, the other using the `geometric_mean()` function.
+```{r}
+jevons_index(p2, p1)
+```
+
+```{r}
+geometric_mean(p2 / p1)
+```
+:::
+
+
+# Comparison across the larger synthetic dataset
+
+Using the full toy dataset - lets compare the price indices
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# 1. Use t1 as the base period
+p_base <- price6$t1
+q_base <- quantity6$t1
+
+# 2. Loop through the periods to calculate indices for the set
+results <- mapply(function(p_curr, q_curr) {
+  c(
+    Laspeyres = laspeyres_index(p1 = p_curr, p0 = p_base, q0 = q_base),
+    Paasche   = paasche_index(p1 = p_curr, p0 = p_base, q1 = q_curr),
+    Jevons = geometric_mean(p_curr / p_base)
+  )
+}, price6, quantity6)
+
+# 3. Convert to a clean dataframe
+df_indexes <- as.data.frame(t(results))
+df_indexes$Period <- rownames(df_indexes)
+
+# 4. Display result
+df_indexes[, c("Period", "Laspeyres", "Paasche", "Jevons")]
+
+library(ggplot2)
+library(tidyr)
+
+# 1. Convert from wide to long format
+df_long <- pivot_longer(df_indexes, 
+                        cols = c("Laspeyres", "Paasche", "Jevons"), 
+                        names_to = "Index_Type", 
+                        values_to = "Value")
+
+# 2. Create the plot
+ggplot(df_long, aes(x = Period, y = Value, color = Index_Type, group = Index_Type)) +
+  geom_line(linewidth = 1) +  # Draw the lines
+  geom_point() +              # Add points for each data entry
+  theme_minimal() +           # Clean theme
+  labs(title = "Comparison of Price Indexes (Base = t1)",
+       subtitle = "Calculated using gpindex price6/quantity6 data",
+       x = "Time Period",
+       y = "Index Value",
+       color = "Formula")
+``` 

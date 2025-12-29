@@ -1,0 +1,25 @@
+---
+title: "Notes on Time Product and Hedonic methods"
+subtitle: Overview of two common stochastic (also considered multilateral) approaches
+author: Serge Goussev
+date: 2025-12-28
+date-modified: last-modified
+execute:
+  echo: true
+  output: true
+format:
+  html:
+    toc: true
+    toc-expand: 2
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    other-links:
+      - text: Aizcorbe (2014) A Practical Guide to Price Index and Hedonic Techniques
+        href: https://global.oup.com/academic/product/a-practical-guide-to-price-index-and-hedonic-techniques-9780198702429?cc=ca&lang=en&
+categories:
+  - Time Product Dummy
+  - Time Dummy Hedonic
+---
+
+Similar to [bilateral methods notes](bilateral_indices.qmd), this is a personal walkthrough/cheatsheet of the TPD and TDH methods applied to some dummy data.
